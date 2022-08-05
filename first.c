@@ -6,14 +6,12 @@
 /*   By: mmensing <mmensing@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 20:35:09 by mmensing          #+#    #+#             */
-/*   Updated: 2022/08/05 12:11:37 by mmensing         ###   ########.fr       */
+/*   Updated: 2022/08/05 20:13:22 by mmensing         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-//fuction for each rule
-
-// int sa()
+//difference swap a and swap b??
 
 
 
@@ -49,104 +47,71 @@ int duplications(char *nums[], int argc)
 	return(k);
 }
 
-// Node *add_at_end(Node *head, int val)
-// {
-// 	Node *temp;
-// 	temp = (Node*)malloc(sizeof(Node));
-// 	if(!temp)
-// 		return(NULL);
-// 	temp->next = NULL;
-// 	temp->value = val;
-// 	Node *lst;
-// 	lst = head;
-// 	while (lst->next != NULL)
-// 	{
-// 		lst = lst->next;
-// 	}
-// 	lst->next = temp;
-	
-// }
 
-Node *new_node()
+// function creates linked list and adds content to it
+Node* create_list(int len, char *argv[])
 {
-	Node *new;
-	new = (Node*)malloc(sizeof(Node));
-	if(!new)
-		return(NULL);
-	new->next = NULL;
-	return(new);
-}
-
-Node *val_into_lst(Node *root, char **argv)
-{
-	Node *lst;
-	lst = (Node*)malloc(sizeof(Node));
-	if(!lst)
-		return(NULL);
-	lst = root;
-	lst->next = NULL;
-	printf("argv: %d\n", atoi(argv[1]));
-	int i = 1;
-	while(argv[i] != NULL)
+	Node *head = NULL;
+	Node *temp = NULL;
+	Node *p = NULL;
+	int i = 0;
+	while(i < len)
 	{
-		lst->value = atoi(argv[i]);
-		//printf("-->  lst->val: %d\n", lst->value);
-		if(argv[i+1] != NULL)
+		temp = (Node*)malloc(sizeof(Node));
+		if(!temp)
+			return(NULL);
+		temp->next = NULL;
+		temp->value = atoi(argv[i]);
+		if (head == NULL)
+			head = temp;
+		else
 		{
-			lst->next = new_node();
-			lst = lst->next;
-		}
+			if(p == NULL)
+				p = head;//p at the beginning just head
+			else
+				p = p->next;//p is the previouse position
+			p->next = temp; // temp contains value  we want
+		}		
 		i++;
 	}
-	lst->next = NULL;
-	return(0);//just testting-> actually void?
+	return(head);
 }
+
+
+// int main(int argc, char *argv[])
+// {
+// 	int i = 1;
+// 	int dup_result = duplications(argv, argc);
+// 	if(dup_result == -1)
+// 	{
+// 		printf("ERROR: num duplicate\n");
+// 		return(0);//error message?
+// 	}
+
+// 	//creating linked list:
+// 	Node *head = NULL;
+// 	head = create_list(argc, argv);
+// 	//-> works
+	
+// 	while (argv[i] != NULL)
+// 	{
+// 		// printf("argv[%d] = %s\n", i, argv[i]);
+// 		i++;
+// 	}	
+// }
 
 int main(int argc, char *argv[])
 {
-	int i = 1;
-	int dup_result = duplications(argv, argc);
-	if(dup_result == -1)
-	{
-		printf("ERROR: num duplicate\n");
-		return(0);//error message?
-	}
-//-------------------------------------------
-	//creating linked list:
-	Node *head = NULL;
-	head = val_into_lst(head, argv);
-	printf("argc: %d\n", argc);
-	int test = 1;
-	while(test < argc)
-	{
-	printf("Yeee\n");
-		printf("head->value: %d\n", head->value);
-		// head = head->next;
-		test++;
-	}
+	Node *stack_a = NULL;
+	stack_a = create_list(argc - 1, argv);
+	Node *stack_b = NULL;
 	
-	// head = (Node*) malloc(sizeof(Node));
-	// int k = 1;
-	// while (argv[k] != NULL)
-	// {
-	// 	//printf("argv= %d\n", atoi(argv[k]));
-	// 	head->value = atoi(argv[k]);
-	// 	//printf("head->value: %d\n", head->value);
-	// 	head = new_node(head->next);
-	// 	k++;
-	// }
-	
-
-//-------------------------------------------
-
-
-
-
-	printf("result: %d\n", duplications(argv, argc));
-	printf("argc= %d\n", argc);
-	while (argv[i] != NULL)
-	{
-		// printf("argv[%d] = %s\n", i, argv[i]);
-		i++;
-	}	
+	printf("len of list: %d\n", list_len(stack_a));
+	// printf("pos 1: %d\npos 2: %d\npos 3: %d\n\n", head->value, head->next->value,  head->next->next->value );
+	printf("check in main function\n");
+	Node *test = NULL;
+	test = sa(stack_a);
+	// head = sa(head);
+	// printf("pos 1: %d\npos 2: %d\npos 3: %d\n\n", head->value, head->next->value,  head->next->next->value );
+	return(0);
 }

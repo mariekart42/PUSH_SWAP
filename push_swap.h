@@ -6,7 +6,7 @@
 /*   By: mmensing <mmensing@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 16:06:16 by mmensing          #+#    #+#             */
-/*   Updated: 2022/08/05 11:42:23 by mmensing         ###   ########.fr       */
+/*   Updated: 2022/08/05 19:31:13 by mmensing         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,5 +22,8 @@ typedef struct Node {
 } Node;
 
 // Node	*ft_lstnew(int content);
+
+Node *sa(Node *head);
+int list_len(Node *head);
 
 #endif
