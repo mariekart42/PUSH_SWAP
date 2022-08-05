@@ -6,7 +6,7 @@
 /*   By: mmensing <mmensing@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 20:35:09 by mmensing          #+#    #+#             */
-/*   Updated: 2022/08/04 20:35:07 by mmensing         ###   ########.fr       */
+/*   Updated: 2022/08/05 12:11:37 by mmensing         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int duplications(char *nums[], int argc)
 	while (k+1 < argc)
 	{
 		all[k] = atoi(*nums);
-		printf("all[k] = %d\n", all[k]);
+		//printf("all[k] = %d\n", all[k]);
 		nums++;
 		k++;
 	}
@@ -85,11 +85,12 @@ Node *val_into_lst(Node *root, char **argv)
 		return(NULL);
 	lst = root;
 	lst->next = NULL;
+	printf("argv: %d\n", atoi(argv[1]));
 	int i = 1;
 	while(argv[i] != NULL)
 	{
 		lst->value = atoi(argv[i]);
-		printf("-->  lst->val: %d\n", lst->value);
+		//printf("-->  lst->val: %d\n", lst->value);
 		if(argv[i+1] != NULL)
 		{
 			lst->next = new_node();
@@ -110,23 +111,30 @@ int main(int argc, char *argv[])
 		printf("ERROR: num duplicate\n");
 		return(0);//error message?
 	}
-	
 //-------------------------------------------
 	//creating linked list:
 	Node *head = NULL;
-	Node = val_into_lst(root, argv);
-
-	
-	head = (Node*) malloc(sizeof(Node));
-	int k = 1;
-	while (argv[k] != NULL)
+	head = val_into_lst(head, argv);
+	printf("argc: %d\n", argc);
+	int test = 1;
+	while(test < argc)
 	{
-		printf("argv= %d\n", atoi(argv[k]));
-		head->value = atoi(argv[k]);
+	printf("Yeee\n");
 		printf("head->value: %d\n", head->value);
-		head = ft_lstnew(head->next);
-		k++;
+		// head = head->next;
+		test++;
 	}
+	
+	// head = (Node*) malloc(sizeof(Node));
+	// int k = 1;
+	// while (argv[k] != NULL)
+	// {
+	// 	//printf("argv= %d\n", atoi(argv[k]));
+	// 	head->value = atoi(argv[k]);
+	// 	//printf("head->value: %d\n", head->value);
+	// 	head = new_node(head->next);
+	// 	k++;
+	// }
 	
 
 //-------------------------------------------
