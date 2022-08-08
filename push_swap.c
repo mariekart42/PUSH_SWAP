@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   first.c                                            :+:      :+:    :+:   */
+/*   push_swap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmensing <mmensing@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 20:35:09 by mmensing          #+#    #+#             */
-/*   Updated: 2022/08/05 20:13:22 by mmensing         ###   ########.fr       */
+/*   Updated: 2022/08/08 14:24:39 by mmensing         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,19 +49,19 @@ int duplications(char *nums[], int argc)
 
 
 // function creates linked list and adds content to it
-Node* create_list(int len, char *argv[])
+stack_a *create_list(int len, char *argv[])
 {
-	Node *head = NULL;
-	Node *temp = NULL;
-	Node *p = NULL;
+	stack_a *temp = NULL;
+	stack_a *p = NULL;
+	stack_a *head = NULL;
 	int i = 0;
 	while(i < len)
 	{
-		temp = (Node*)malloc(sizeof(Node));
+		temp = (stack_a *)malloc(sizeof(stack_a));
 		if(!temp)
 			return(NULL);
 		temp->next = NULL;
-		temp->value = atoi(argv[i]);
+		temp->val = atoi(argv[i]);
 		if (head == NULL)
 			head = temp;
 		else
@@ -102,16 +102,17 @@ Node* create_list(int len, char *argv[])
 
 int main(int argc, char *argv[])
 {
-	Node *stack_a = NULL;
-	stack_a = create_list(argc - 1, argv);
-	Node *stack_b = NULL;
+	stack_a *head = NULL;
+	head = create_list(argc , argv);
+	printf("pos 1: %d\npos 2: %d\n\n", head->next->val, head->next->next->val);
+	// stack_a *stack_b = NULL;
 	
-	printf("len of list: %d\n", list_len(stack_a));
-	// printf("pos 1: %d\npos 2: %d\npos 3: %d\n\n", head->value, head->next->value,  head->next->next->value );
-	printf("check in main function\n");
-	Node *test = NULL;
-	test = sa(stack_a);
-	// head = sa(head);
-	// printf("pos 1: %d\npos 2: %d\npos 3: %d\n\n", head->value, head->next->value,  head->next->next->value );
-	return(0);
+	// printf("len of list: %d\n", list_len(stack_a));
+	// // printf("pos 1: %d\npos 2: %d\npos 3: %d\n\n", head->val_a, head->next->val_a,  head->next->next->val_a );
+	// printf("check in main function\n");
+	// stack_a *test = NULL;
+	// test = sa(stack_a);
+	// // head = sa(head);
+	// // printf("pos 1: %d\npos 2: %d\npos 3: %d\n\n", head->val_a, head->next->val_a,  head->next->next->val_a );
+	// return(0);
 }
