@@ -6,7 +6,7 @@
 /*   By: mmensing <mmensing@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 20:35:09 by mmensing          #+#    #+#             */
-/*   Updated: 2022/08/08 14:24:39 by mmensing         ###   ########.fr       */
+/*   Updated: 2022/08/08 21:58:38 by mmensing         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int duplications(char *nums[], int argc)
 
 
 // function creates linked list and adds content to it
-stack_a *create_list(int len, char *argv[])
+stack_a *create_list(int len, char *content)
 {
 	stack_a *temp = NULL;
 	stack_a *p = NULL;
@@ -61,7 +61,7 @@ stack_a *create_list(int len, char *argv[])
 		if(!temp)
 			return(NULL);
 		temp->next = NULL;
-		temp->val = atoi(argv[i]);
+		temp->val = content[i];
 		if (head == NULL)
 			head = temp;
 		else
@@ -100,19 +100,51 @@ stack_a *create_list(int len, char *argv[])
 // 	}	
 // }
 
+/**
+ * @brief function turns double pointer argv into single pointer
+ * 
+ * @param argc len of array
+ * @param argv content
+ * @return char* normal pointer to list of content from argv
+ */
+char *argv_changer(int argc, char **argv)
+{
+	int i = 0;
+	int k = 1;
+	char *array;
+	array = (char *)malloc(len);
+	if(!array)
+		return(NULL);
+	//char array[len-1];
+	//printf("len: %d\n", len);
+	while(len > k)
+	{
+		array[i] = atoi(argv[k]);
+		// printf("argv[%d]  = %d\n", i, atoi(argv[k]));
+		// printf("array[%d] = %d\n", i, array[i]);
+		i++;
+		k++;
+	}
+	array[i] = '\0';
+	return(array);
+}
+
 int main(int argc, char *argv[])
 {
-	stack_a *head = NULL;
-	head = create_list(argc , argv);
-	printf("pos 1: %d\npos 2: %d\n\n", head->next->val, head->next->next->val);
+	//stack_a *head = NULL;
+	char *array;
+	array = argv_changer(argc, argv);
+	// head = create_list(argc , array);
+	
+	
 	// stack_a *stack_b = NULL;
 	
 	// printf("len of list: %d\n", list_len(stack_a));
-	// // printf("pos 1: %d\npos 2: %d\npos 3: %d\n\n", head->val_a, head->next->val_a,  head->next->next->val_a );
+	//printf("pos 1: %d\npos 2: %d\npos 3: %d\n\n", head->val_a, head->next->val_a,  head->next->next->val_a );
 	// printf("check in main function\n");
 	// stack_a *test = NULL;
 	// test = sa(stack_a);
 	// // head = sa(head);
-	// // printf("pos 1: %d\npos 2: %d\npos 3: %d\n\n", head->val_a, head->next->val_a,  head->next->next->val_a );
+	//printf("pos 1: %d\npos 2: %d\npos 3: %d\n\n", head->val_a, head->next->val_a,  head->next->next->val_a );
 	// return(0);
 }
