@@ -6,7 +6,7 @@
 /*   By: mmensing <mmensing@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 16:06:16 by mmensing          #+#    #+#             */
-/*   Updated: 2022/08/08 14:59:20 by mmensing         ###   ########.fr       */
+/*   Updated: 2022/08/08 21:56:08 by mmensing         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,15 +22,14 @@ typedef struct stack_a
 	struct stack_a *next;
 } stack_a;
 
-// typedef struct stack_b
-// {
-// 	int val;
-// 	struct stack_b *next;
-// } stack_b;
+typedef struct stack_b
+{
+	int val_b;
+	struct stack_b *next;
+} stack_b;
 
-stack_a *create_list(int len, char *argv[]);
-
-
+stack_a *create_list(int len, char *content)
+char *argv_changer(int argc, char **argv);
 
 stack_a *sa(stack_a *head);
 int list_len(stack_a *head);
