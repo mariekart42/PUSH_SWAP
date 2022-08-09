@@ -6,7 +6,7 @@
 #    By: mmensing <mmensing@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/08 12:21:27 by mmensing          #+#    #+#              #
-#    Updated: 2022/08/08 12:31:15 by mmensing         ###   ########.fr        #
+#    Updated: 2022/08/09 20:33:33 by mmensing         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ CFLAGS= -Wall -Werror -Wextra
 HEADER= push_swap.h
 RM= rm -rf
 
-FILES= push_swap.c rules.c extra_funcs.c
+FILES= extra_funcs.c main.c rules.c delete_later_funcs.c
 
 O_FILES= $(FILES:%.c=%.o)
 
@@ -33,5 +33,8 @@ fclean: clean
 	$(RM) $(NAME)
 	
 re: fclean all
+
+g:
+	@gcc $(FILES) $(CFLAGS)
 
 .PHONY: all clean fclean re

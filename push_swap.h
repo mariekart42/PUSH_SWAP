@@ -6,7 +6,7 @@
 /*   By: mmensing <mmensing@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 16:06:16 by mmensing          #+#    #+#             */
-/*   Updated: 2022/08/08 21:56:08 by mmensing         ###   ########.fr       */
+/*   Updated: 2022/08/09 21:18:12 by mmensing         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,22 +16,27 @@
 #include<stdio.h>
 #include<stdlib.h>
 
-typedef struct stack_a 
+typedef struct l_list 
 {
-	int val_a;
-	struct stack_a *next;
-} stack_a;
+	int val;
+	struct l_list *next;
+} l_list;
 
-typedef struct stack_b
-{
-	int val_b;
-	struct stack_b *next;
-} stack_b;
+l_list *create_list_alone(int len, int *content); //deleter later
 
-stack_a *create_list(int len, char *content)
-char *argv_changer(int argc, char **argv);
+l_list *create_list(int len, char **content);
+int list_len(l_list *head);
+l_list *new_node(int content);
+// stack_a *create_list(int len, char *content);
+//char *argv_changer(int argc, char **argv);
 
-stack_a *sa(stack_a *head);
-int list_len(stack_a *head);
+
+
+/* - - - RULES - - - */
+void sa(l_list *stack_a);
+void sb(l_list *stack_b);
+void ss(l_list *stack_a, l_list *stack_b);
+void pa(l_list *stack_a, l_list *stack_b);
+
 
 #endif
