@@ -1,6 +1,6 @@
 #include "push_swap.h"
 
-// create list without passing argc argv
+// create list without passing argc argv -> here just for testing
 l_list *create_list_alone(int len, int *content)
 {
 	l_list *temp = NULL;

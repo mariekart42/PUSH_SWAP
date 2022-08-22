@@ -6,7 +6,7 @@
 /*   By: mmensing <mmensing@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 17:18:05 by mmensing          #+#    #+#             */
-/*   Updated: 2022/08/09 20:32:42 by mmensing         ###   ########.fr       */
+/*   Updated: 2022/08/22 21:57:00 by mmensing         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,3 +88,19 @@ l_list *new_node(int content)
 	return (new);
 }
 
+int last_nodes_content(l_list *head)
+{
+	while (head->next != NULL)
+		head = head->next;
+	return (head->val);
+}
+
+// int main()
+// {
+// 	int content;
+// 	l_list *node = NULL;
+// 	int array[3] = {1, 2, 3};
+// 	node = create_list_alone(3, array);
+// 	content = last_nodes_content(node);
+// 	printf("content: %d\n", content);
+// }

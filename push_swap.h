@@ -6,15 +6,15 @@
 /*   By: mmensing <mmensing@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 16:06:16 by mmensing          #+#    #+#             */
-/*   Updated: 2022/08/09 21:18:12 by mmensing         ###   ########.fr       */
+/*   Updated: 2022/08/23 00:12:40 by mmensing         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 
-#include<stdio.h>
-#include<stdlib.h>
+#include <stdio.h>
+#include <stdlib.h>
 
 typedef struct l_list 
 {
@@ -30,13 +30,17 @@ l_list *new_node(int content);
 // stack_a *create_list(int len, char *content);
 //char *argv_changer(int argc, char **argv);
 
+int last_nodes_content(l_list *head);
 
 
 /* - - - RULES - - - */
 void sa(l_list *stack_a);
 void sb(l_list *stack_b);
 void ss(l_list *stack_a, l_list *stack_b);
-void pa(l_list *stack_a, l_list *stack_b);
 
+void pa(l_list **stack_a, l_list **stack_b);
+void pb(l_list **stack_a, l_list **stack_b);
+
+void ra(l_list **stack_a);
 
 #endif
