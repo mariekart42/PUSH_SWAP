@@ -6,7 +6,7 @@
 /*   By: mmensing <mmensing@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 15:43:26 by mmensing          #+#    #+#             */
-/*   Updated: 2022/08/23 00:39:28 by mmensing         ###   ########.fr       */
+/*   Updated: 2022/08/23 20:58:10 by mmensing         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,67 +71,112 @@ void pb(l_list **stack_a, l_list **stack_b)
 	
 	temp = 0;
 	l_list *temp_b = NULL;
-	if(stack_b == NULL) // if stack_a is empty
+	if(stack_a == NULL) // if stack_a is empty
 		return ;
-	temp = (*stack_b)->val;
+	temp = (*stack_a)->val;
 	temp_b = (*stack_b);
 	(*stack_b) = new_node(temp);
 	(*stack_b)->next = temp_b;
 }
 // the swap is working correctly but is return right?
 // ----------------------------------------------------------
-// ----------- ra & rb --------------------------------------
+// ----------- ra & rb & rr ---------------------------------
 // Shift up all elements of stack a by 1
-// The first element becomes the last one.
+// The first element becomes the last one
 void ra(l_list **stack_a)
 {
-	int last_node;
-	l_list *rm_last = NULL;
-	l_list *temp_a = NULL;
-	last_node = last_nodes_content(* stack_a);
-	temp_a = (*stack_a);
-	printf("last_node: %d\n", last_node);
-	printf("stack_a->val: %d\n", (*stack_a)->val);
-	(*stack_a) = new_node(last_node);
-	(*stack_a)->next = temp_a;
+	if ((*stack_a)->next == NULL)
+		return ; //some error thing
+	l_list *temp = NULL;
+	l_list *first_node = NULL;
+	
+	temp = *stack_a;
+	first_node = *stack_a;
+	
+	*stack_a = (*stack_a)->next; 
+	while(temp->next != NULL)
+		temp = temp->next; // last position of list
+	temp->next = first_node;
+	first_node->next = NULL;
 }
-// not working dunno maybe stack heap shit
-// compare to others code 
+// is working correctly 
 
+// Shift up all elements of stack b by 1
+// The first element becomes the last one
+void rb(l_list **stack_b)
+{
+	if ((*stack_b)->next == NULL)
+		return ; //some error thing
+	l_list *temp = NULL;
+	l_list *first_node = NULL;
+	
+	temp = *stack_b;
+	first_node = *stack_b;
+	
+	*stack_b = (*stack_b)->next; 
+	while (temp->next != NULL)
+		temp = temp->next; // last position of list
+	temp->next = first_node;
+	first_node->next = NULL;
+}
+// is working correctly 
+
+void rr(l_list **stack_a, l_list **stack_b)
+{
+	ra(stack_a);
+	rb(stack_b);
+}
+// ----------------------------------------------------------
+// ----------- rra & rrb & rrr ------------------------------
+// shift down all elements of stack a by 1
+// the last element becomes the first one
+void rra(l_list **stack_a)
+{
+	l_list *temp_a = NULL;
+	l_list *iter = NULL;
+	
+	iter = *stack_a;
+	temp_a = *stack_a;
+	// while (iter->next->next != NULL)
+	// 	iter = iter->next;
+	// iter->next = NULL;
+	printf("stack_a->val: %d\n", (*stack_a)->val);
+	if((*stack_a)->next == NULL)
+	{
+		printf("ERROR [(*stack_a)->next == NULL]");
+		return ;
+	}
+	while ((*stack_a)->next->next != NULL)
+		*stack_a = (*stack_a)->next;
+		printf("check_func\n");
+	iter = *stack_a;
+	*stack_a = (*stack_a)->next;
+	// stack_a points now to last node
+	printf("stack_a end: %d\n", (*stack_a)->val);
+	(*stack_a)->next = temp_a;
+	// printf("temp_a: %d\n", temp_a->val);
+	// if(temp_a->next == NULL)
+	// 	printf("NULL\n");
+	// printf("temp_a: %d\n", temp_a->next->val);
+}
+// setting in the end something to NULL!!
+// iterating again trough the list and set now last node to NULL i guess
 
 
 // main for ra and rb
 int main()
-{
+{ 
 	l_list *node = NULL;
-	int array[3] = {1, 2, 5};
-	node = create_list_alone(3, array);
-	printf("BEFORE\npos 1: %d\npos 2: %d\npos 3: %d\n\n", node->val, node->next->val, node->next->next->val);
-	ra(&node);
-	printf("AFTER\npos 1: %d\npos 2: %d\npos 3: %d\n\n", node->val, node->next->val, node->next->next->val);
+	int array[5] = {1, 2, 3, 4, 0};
+	node = create_list_alone(5, array);
+	//printf("BEFORE\npos 1: %d\npos 2: %d\npos 3: %d\npos 4: %d\npos 5: %d\n\n", node->val, node->next->val, node->next->next->val, node->next->next->next->val, node->next->next->next->next->val);
+	print_list(&node);
+	printf("check\n");
+	rra(&node);
+	// rb(&node);
+	// rb(&node);
+	// rb(&node);
+	// rb(&node);
+	print_list(&node);
+	// printf("AFTER\npos 1: %d\npos 2: %d\npos 3: %d\npos 4: %d\npos 5: %d\n\n", node->val, node->next->val, node->next->next->val, node->next->next->next->val, node->next->next->next->next->val);
 }
-
-
-
-
-// // main for pa and pb
-// int main()
-// {
-// 	//before
-// 	printf("BEFORE\n");
-// 	l_list *stack_a = NULL;
-// 	int array_a[3] = {1, 2, 3};
-// 	stack_a = create_list_alone(3, array_a);
-// 	printf("stack_a:\npos 1: %d\npos 2: %d\npos 3: %d\n\n", stack_a->val, stack_a->next->val, stack_a->next->next->val);
-
-// 	l_list *stack_b = NULL;
-// 	int array_b[4] = {2, 8, 7, 6};
-// 	stack_b = create_list_alone(4, array_b);
-// 	printf("stack_b:\npos 1: %d\npos 2: %d\npos 3: %d\n\n", stack_b->val, stack_b->next->val, stack_b->next->next->val);
-	
-// 	//using pa rule
-// 	pa(&stack_a, &stack_b);
-// 	printf("AFTER\n");
-// 	printf("stack_a:\npos 1: %d\npos 2: %d\npos 3: %d\npos 4: %d\n\n", stack_a->val, stack_a->next->val, stack_a->next->next->val, stack_a->next->next->next->val);
-// 	printf("stack_b:\npos 1: %d\npos 2: %d\npos 3: %d\n\n", stack_b->val, stack_b->next->val, stack_b->next->next->val);
-// }

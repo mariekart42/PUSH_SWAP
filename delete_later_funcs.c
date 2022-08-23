@@ -28,3 +28,20 @@ l_list *create_list_alone(int len, int *content)
 	}
 	return(head);
 }
+
+void print_list(l_list **list)
+{
+	int i = 1;
+	l_list *node = NULL;
+	node = (*list);
+	while (node->next != NULL)
+	{
+		printf("list_pos_%d: %d\n", i, node->val);
+		i++;
+		node = node->next;
+	}
+	if(node->next == NULL)
+		printf("list_pos_%d: (NULL)\n\n", i);
+	else	
+		printf("something wrong! (print_list function)\n");
+}
