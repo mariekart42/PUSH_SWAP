@@ -6,7 +6,7 @@
 /*   By: mmensing <mmensing@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 16:06:16 by mmensing          #+#    #+#             */
-/*   Updated: 2022/08/23 20:31:17 by mmensing         ###   ########.fr       */
+/*   Updated: 2022/08/24 01:01:56 by mmensing         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,12 @@ l_list *new_node(int content);
 //char *argv_changer(int argc, char **argv);
 
 int last_nodes_content(l_list *head);
-
+int create_and_check_list(l_list **stack_a, char **argv, int argc);
 
 /* - - - RULES - - - */
-void sa(l_list *stack_a);
-void sb(l_list *stack_b);
-void ss(l_list *stack_a, l_list *stack_b);
+void sa(l_list **stack_a);
+void sb(l_list **stack_b);
+void ss(l_list **stack_a, l_list **stack_b);
 
 void pa(l_list **stack_a, l_list **stack_b);
 void pb(l_list **stack_a, l_list **stack_b);
@@ -48,5 +48,7 @@ void rb(l_list **stack_b);
 void rr(l_list **stack_a, l_list **stack_b);
 
 void rra(l_list **stack_a);
+void rrb(l_list **stack_b);
+void rrr(l_list **stack_a, l_list **stack_b);
 
 #endif

@@ -40,6 +40,9 @@ void print_list(l_list **list)
 		i++;
 		node = node->next;
 	}
+	printf("-list_pos_%d: %d\n", i, node->val);
+	i++;
+	// printf("nnn: %d\n", node->next->val);
 	if(node->next == NULL)
 		printf("list_pos_%d: (NULL)\n\n", i);
 	else	

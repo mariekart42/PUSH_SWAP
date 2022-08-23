@@ -6,36 +6,22 @@
 /*   By: mmensing <mmensing@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 17:18:05 by mmensing          #+#    #+#             */
-/*   Updated: 2022/08/22 21:57:00 by mmensing         ###   ########.fr       */
+/*   Updated: 2022/08/24 01:03:54 by mmensing         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-// /**
-//  * @brief function turns double pointer argv into single pointer
-//  * 
-//  * @param argc len of array
-//  * @param argv content
-//  * @return char* normal pointer to list of content from argv
-//  */
-// l_list *argv_changer(int argc, char **argv)
-// {
-// 	int i = 0;
-// 	int k = 1;
-// 	char *array;
-// 	array = (char *)malloc(argc);
-// 	if (!array)
-// 		return(NULL);
-// 	while (argc > k)
-// 	{
-// 		array[i] = atoi(argv[k]);
-// 		i++;
-// 		k++;
-// 	}
-// 	array[i] = '\0';
-// 	return(array);
-// }
+int create_and_check_list(l_list **stack_a, char **argv, int argc)
+{
+	printf("len: %d\n", argc-1);
+	*stack_a = create_list(argc - 1, argv);
+	print_list(stack_a);
+	// duplicates
+	
+	// int max/min
+	return(0);
+}
 
 // function creates linked list and adds content to it
 l_list *create_list(int len, char **content)
