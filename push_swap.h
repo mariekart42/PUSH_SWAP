@@ -6,7 +6,7 @@
 /*   By: mmensing <mmensing@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 16:06:16 by mmensing          #+#    #+#             */
-/*   Updated: 2022/08/25 01:14:24 by mmensing         ###   ########.fr       */
+/*   Updated: 2022/08/26 00:28:38 by mmensing         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 #include <unistd.h> // write()
 #include <stdint.h> // int32_t
 #include <limits.h> // int max/min macros
+#include <string.h> // strlen -> delete later & implement libft strlen
 
 typedef struct l_list 
 {
@@ -41,6 +42,8 @@ typedef struct l_list
 l_list *create_list_alone(int32_t len, int32_t *content); //deleter later
 void print_list(l_list **list, char *name);
 
+
+
 l_list *create_list(int32_t len, char **content);
 int32_t list_len(l_list *head);
 l_list *new_node(int32_t content);
@@ -48,12 +51,14 @@ l_list *new_node(int32_t content);
 //char *argv_changer(int argc, char **argv);
 long int ft_atol(const char *str);
 
+void first_sort_try(l_list **stack_a, l_list **stack_b);
+
 int32_t last_nodes_content(l_list *head);
 int create_and_check_list(l_list **stack_a, char **argv, int argc);
-
+int	ft_isdigit(int val);
 
 /* - - - CHECK - - - */
-int8_t duplicates(char **argv, int32_t argc);
+int8_t dupli_and_min_max(char **argv, int32_t argc);
 int8_t checking(char **argv, int32_t argc);
 int32_t only_nums(char **argv, int32_t argc);
 

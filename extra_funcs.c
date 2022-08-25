@@ -6,7 +6,7 @@
 /*   By: mmensing <mmensing@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 17:18:05 by mmensing          #+#    #+#             */
-/*   Updated: 2022/08/25 01:11:32 by mmensing         ###   ########.fr       */
+/*   Updated: 2022/08/25 16:21:27 by mmensing         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,15 @@ long int ft_atol(const char *str)
 		i++;
 	}
 	return (val * minus);
+}
+
+int	ft_isdigit(int val)
+{
+	if (val >= 48 && val <= 57)
+	{
+		return (1);
+	}
+	return (0);
 }
 
 // int main()
