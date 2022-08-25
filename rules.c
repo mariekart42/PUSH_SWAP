@@ -6,7 +6,7 @@
 /*   By: mmensing <mmensing@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 15:43:26 by mmensing          #+#    #+#             */
-/*   Updated: 2022/08/24 01:11:09 by mmensing         ###   ########.fr       */
+/*   Updated: 2022/08/24 17:33:28 by mmensing         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,93 +19,104 @@
 
 // swap first 2 elements of stack a
 // Do nothing if there is only one or no elements
-void sa(l_list **stack_a)
+void sa(l_list **stack_a, bool output)
 {
-	int check;
-	l_list *temp = NULL;
-	
-	check = 0;
-	temp = *stack_a;
-	while (temp->next != NULL)
+	if(*stack_a == NULL || (*stack_a)->next == NULL)
 	{
-		temp = temp->next;
-		check++;
+		printf("[sa rule] nothing or just one elemtent\n"); // deleter later
+		return ;
 	}
-	if((check + 1) < 2)
-		return ; // quit and do nothing
 
-	temp = (*stack_a)->next->val;
-	(*stack_a)->next->val = (*stack_a)->val;
-	(*stack_a)->val = temp;
+	l_list *head = NULL;
+	head = *stack_a;
+	
+	*stack_a = (*stack_a)->next;
+	head->next = (*stack_a)->next;
+	(*stack_a)->next = head;
+
+	if (output == false)
+		write(1, "ss\n", 3);
+	else
+		write(1, "sa\n", 3);
 }
 
 // swap first 2 elements of stack b
 // Do nothing if there is only one or no elements
-void sb(l_list **stack_b)
+void sb(l_list **stack_b, bool output)
 {
-	int check;
-	l_list *temp = NULL;
+	// int check;
+	//l_list *temp = NULL;
 	
-	check = 0;
-	temp = *stack_b;
-	while (temp->next != NULL)
+	if(*stack_b == NULL || (*stack_b)->next == NULL)
 	{
-		temp = temp->next;
-		check++;
+		printf("[sb rule] nothing or just one elemtent\n"); // delete later
+		return ;
 	}
-	if((check + 1) < 2)
-		return ; // do nothing
-	temp = (*stack_b)->next->val;
-	(*stack_b)->next->val = (*stack_b)->val;
-	(*stack_b)->val = temp;
+
+	l_list *head = NULL;
+	head = *stack_b;
+	
+	*stack_b = (*stack_b)->next;
+	head->next = (*stack_b)->next;
+	(*stack_b)->next = head;
+
+	if (output == false)
+		write(1, "ss\n", 3);
+	else
+		write(1, "sa\n", 3);
 }
 
 // rule sa and sb at the same time
 void ss(l_list **stack_a, l_list **stack_b)
 {
-	sa(stack_a);
-	sb(stack_b);
+	sa(stack_a, false);
+	sb(stack_b, false);
 }
 
 
-
-// first element of stack b to stack a
-// Do nothing if b is empty
-void pa(l_list **stack_a, l_list **stack_b)
+// first element of stack a to stack b
+// first element of stack b gets removed!
+// Do nothing if a is empty
+void	pa(l_list **stack_a, l_list **stack_b)
 {
-	int temp;
+	l_list *head = NULL;
 	
-	temp = 0;
-	l_list *temp_a = NULL;
-	if (stack_b == NULL) // if stack_b is empty
+	if (*stack_b == NULL) // if stack_a is empty
+	{
+		printf("stack_b is empty\n"); // delete later
 		return ;
-	temp = (*stack_b)->val;
-	temp_a = (*stack_a);
-	(*stack_a) = new_node(temp);
-	(*stack_a)->next = temp_a;
+	}
+	head = *stack_b;
+	*stack_b = (*stack_b)->next;
+	*stack_a = head;
+	(*stack_a)->next = NULL;
+	write(1, "pa\n", 3);
 }
 
 // first element of stack a to stack b
+// first element of stack b gets removed!
 // Do nothing if a is empty
-void pb(l_list **stack_a, l_list **stack_b)
+void	pb(l_list **stack_a, l_list **stack_b)
 {
-	int temp;
+	l_list *head = NULL;
 	
-	temp = 0;
-	l_list *temp_b = NULL;
-	if(stack_a == NULL) // if stack_a is empty
+	if (*stack_a == NULL) // if stack_a is empty
+	{
+		printf("stack_a is empty\n"); // delete later
 		return ;
-	temp = (*stack_a)->val;
-	temp_b = (*stack_b);
-	(*stack_b) = new_node(temp);
-	(*stack_b)->next = temp_b;
+	}
+	head = *stack_a;
+	*stack_a = (*stack_a)->next;
+	*stack_b = head;
+	(*stack_b)->next = NULL;
+	write(1, "pb\n", 3);
 }
 
 
 
 // Shift up all elements of stack a by 1
 // The first element becomes the last one
-void ra(l_list **stack_a)
+void ra(l_list **stack_a, bool output)
 {
 	if ((*stack_a)->next == NULL)
 		return ; //some error thing
@@ -120,11 +131,15 @@ void ra(l_list **stack_a)
 		temp = temp->next; // last position of list
 	temp->next = first_node;
 	first_node->next = NULL;
+	if (output == false)
+		write(1, "rr\n", 3);
+	else
+		write(1, "ra\n", 3);
 }
 
 // Shift up all elements of stack b by 1
 // The first element becomes the last one
-void rb(l_list **stack_b)
+void rb(l_list **stack_b, bool output)
 {
 	if ((*stack_b)->next == NULL)
 		return ; //some error thing
@@ -139,20 +154,24 @@ void rb(l_list **stack_b)
 		temp = temp->next; // last position of list
 	temp->next = first_node;
 	first_node->next = NULL;
+	if (output == false)
+		write(1, "rr\n", 3);
+	else
+		write(1, "rb\n", 3);
 }
 // is working correctly 
 
 void rr(l_list **stack_a, l_list **stack_b)
 {
-	ra(stack_a);
-	rb(stack_b);
+	ra(stack_a, false);
+	rb(stack_b, false);
 }
 
 
 
 // shift down all elements of stack a by 1
 // the last element becomes the first one
-void rra(l_list **stack_a)
+void rra(l_list **stack_a, bool output)
 {
 	l_list *head = NULL;
 	l_list *second_last = NULL;
@@ -160,9 +179,9 @@ void rra(l_list **stack_a)
 	second_last = *stack_a;
 	head = *stack_a;
 
-	if ((*stack_a)->next == NULL)
+	if (*stack_a == NULL || (*stack_a)->next == NULL)
 	{
-		printf("ERROR [(*stack_a)->next == NULL]");
+		printf("none or just one element in stack_a\n");
 		return ; //do nothing cause only one node in list
 	}
 	while ((*stack_a)->next->next != NULL)
@@ -173,11 +192,15 @@ void rra(l_list **stack_a)
 
 	second_last->next = NULL;
 	(* stack_a)->next = head;
+	if (output == false)
+		write(1, "rrr\n", 4);
+	else
+		write(1, "rra\n", 4);
 }
 
 // shift down all elements of stack b by 1
 // the last element becomes the first one
-void rrb(l_list **stack_b)
+void rrb(l_list **stack_b, bool output)
 {
 	l_list *head = NULL;
 	l_list *second_last = NULL;
@@ -185,9 +208,9 @@ void rrb(l_list **stack_b)
 	second_last = *stack_b;
 	head = *stack_b;
 
-	if ((*stack_b)->next == NULL)
+	if (*stack_b == NULL || (*stack_b)->next == NULL)
 	{
-		printf("ERROR [(*stack_b)->next == NULL]");
+		printf("none or just one element in stack_b\n");
 		return ; //do nothing cause only one node in list
 	}
 	while ((*stack_b)->next->next != NULL)
@@ -198,13 +221,17 @@ void rrb(l_list **stack_b)
 
 	second_last->next = NULL;
 	(*stack_b)->next = head;
+	if (output == false)
+		write(1, "rrr\n", 4);
+	else
+		write(1, "rrb\n", 4);
 }
 
 // rra and rrb at the same time
 void rrr(l_list **stack_a, l_list **stack_b)
 {
-	rra(stack_a);
-	rrb(stack_b);
+	rra(stack_a, false);
+	rrb(stack_b, false);
 }
 
 

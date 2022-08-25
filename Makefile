@@ -6,7 +6,7 @@
 #    By: mmensing <mmensing@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/08 12:21:27 by mmensing          #+#    #+#              #
-#    Updated: 2022/08/09 20:33:33 by mmensing         ###   ########.fr        #
+#    Updated: 2022/08/24 17:45:27 by mmensing         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ CFLAGS= -Wall -Werror -Wextra
 HEADER= push_swap.h
 RM= rm -rf
 
-FILES= extra_funcs.c main.c rules.c delete_later_funcs.c
+FILES= extra_funcs.c main.c rules.c delete_later_funcs.c checking.c
 
 O_FILES= $(FILES:%.c=%.o)
 
@@ -28,6 +28,7 @@ $(NAME): $(O_FILES) $(HEADER)
 	
 clean:
 	$(RM) $(O_FILES)
+	$(RM) a.out
 	
 fclean: clean
 	$(RM) $(NAME)
