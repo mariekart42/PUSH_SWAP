@@ -6,7 +6,7 @@
 /*   By: mmensing <mmensing@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 17:37:08 by mmensing          #+#    #+#             */
-/*   Updated: 2022/09/08 18:45:49 by mmensing         ###   ########.fr       */
+/*   Updated: 2022/09/08 19:03:02 by mmensing         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,11 @@
 // normal pointer so we get the copy of stack_a and dont change anything
 bool checking(char **argv, int32_t argc)
 {
-	// int8_t check = 0;
-	// // checks if there is at least one argument
-	// if (argc < 2)
-	// 	check += 1;
-	// check += dupli_and_min_max(argv, argc);
-	// check += only_nums(argv, argc);
-	if(argc < 2 || dupli_and_min_max(argv, argc) == false || only_nums(argv, argc) == false)
-		return(false);
+	// if statement returns false directly 
+	// -> not every function needs to be executed
+	// ->> more efficient
+	if (argc < 2 || dupli_and_min_max(argv, argc) == false || only_nums(argv, argc) == false)
+		return (false);
 	return (true);
 }
 
