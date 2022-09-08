@@ -6,7 +6,7 @@
 /*   By: mmensing <mmensing@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 15:43:26 by mmensing          #+#    #+#             */
-/*   Updated: 2022/08/24 17:33:28 by mmensing         ###   ########.fr       */
+/*   Updated: 2022/09/07 17:26:12 by mmensing         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,15 @@
 
 
 // swap first 2 elements of stack a
-// Do nothing if there is only one or no elements
+// Do nothing if there is only one or no element in a
 void sa(l_list **stack_a, bool output)
 {
 	if(*stack_a == NULL || (*stack_a)->next == NULL)
 	{
 		printf("[sa rule] nothing or just one elemtent\n"); // deleter later
+		write(STDERR_FILENO, "Error\n", 6); 
+		//"In case of error, it must display "Error" followed by a ’\n’ on the standard error"
+		// -> like this?
 		return ;
 	}
 
@@ -80,7 +83,7 @@ void ss(l_list **stack_a, l_list **stack_b)
 void	pa(l_list **stack_a, l_list **stack_b)
 {
 	l_list *head = NULL;
-	
+	l_list *prev_content = *stack_b;
 	if (*stack_b == NULL) // if stack_a is empty
 	{
 		printf("stack_b is empty\n"); // delete later
@@ -89,7 +92,7 @@ void	pa(l_list **stack_a, l_list **stack_b)
 	head = *stack_b;
 	*stack_b = (*stack_b)->next;
 	*stack_a = head;
-	(*stack_a)->next = NULL;
+	(*stack_a)->next = prev_content;
 	write(1, "pa\n", 3);
 }
 
@@ -99,6 +102,7 @@ void	pa(l_list **stack_a, l_list **stack_b)
 void	pb(l_list **stack_a, l_list **stack_b)
 {
 	l_list *head = NULL;
+	l_list *prev_content = *stack_b;
 	
 	if (*stack_a == NULL) // if stack_a is empty
 	{
@@ -108,7 +112,7 @@ void	pb(l_list **stack_a, l_list **stack_b)
 	head = *stack_a;
 	*stack_a = (*stack_a)->next;
 	*stack_b = head;
-	(*stack_b)->next = NULL;
+	(*stack_b)->next = prev_content;
 	write(1, "pb\n", 3);
 }
 
@@ -122,6 +126,7 @@ void ra(l_list **stack_a, bool output)
 		return ; //some error thing
 	l_list *temp = NULL;
 	l_list *first_node = NULL;
+	
 	
 	temp = *stack_a;
 	first_node = *stack_a;

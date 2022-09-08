@@ -6,22 +6,11 @@
 /*   By: mmensing <mmensing@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 17:18:05 by mmensing          #+#    #+#             */
-/*   Updated: 2022/08/25 16:21:27 by mmensing         ###   ########.fr       */
+/*   Updated: 2022/09/08 12:30:09 by mmensing         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-// int create_and_check_list(l_list **stack_a, char **argv, int argc)
-// {
-// 	printf("len: %d\n", argc-1);
-// 	*stack_a = create_list(argc - 1, argv);
-// 	//print_list(stack_a);
-// 	// duplicates
-	
-// 	// int max/min
-// 	return(0);
-// }
 
 // function creates linked list and adds content to it
 l_list *create_list(int32_t len, char **content)
@@ -81,6 +70,14 @@ int32_t last_nodes_content(l_list *head)
 	return (head->val);
 }
 
+l_list *lst_last(l_list *head)
+{
+	while(head->next != NULL)
+		head = head->next;
+	return(head);
+		
+}
+
 long int ft_atol(const char *str)
 {
 	int64_t		val; 	//int64_t == long int
@@ -116,12 +113,3 @@ int	ft_isdigit(int val)
 	return (0);
 }
 
-// int main()
-// {
-// 	int content;
-// 	l_list *node = NULL;
-// 	int array[3] = {1, 2, 3};
-// 	node = create_list_alone(3, array);
-// 	content = last_nodes_content(node);
-// 	printf("content: %d\n", content);
-// }
