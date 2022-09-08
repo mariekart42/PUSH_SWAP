@@ -1,0 +1,6 @@
+UPDATE:
+- checker funcs now also works for neg numbers
+- perfect pivot works
+
+NEXT:
+- start with list algo quick sort
