@@ -6,7 +6,7 @@
 /*   By: mmensing <mmensing@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 20:35:43 by mmensing          #+#    #+#             */
-/*   Updated: 2022/09/09 21:39:00 by mmensing         ###   ########.fr       */
+/*   Updated: 2022/09/10 00:54:19 by mmensing         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,19 +36,35 @@ int32_t lst_len_end(l_list *start, l_list *end)
     return(count);
 }
 
-bool is_sorted(int **array, int len_list)
+bool is_sorted(int *array, int len_list)
 {
     int i = 0;
     if (len_list == 1)
         return(true);
-    while(len_list > 0)
+    while(len_list - 1 > 0)
     {
-        // printf("array: %d\n", array[i]);
-        if (array[0][i] > array[0][i+1])
+        if (array[i] > array[i+1])
             return(false);
         len_list--;
+        i++;
     }
     return(true);
+}
+// WORKS
+
+
+int32_t half_list_val(int *array, int len_list)
+{
+    int32_t half_len = 0;
+    
+    if(len_list == 1)
+        return(array[0]);
+        
+    if ((len_list % 2) == 0)
+        half_len = len_list / 2;
+    else if ((len_list % 2) != 0)
+        half_len = (len_list - 1) / 2;
+    return(array[half_len]);
 }
 
 // create array with content of list
@@ -59,28 +75,32 @@ int32_t perfect_pivot(l_list *start, l_list *end)
     int i = 0;
     int len_list;
     len_list = lst_len_end(start, end);
-    printf("len_ list %d\n", len_list);
+    int temp;
     int *array; 
     array = (int *)malloc(sizeof(int) * len_list + 1);
-    while(len_list-- > 0)
+    while(len_list > 0)
     {
         array[i] = start->val;
-        printf("array: %d\n", array[i]);
-
+        len_list--;
         i++;
         start = start->next;
     }
     array[i] = '\0';
     len_list = i;
-    printf("check\n");
-    if(is_sorted(&array, len_list) == true)
-        printf("ZESS\n");
-    else if(is_sorted(&array, len_list) == false)
-        printf("NOO\n");
-    
-    // while(is_sorted(array, len_list) == false)
-    // {
-
-    // }
-    return(0);
+    i = 0;
+    while(is_sorted(array, len_list) == false)
+    {
+        while(len_list - 1 > i)
+        {
+            if (array[i] > array[i+1])
+            {
+                temp = array[i];
+                array[i] = array[i+1];
+                array[i+1] = temp;
+            }
+            i++;
+        }
+        i=0;
+    }
+    return(half_list_val(array, len_list));
 }
