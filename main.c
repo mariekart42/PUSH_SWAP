@@ -6,7 +6,7 @@
 /*   By: mmensing <mmensing@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 18:42:45 by mmensing          #+#    #+#             */
-/*   Updated: 2022/09/08 18:46:13 by mmensing         ###   ########.fr       */
+/*   Updated: 2022/09/09 15:50:51 by mmensing         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,9 @@ int32_t main(int32_t argc, char **argv)
 	stack_b = NULL;
 	stack_a = create_list(argc, argv);
 
-	printf("bool is sorted: %d\n", is_sorted(stack_a, NULL));
+	mid_point_algo(&stack_a, &stack_b);
+
+	//printf("bool is sorted: %d\n", is_sorted(stack_a, NULL));
 
 	// int dunno = sort(stack_a, NULL);
 	// printf("perfect pivot: %d\n", dunno);

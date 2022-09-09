@@ -5,82 +5,82 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmensing <mmensing@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/08 10:52:49 by mmensing          #+#    #+#             */
-/*   Updated: 2022/09/08 17:14:27 by mmensing         ###   ########.fr       */
+/*   Created: 2022/09/09 20:35:43 by mmensing          #+#    #+#             */
+/*   Updated: 2022/09/09 21:39:00 by mmensing         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include"push_swap.h"
+#include "push_swap.h"
 
-void lst_swap(l_list *head_a, l_list *head_b)
+// count len from start to end
+// works!!
+int32_t lst_len_end(l_list *start, l_list *end)
 {
-    int temp;
+    int count = 0;
+    // should not happen i guess
+    if(start == NULL)
+    {
+        printf("wrong in lst_len_end\n\n");//delete later
+        return(0);
+    }
     
-    temp = head_a->val;
-    head_a->val = head_b->val;
-    head_b->val = temp;
+    if (start == end)
+        return(1);
+        
+    while(start != end && start != NULL)
+    {
+        count++;
+        start = start->next;
+    }
+    // printf("count: %d\n", count);
+    return(count);
 }
 
-// function checks if contend is sorted
-bool is_sorted(l_list *start, l_list *end)
+bool is_sorted(int **array, int len_list)
 {
-    while(start->next != end)
+    int i = 0;
+    if (len_list == 1)
+        return(true);
+    while(len_list > 0)
     {
-        if(start->val > start->next->val)
+        // printf("array: %d\n", array[i]);
+        if (array[0][i] > array[0][i+1])
             return(false);
-        start = start->next;    
+        len_list--;
     }
     return(true);
 }
 
-// fuction sorts given chunk of array and calculates
-// perfect piviot
+// create array with content of list
+// sort array
+// find half
 int32_t perfect_pivot(l_list *start, l_list *end)
 {
-    l_list *temp = NULL;
-    temp = start;
-    while (is_sorted(start, end) == false)
+    int i = 0;
+    int len_list;
+    len_list = lst_len_end(start, end);
+    printf("len_ list %d\n", len_list);
+    int *array; 
+    array = (int *)malloc(sizeof(int) * len_list + 1);
+    while(len_list-- > 0)
     {
-        while (temp->next != end)
-        {
-            if (temp->val > temp->next->val)
-                lst_swap(temp, temp->next);
-            temp = temp->next;
-        }
-        temp = start;
-    }
-    // print_list(&start, "start");
-    return(val_half_list(start, end));
-}
+        array[i] = start->val;
+        printf("array: %d\n", array[i]);
 
-// function calculates the number in middle of list
-// eg. list:   2 5 12 3 4
-//                 ˆˆ
-// -> function returns 12
-// 'end' is the last number of chunk we wanna check
-int32_t val_half_list(l_list *head, l_list *end)
-{
-    int len = 0; // len of list
-    l_list *temp = head;
-    int half_len = 0;
-    int count = 1;
+        i++;
+        start = start->next;
+    }
+    array[i] = '\0';
+    len_list = i;
+    printf("check\n");
+    if(is_sorted(&array, len_list) == true)
+        printf("ZESS\n");
+    else if(is_sorted(&array, len_list) == false)
+        printf("NOO\n");
+    
+    // while(is_sorted(array, len_list) == false)
+    // {
 
-    while (temp != end)
-    {
-        temp = temp->next;
-        len++;
-    }
-    if ((len % 2) == 0)
-        half_len = len / 2;
-    else if ((len % 2) != 0)
-        half_len = (len + 1) / 2;
-    while (half_len > count)
-    {
-        if (head == end)
-            break;
-        head = head->next;
-        count++;
-    }
-    return (head->val);
+    // }
+    return(0);
 }
-// WORKS

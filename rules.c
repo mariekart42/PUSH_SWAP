@@ -6,7 +6,7 @@
 /*   By: mmensing <mmensing@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 15:43:26 by mmensing          #+#    #+#             */
-/*   Updated: 2022/09/07 17:26:12 by mmensing         ###   ########.fr       */
+/*   Updated: 2022/09/09 11:07:27 by mmensing         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,7 +138,7 @@ void ra(l_list **stack_a, bool output)
 	first_node->next = NULL;
 	if (output == false)
 		write(1, "rr\n", 3);
-	else
+	else if(output == true)
 		write(1, "ra\n", 3);
 }
 

@@ -6,7 +6,7 @@
 /*   By: mmensing <mmensing@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 17:18:05 by mmensing          #+#    #+#             */
-/*   Updated: 2022/09/08 12:30:09 by mmensing         ###   ########.fr       */
+/*   Updated: 2022/09/09 20:23:04 by mmensing         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,12 +44,14 @@ l_list *create_list(int32_t len, char **content)
 int32_t list_len(l_list *head)
 {
 	int32_t len = 0;
+	if (head == NULL)
+		return(0);
 	while (head->next != NULL)
 	{
 		len++;
 		head = head->next;
 	}
-	return(len+1);
+	return (len+1);
 }
 
 l_list *new_node(int32_t content)
@@ -74,8 +76,7 @@ l_list *lst_last(l_list *head)
 {
 	while(head->next != NULL)
 		head = head->next;
-	return(head);
-		
+	return(head);	
 }
 
 long int ft_atol(const char *str)

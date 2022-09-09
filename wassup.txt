@@ -1,6 +1,7 @@
 UPDATE:
 - checker funcs now also works for neg numbers
-- perfect pivot works
+- perfect pivot works -> NOPE
 
 NEXT:
-- start with list algo quick sort
+- pivot doesn't work! ->    somehow but stuff into array, sort in
+                            and find middle
