@@ -10,4 +10,6 @@ UPDATE:
 - again no leaks :)
 
 NEXT:
+- implement chunk list
 - implement first mid point sort to recurs repetition
+- hardcode case 3 and 5 nums
