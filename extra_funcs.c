@@ -6,7 +6,7 @@
 /*   By: mmensing <mmensing@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 17:18:05 by mmensing          #+#    #+#             */
-/*   Updated: 2022/09/09 20:23:04 by mmensing         ###   ########.fr       */
+/*   Updated: 2022/09/11 14:58:57 by mmensing         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,11 @@ l_list *create_list(int32_t len, char **content)
 		temp->next = NULL;
 		temp->val = atoi(content[i]);
 		if (head == NULL)
+		{
 			head = temp;
+		//free_list(temp);
+
+		}
 		else
 		{
 			if(p == NULL)
@@ -38,6 +42,11 @@ l_list *create_list(int32_t len, char **content)
 		}		
 		i++;
 	}
+	// temp = NULL;
+	// free(temp);
+	// p=NULL;
+	// free(p);
+	
 	return(head);
 }
 
@@ -108,9 +117,19 @@ long int ft_atol(const char *str)
 int	ft_isdigit(int val)
 {
 	if (val >= 48 && val <= 57)
-	{
 		return (1);
-	}
 	return (0);
 }
 
+void free_list(l_list *head)
+{
+	if(!head)
+		return ;
+	l_list *temp;
+	while(head != NULL)
+	{
+		temp = head;
+		head = head->next;
+		free(temp);
+	}
+}

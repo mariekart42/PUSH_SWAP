@@ -6,7 +6,7 @@
 /*   By: mmensing <mmensing@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 20:35:43 by mmensing          #+#    #+#             */
-/*   Updated: 2022/09/10 00:54:19 by mmensing         ###   ########.fr       */
+/*   Updated: 2022/09/11 15:03:19 by mmensing         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ int32_t perfect_pivot(l_list *start, l_list *end)
     int len_list;
     len_list = lst_len_end(start, end);
     int temp;
-    int *array; 
+    int *array;
     array = (int *)malloc(sizeof(int) * len_list + 1);
     while(len_list > 0)
     {
@@ -102,5 +102,7 @@ int32_t perfect_pivot(l_list *start, l_list *end)
         }
         i=0;
     }
-    return(half_list_val(array, len_list));
+    temp = half_list_val(array, len_list);
+    free(array);
+    return (temp);
 }

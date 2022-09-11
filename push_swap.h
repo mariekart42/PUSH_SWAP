@@ -6,7 +6,7 @@
 /*   By: mmensing <mmensing@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 16:06:16 by mmensing          #+#    #+#             */
-/*   Updated: 2022/09/10 00:27:57 by mmensing         ###   ########.fr       */
+/*   Updated: 2022/09/11 14:43:40 by mmensing         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ int32_t last_nodes_content(l_list *head);
 l_list *lst_last(l_list *head);
 long int ft_atol(const char *str);
 int	ft_isdigit(int val);
+void free_list(l_list *head);
 
 
 

@@ -6,7 +6,7 @@
 /*   By: mmensing <mmensing@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 15:43:26 by mmensing          #+#    #+#             */
-/*   Updated: 2022/09/09 11:07:27 by mmensing         ###   ########.fr       */
+/*   Updated: 2022/09/11 15:21:07 by mmensing         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,7 +126,6 @@ void ra(l_list **stack_a, bool output)
 		return ; //some error thing
 	l_list *temp = NULL;
 	l_list *first_node = NULL;
-	
 	
 	temp = *stack_a;
 	first_node = *stack_a;

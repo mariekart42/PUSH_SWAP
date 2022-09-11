@@ -6,7 +6,7 @@
 /*   By: mmensing <mmensing@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 11:19:42 by mmensing          #+#    #+#             */
-/*   Updated: 2022/09/10 00:58:11 by mmensing         ###   ########.fr       */
+/*   Updated: 2022/09/11 16:19:47 by mmensing         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,31 +14,37 @@
 
 void mid_point_algo(l_list **stack_a, l_list **stack_b)
 {
-    int pivot;
-
-
-    pivot = perfect_pivot(*stack_a, NULL);
-    stack_b++;
-    
-    printf("perfect pivot: %d\n", pivot);
-    
-    // l_list *temp_a = *stack_a;
-    // last_node = lst_last(*stack_a);
-    // while(is_sorted(*stack_a, lst_last(*stack_a)) == false || list_len(*stack_b) > 1) //quit while loop if list is sorted
-    // {        
-    //     if(pivot > temp_a->val)
-    //     {
-    //         temp_a = temp_a->next;
-    //         pb(stack_a, stack_b);
-    //     }
-    //     else if(pivot < temp_a->val)
-    //     {
-    //         temp_a = temp_a->next;
-    //         ra(stack_a, true);
-    //     }
-    //     else
-    //         temp_a = temp_a->next; 
-    // print_list(stack_a, "stack_a");
-    // print_list(stack_b, "stack_b");
-    // }
+    int pivot = perfect_pivot(*stack_a, NULL);
+	printf("pivot: %d\n", pivot);
+    int count = 0;
+    l_list *start = *stack_a;
+    l_list *end = lst_last(*stack_a);
+    printf("before\n");
+    print_list(stack_a, "stack_a");
+    print_list(stack_b, "stack_b");
+    while (start->next != NULL && end->next != start)
+    {
+        if(pivot > start->val)
+        {
+            start = start->next;
+            pb (stack_a, stack_b);
+        }
+        else if(pivot <= start->val)
+        {
+			// guard for stop loop if hitting piviot again
+			if (start->val == pivot)
+				count++;
+			if (count > 1 && start->val == pivot)
+				break ;
+				
+			start = start->next;
+			ra (stack_a, true);
+			end = end->next;
+		}
+		else
+			start = start->next;
+    }
+    printf("\n\nafter\n");
+    print_list(stack_a, "stack_a");
+    print_list(stack_b, "stack_b");
 }

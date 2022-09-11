@@ -4,6 +4,10 @@ UPDATE:
 - pivot doesn't work! ->    somehow but stuff into array, sort in
                             and find middle
 ->> pivot works now hehe
+- no leaks anymore
+- very first mid algo works -> stack_b kinda wrong order
+    -> doesnt matter i guess
+- again no leaks :)
 
 NEXT:
-- mid point algo llist
+- implement first mid point sort to recurs repetition

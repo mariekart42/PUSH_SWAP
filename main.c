@@ -6,7 +6,7 @@
 /*   By: mmensing <mmensing@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 18:42:45 by mmensing          #+#    #+#             */
-/*   Updated: 2022/09/09 15:50:51 by mmensing         ###   ########.fr       */
+/*   Updated: 2022/09/11 14:51:05 by mmensing         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,6 @@ int32_t main(int32_t argc, char **argv)
 		write(2, "ERROR\n", 6); // printing error to standard error output
 		exit(0);
 	}
-	// printf("check\n");
-	stack_a = calloc(1, sizeof(l_list));
 	stack_b = NULL;
 	stack_a = create_list(argc, argv);
 
@@ -38,7 +36,9 @@ int32_t main(int32_t argc, char **argv)
 
 	// int dunno = sort(stack_a, NULL);
 	// printf("perfect pivot: %d\n", dunno);
-	
+	free_list(stack_a);
+	free_list(stack_b);
+
 
 
 }
