@@ -6,7 +6,7 @@
 /*   By: mmensing <mmensing@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 18:42:45 by mmensing          #+#    #+#             */
-/*   Updated: 2022/09/11 14:51:05 by mmensing         ###   ########.fr       */
+/*   Updated: 2022/09/12 13:07:48 by mmensing         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,4 +73,27 @@ int32_t main(int32_t argc, char **argv)
 // 	// rrr(&stack_a, &stack_b);
 // 	print_list(&stack_a, "stack_a");
 // 	print_list(&stack_b, "stack_b");
+
+// }
+
+// int main(void)
+// {
+// 	//hardcoding linked list
+// 	l_list *temp = NULL;
+// 	temp = malloc(sizeof(l_list));
+// 	temp->next = malloc(sizeof(l_list));
+// 	temp->next->next = malloc(sizeof(l_list));
+// 	temp->next->next->next = malloc(sizeof(l_list));
+// 	temp->next->next->next->next = malloc(sizeof(l_list));
+// 	temp->next->next->next->next->next = malloc(sizeof(l_list));
+// 	temp->val = 5;
+// 	temp->next->val = -2;
+// 	temp->next->next->val = 1;
+// 	temp->next->next->next->val = 11;
+// 	temp->next->next->next->next->val = 2;
+// 	temp->next->next->next->next->next = NULL;
+	
+// 	print_list(&temp, "TEMP");
+	
+
 // }

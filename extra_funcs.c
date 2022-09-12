@@ -6,7 +6,7 @@
 /*   By: mmensing <mmensing@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 17:18:05 by mmensing          #+#    #+#             */
-/*   Updated: 2022/09/11 14:58:57 by mmensing         ###   ########.fr       */
+/*   Updated: 2022/09/12 14:58:52 by mmensing         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,7 @@ l_list *create_list(int32_t len, char **content)
 		temp->next = NULL;
 		temp->val = atoi(content[i]);
 		if (head == NULL)
-		{
 			head = temp;
-		//free_list(temp);
-
-		}
 		else
 		{
 			if(p == NULL)
@@ -42,11 +38,6 @@ l_list *create_list(int32_t len, char **content)
 		}		
 		i++;
 	}
-	// temp = NULL;
-	// free(temp);
-	// p=NULL;
-	// free(p);
-	
 	return(head);
 }
 
@@ -83,6 +74,8 @@ int32_t last_nodes_content(l_list *head)
 
 l_list *lst_last(l_list *head)
 {
+	if(head == NULL)
+		return(NULL);
 	while(head->next != NULL)
 		head = head->next;
 	return(head);	
