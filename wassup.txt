@@ -13,4 +13,4 @@ NEXT:
 - implement chunk last -> fugging seg fault right now
 - implement chunk list
 - implement first mid point sort to recurs repetition
-- hardcode case 3 and 5 nums
+- hardcode case 3 and 5 nums 
