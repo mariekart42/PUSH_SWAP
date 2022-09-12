@@ -6,7 +6,7 @@
 /*   By: mmensing <mmensing@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 11:19:42 by mmensing          #+#    #+#             */
-/*   Updated: 2022/09/12 22:31:01 by mmensing         ###   ########.fr       */
+/*   Updated: 2022/09/12 23:45:52 by mmensing         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,10 @@ bool create_list_c_start_and_c_end(l_list *stack_b, l_list **c_start, l_list **c
 	iter++;
 	if(stack_b->next == NULL || l_duplication(*c_start, stack_b->next->val) == true)
 	{
-		
-		printf("SHOULD RETURN FALSE\n");
+		// next c_start is stack b val return true
+		// print_list(c_start, "HERE C START");
+		temp->next = new_node(stack_b->val);
+		// printf("SHOULD RETURN FALSE\n");
 		return(true);
 	}
 	// if(l_duplication(*c_start, stack_b->val) == true)
@@ -76,7 +78,7 @@ bool create_list_c_start_and_c_end(l_list *stack_b, l_list **c_start, l_list **c
 	while(c_end_temp->next->val != second_last_val)
 	{
 	// printf("check IN\n");
-		printf("c end : %d\n", c_end_temp->val);
+		// printf("c end : %d\n", c_end_temp->val);
 		c_end_temp = c_end_temp->next;
 	}
 	
@@ -129,8 +131,8 @@ void mid_point_algo(l_list **stack_a, l_list **stack_b)
 	
 	while(list_len(*stack_a) > 2)
 	{
-		print_list(stack_a, "STACKKKKK_A");
-		print_list(stack_b, "STACKKKKK_B");
+		// print_list(stack_a, "STACKKKKK_A");
+		// print_list(stack_b, "STACKKKKK_B");
 		l_start = *stack_a;
 		l_end = lst_last(*stack_a);
 		int pivot = perfect_pivot(*stack_a, NULL);
@@ -162,10 +164,10 @@ void mid_point_algo(l_list **stack_a, l_list **stack_b)
 		{
 			//means there is either only 
 			printf("\nSHOULD END HERE\n\n");
-			
+			break;
 		}
-		print_list(&c_start, "C START");
-		print_list(&c_end, "C END");
+		// print_list(&c_start, "C START");
+		// print_list(&c_end, "C END");
 		count=0;
 		
 	}
@@ -176,6 +178,8 @@ void mid_point_algo(l_list **stack_a, l_list **stack_b)
 	}
 	
     printf("\n\nafter\n");
+	print_list(stack_a, "stack A");
+	print_list(stack_b, "stack B");
 	print_list(&c_start, "chunk start");
 	print_list(&c_end, "chunk end");
 

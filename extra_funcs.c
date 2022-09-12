@@ -6,7 +6,7 @@
 /*   By: mmensing <mmensing@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 17:18:05 by mmensing          #+#    #+#             */
-/*   Updated: 2022/09/12 22:27:08 by mmensing         ###   ########.fr       */
+/*   Updated: 2022/09/12 23:46:36 by mmensing         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,13 +100,13 @@ int32_t second_last(l_list *head)
 // return true if found duplication
 bool l_duplication(l_list *head, int content)
 {
-	printf("$$$content in dupli: %d\n\n", content);
-	print_list(&head, "HEAD ind dupli");
+	// printf("$$$content in dupli: %d\n\n", content);
+	// print_list(&head, "HEAD ind dupli");
 	if (head == NULL)
 		return(false);
 	while(head != NULL)
 	{
-		printf("@@check in dupli\n");
+		// printf("@@check in dupli\n");
 		if(head->val == content)
 			return(true);
 		head = head->next;
