@@ -8,9 +8,10 @@ UPDATE:
 - very first mid algo works -> stack_b kinda wrong order
     -> doesnt matter i guess
 - again no leaks :)
-
-NEXT:
 - implement chunk last -> fugging seg fault right now
 - implement chunk list
+-> done
+
+NEXT:
 - implement first mid point sort to recurs repetition
-- hardcode case 3 and 5 nums 
+- hardcode case 4 and 5 nums 

@@ -6,7 +6,7 @@
 /*   By: mmensing <mmensing@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 11:19:42 by mmensing          #+#    #+#             */
-/*   Updated: 2022/09/12 23:45:52 by mmensing         ###   ########.fr       */
+/*   Updated: 2022/09/13 13:27:29 by mmensing         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,15 +25,18 @@ bool create_list_c_start_and_c_end(l_list *stack_b, l_list **c_start, l_list **c
 	temp = lst_last(*c_start);
 	
 	static int iter = 1;
+	
+	print_list(&stack_b, "STACK_B");
 	printf("\n-----------------\nITER: %d\n\n", iter);
 	iter++;
-	if(stack_b->next == NULL || l_duplication(*c_start, stack_b->next->val) == true)
+	if(l_duplication(*c_start, stack_b->next->val) == true)
 	{
 		// next c_start is stack b val return true
 		// print_list(c_start, "HERE C START");
-		temp->next = new_node(stack_b->val);
+		// temp->next = new_node(stack_b->val);
 		// printf("SHOULD RETURN FALSE\n");
-		return(true);
+		// pa(sta)
+		return(false);
 	}
 	// if(l_duplication(*c_start, stack_b->val) == true)
 
@@ -129,7 +132,7 @@ void mid_point_algo(l_list **stack_a, l_list **stack_b)
     // print_list(stack_a, "stack_a");
     // print_list(stack_b, "stack_b");
 	
-	while(list_len(*stack_a) > 2)
+	while(list_len(*stack_a) > 4)
 	{
 		// print_list(stack_a, "STACKKKKK_A");
 		// print_list(stack_b, "STACKKKKK_B");
@@ -160,9 +163,10 @@ void mid_point_algo(l_list **stack_a, l_list **stack_b)
 				l_start = l_start->next;
 		}
 		//checking if only one digit in list
+		print_list(stack_a, "STACK_A");
 		if (create_list_c_start_and_c_end(*stack_b, &c_start, &c_end) == false)
 		{
-			//means there is either only 
+			//means there is only on last digit to push to stack b -> using hardcode case 3
 			printf("\nSHOULD END HERE\n\n");
 			break;
 		}
@@ -170,18 +174,24 @@ void mid_point_algo(l_list **stack_a, l_list **stack_b)
 		// print_list(&c_end, "C END");
 		count=0;
 		
-	}
-	if(list_len(*stack_a) == 2)
-	{
-		if((*stack_a)->val > (*stack_a)->next->val)
-			ra(stack_a, true);
-	}
-	
-    printf("\n\nafter\n");
-	print_list(stack_a, "stack A");
-	print_list(stack_b, "stack B");
 	print_list(&c_start, "chunk start");
 	print_list(&c_end, "chunk end");
+	}
+		printf("\n======\nOUT WHILE LOOP\n=========\n");
+	if(list_len(*stack_a) == 3)
+		hardcode_case_3(stack_a);
+	if(list_len(*stack_a) == 4)
+		hardcode_case_4(stack_a);
+	if(list_len(*stack_a) == 2 && ((*stack_a)->val > (*stack_a)->next->val))
+		ra(stack_a, true);
+	
+	
+
+    // printf("\n\nafter\n");
+	// print_list(stack_a, "stack A");
+	// print_list(stack_b, "stack B");
+	// print_list(&c_start, "chunk start");
+	// print_list(&c_end, "chunk end");
 
 
 

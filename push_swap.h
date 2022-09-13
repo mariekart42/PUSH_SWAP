@@ -6,7 +6,7 @@
 /*   By: mmensing <mmensing@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 16:06:16 by mmensing          #+#    #+#             */
-/*   Updated: 2022/09/12 21:51:59 by mmensing         ###   ########.fr       */
+/*   Updated: 2022/09/13 13:32:25 by mmensing         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,8 @@ int	ft_isdigit(int val);
 void free_list(l_list *head);
 int32_t second_last(l_list *head);
 bool l_duplication(l_list *head, int content);
+void hardcode_case_3(l_list **node);
+void hardcode_case_4(l_list **node);
 
 
 

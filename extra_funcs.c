@@ -6,7 +6,7 @@
 /*   By: mmensing <mmensing@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 17:18:05 by mmensing          #+#    #+#             */
-/*   Updated: 2022/09/12 23:46:36 by mmensing         ###   ########.fr       */
+/*   Updated: 2022/09/13 13:36:22 by mmensing         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,4 +158,36 @@ void free_list(l_list *head)
 		head = head->next;
 		free(temp);
 	}
+}
+
+// algo for only 3 digits -> max 2 rules! works
+void hardcode_case_3(l_list **node)
+{
+	while((*node)->val > ((*node)->next->next)->val)
+		ra(node, false);
+	if(((*node)->next->next)->val < ((*node)->next)->val)
+		rra(node, false);
+	if((*node)->val > ((*node)->next)->val)
+		sa(node, false);
+}
+
+void hardcode_case_4(l_list **node)
+{
+	l_list *temp = *node;
+	int biggest_val = temp->val;
+	temp = temp->next;
+	while (temp != NULL)
+	{
+		if(temp->val > biggest_val)
+			biggest_val = temp->val;
+		temp = temp->next;
+	}
+	free(temp); // dunno lol
+	printf("node: %d\n", (*node)->val);
+	printf("biggest val: %d\n", biggest_val);
+	if((*node)->val == biggest_val);
+	if(((*node)->next)->val == biggest_val);
+	if(((*node)->next->next)->val == biggest_val);
+	if(((*node)->next->next->next)->val == biggest_val);
+	
 }

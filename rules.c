@@ -6,7 +6,7 @@
 /*   By: mmensing <mmensing@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 15:43:26 by mmensing          #+#    #+#             */
-/*   Updated: 2022/09/11 15:21:07 by mmensing         ###   ########.fr       */
+/*   Updated: 2022/09/13 13:03:34 by mmensing         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ void ss(l_list **stack_a, l_list **stack_b)
 }
 
 
-// first element of stack a to stack b
+// first element of stack b to top of stack a
 // first element of stack b gets removed!
 // Do nothing if a is empty
 void	pa(l_list **stack_a, l_list **stack_b)
