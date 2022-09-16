@@ -6,7 +6,7 @@
 /*   By: mmensing <mmensing@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 18:42:45 by mmensing          #+#    #+#             */
-/*   Updated: 2022/09/12 13:07:48 by mmensing         ###   ########.fr       */
+/*   Updated: 2022/09/15 22:22:57 by mmensing         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ int32_t main(int32_t argc, char **argv)
 	if (checking(argv, argc) == false) // function returns 1 if something wrong, 0 if all right
 	{
 		write(2, "ERROR\n", 6); // printing error to standard error output
+		return(0);
 		exit(0);
 	}
 	stack_b = NULL;
@@ -36,9 +37,10 @@ int32_t main(int32_t argc, char **argv)
 
 	// int dunno = sort(stack_a, NULL);
 	// printf("perfect pivot: %d\n", dunno);
+	print_list(&stack_a, "stack_a");
+	print_list(&stack_b, "stack_b");
 	free_list(stack_a);
 	free_list(stack_b);
-
 
 
 }

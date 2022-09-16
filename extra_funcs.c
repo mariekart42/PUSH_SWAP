@@ -6,7 +6,7 @@
 /*   By: mmensing <mmensing@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 17:18:05 by mmensing          #+#    #+#             */
-/*   Updated: 2022/09/13 13:36:22 by mmensing         ###   ########.fr       */
+/*   Updated: 2022/09/16 04:02:45 by mmensing         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,22 +97,21 @@ int32_t second_last(l_list *head)
 	return(temp);
 }
 
-// return true if found duplication
-bool l_duplication(l_list *head, int content)
-{
-	// printf("$$$content in dupli: %d\n\n", content);
-	// print_list(&head, "HEAD ind dupli");
-	if (head == NULL)
-		return(false);
-	while(head != NULL)
-	{
-		// printf("@@check in dupli\n");
-		if(head->val == content)
-			return(true);
-		head = head->next;
-	}
-	return(false);
-}
+// // function compares whole list to given digit
+// // returns true if found duplication
+// // false if not
+// bool l_duplication(l_list *head, int content)
+// {
+// 	if (head == NULL)
+// 		return (false);
+// 	while (head != NULL)
+// 	{
+// 		if (head->val == content)
+// 			return (true);
+// 		head = head->next;
+// 	}
+// 	return (false);
+// }
 
 long int ft_atol(const char *str)
 {
@@ -163,31 +162,72 @@ void free_list(l_list *head)
 // algo for only 3 digits -> max 2 rules! works
 void hardcode_case_3(l_list **node)
 {
+	// print_list(node, "HERE NODE before");
 	while((*node)->val > ((*node)->next->next)->val)
 		ra(node, false);
 	if(((*node)->next->next)->val < ((*node)->next)->val)
 		rra(node, false);
 	if((*node)->val > ((*node)->next)->val)
 		sa(node, false);
+	// print_list(node, "HERE NODE after");
 }
 
 void hardcode_case_4(l_list **node)
 {
 	l_list *temp = *node;
-	int biggest_val = temp->val;
+	int smallest_val = temp->val;
 	temp = temp->next;
 	while (temp != NULL)
 	{
-		if(temp->val > biggest_val)
-			biggest_val = temp->val;
+		if(temp->val < smallest_val)
+			smallest_val = temp->val;
 		temp = temp->next;
 	}
 	free(temp); // dunno lol
-	printf("node: %d\n", (*node)->val);
-	printf("biggest val: %d\n", biggest_val);
-	if((*node)->val == biggest_val);
-	if(((*node)->next)->val == biggest_val);
-	if(((*node)->next->next)->val == biggest_val);
-	if(((*node)->next->next->next)->val == biggest_val);
+	if(((*node)->next)->val == smallest_val)
+		sa(node, false);
+	else if(((*node)->next->next)->val == smallest_val)
+	{
+		rra(node, false);
+		rra(node, false);
+	}
+	else if(((*node)->next->next->next)->val == smallest_val)
+		rra(node, false);
+	hardcode_case_3(&((*node)->next));
+}
+
+void sort_stack_b(l_list **stack_a, l_list **stack_a, l_list **c_start, l_list **c_end)
+{
+	while(list_len(*stack_b) > 4)
+	{
+		
+	}
+	
+	
+	// hardcode cases for 2, 3 and 4
+}
+
+
+
+bool is_sorted_from_to(l_list **head, int32_t end, int32_t start, int32_t len)
+{
+	l_list *temp;
+	int count = 0;
+	while ((*head)->val != start)
+		*head = (*head)->next;
+		
+	// temp should know have the same val as int start
+	temp = *head;
+	int array
+	while(temp->val != end)
+	{
+		temp = temp->next;
+		count++;
+	}
+	count++;
+	
+	
+	// here again cause while loop doesnt compare last case
+
 	
 }

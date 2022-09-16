@@ -10,8 +10,10 @@ UPDATE:
 - again no leaks :)
 - implement chunk last -> fugging seg fault right now
 - implement chunk list
+- implement first mid point sort to recurs repetition
 -> done
+CHUNK LIST done
 
 NEXT:
-- implement first mid point sort to recurs repetition
+- continue with sort_stack_b function 
 - hardcode case 4 and 5 nums 
