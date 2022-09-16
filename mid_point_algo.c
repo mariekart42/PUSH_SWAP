@@ -6,7 +6,7 @@
 /*   By: mmensing <mmensing@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 11:19:42 by mmensing          #+#    #+#             */
-/*   Updated: 2022/09/16 03:30:37 by mmensing         ###   ########.fr       */
+/*   Updated: 2022/09/16 14:25:36 by mmensing         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,25 @@ void create_list_c_start_and_c_end(l_list *stack_b, l_list **c_start, l_list **c
 	(lst_last(*c_start))->next = new_node(stack_b->val);
 }
 
+
+void edit_list_c_start_and_c_end(l_list **stack_b, l_list **c_start, l_list **c_end)
+{
+	l_list *temp = *stack_b;
+	while(temp->val != (*stack_b)->val)
+		temp = temp->next;
+		
+		
+	// delete last contents of both chunk lists and replace it with new val
+	// if there is no new val or its under 5, just delete last content of both
+	// chunk lists and use ggf hardcode cases
+	
+	
+	// // C_START
+	// (lst_last(*c_start)) = new_node(temp->next->val);
+
+	// // C_END
+	// (lst_last(*c_end)) = new_node(last_nodes_content(*stack_b));
+}
 
 //----------------------------------------------------------------------------------
 // l_ -> always list
@@ -78,6 +97,7 @@ void mid_point_algo(l_list **stack_a, l_list **stack_b)
 				ra (stack_a, true);
 				l_end = l_end->next;
 			}
+			// should do nothing ??:
 			else
 				l_start = l_start->next;
 		}
@@ -91,16 +111,20 @@ void mid_point_algo(l_list **stack_a, l_list **stack_b)
 		hardcode_case_4(stack_a);
 	else if (list_len(*stack_a) == 2 && ((*stack_a)->val > (*stack_a)->next->val))
 		ra(stack_a, true);
-	else
-		sort_stack_b();
+
+
+	printf(RED"\n=========\nSORT STACK B\n=========\n\n"RESET);
 	
-    printf("\n\nafter\n");
-	print_list(stack_a, "stack A");
-	print_list(stack_b, "stack B");
 	print_list(&c_start, "chunk start");
 	print_list(&c_end, "chunk end");
+	sort_stack_b(stack_a, stack_b, &c_start, &c_end);
+	
 
 	
+    // printf("\n\nafter\n");
+	// print_list(stack_a, "stack A");
+	// print_list(stack_b, "stack B");
+
 }
 
 

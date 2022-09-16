@@ -6,7 +6,7 @@
 /*   By: mmensing <mmensing@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 16:06:16 by mmensing          #+#    #+#             */
-/*   Updated: 2022/09/16 03:26:40 by mmensing         ###   ########.fr       */
+/*   Updated: 2022/09/16 14:21:42 by mmensing         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ typedef struct l_list
 void mid_point_algo(l_list **stack_a, l_list **stack_b);
 void sort_stack_b();
 void create_list_c_start_and_c_end(l_list *stack_b, l_list **c_start, l_list **c_end);
+void edit_list_c_start_and_c_end(l_list **stack_b, l_list **c_start, l_list **c_end);
 
 
 // -----  delete_later_funcs.c  -----
@@ -71,10 +72,11 @@ l_list *lst_last(l_list *head);
 long int ft_atol(const char *str);
 int	ft_isdigit(int val);
 void free_list(l_list *head);
-int32_t second_last(l_list *head);
+l_list *second_last(l_list *head);
 // bool l_duplication(l_list *head, int content);
 void hardcode_case_3(l_list **node);
 void hardcode_case_4(l_list **node);
+bool lst_is_sorted(l_list **head, int32_t end, int32_t start);
 
 
 
