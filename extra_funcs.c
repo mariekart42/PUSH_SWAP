@@ -6,7 +6,7 @@
 /*   By: mmensing <mmensing@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 17:18:05 by mmensing          #+#    #+#             */
-/*   Updated: 2022/09/17 17:08:11 by mmensing         ###   ########.fr       */
+/*   Updated: 2022/09/17 23:35:22 by mmensing         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,8 @@ l_list *lst_last(l_list *head)
 l_list *second_last(l_list *head)
 {
 	l_list *temp;
+	if(head == NULL || head->next == NULL)
+		return(NULL);
 	if(head->next->next == NULL)
 	{
 		return(head);

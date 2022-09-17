@@ -6,7 +6,7 @@
 /*   By: mmensing <mmensing@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 11:19:42 by mmensing          #+#    #+#             */
-/*   Updated: 2022/09/17 17:48:57 by mmensing         ###   ########.fr       */
+/*   Updated: 2022/09/17 23:38:15 by mmensing         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,25 +121,34 @@ void sort_stack_b(l_list **stack_a, l_list **stack_b, l_list **c_b_start, l_list
 	// hardcode cases for 2, 3 and 4
 }
 
+void variable_buffer(l_list **stack_a, l_list **stack_b)
+{
+	l_list *c_b_start = NULL;
+	l_list *c_b_end = NULL;
+	l_list *c_a_start = NULL;
+	l_list *c_a_end = NULL;
+	mid_point_algo(&stack_a, *stack_b, &c_b_start, &c_b_end);
+}
 
 //----------------------------------------------------------------------------------
 // l_ -> always list
 // c_ -> always chunk
-void mid_point_algo(l_list **stack_a, l_list **stack_b)
+void mid_point_algo(l_list **stack_a, l_list **stack_b, l_list **b_starts, l_list** a_starts)
 {
-	l_list *c_b_start = NULL;
-	l_list *c_b_end = NULL; // but both to main func so mid point algo can get called again
-
 	l_list *l_start = NULL;
 	l_list *l_end = NULL;
     int count = 0;
 	
-	while (list_len(*stack_a) > 4 && (!(is_sorted(stack_a, last_node(stack_a) == true && list_len(stack_b) == 0)))
+	while (list_len(*stack_a) > 4 || (!((is_sorted(stack_a, last_node(stack_a)) == true) && list_len(stack_b) == 0)))
 	{
 		l_start = *stack_a;
-		l_end = lst_last(*stack_a);
+		if(first == true)
+			l_end = lst_last(*stack_a);
+		else if (first == false)
+			l_end = second_last(c_a_start);
 		int pivot = perfect_pivot(*stack_a, NULL);
 		printf("pivot: %d\n", pivot);
+		
 		while (l_start->next != NULL && l_end->next != l_start)
 		{
 			if (pivot > l_start->val)

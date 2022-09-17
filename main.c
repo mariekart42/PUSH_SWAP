@@ -6,7 +6,7 @@
 /*   By: mmensing <mmensing@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 18:42:45 by mmensing          #+#    #+#             */
-/*   Updated: 2022/09/17 17:42:30 by mmensing         ###   ########.fr       */
+/*   Updated: 2022/09/18 01:19:50 by mmensing         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,28 +21,30 @@ int32_t main(int32_t argc, char **argv)
 {
 	l_list *stack_a = NULL;
 	l_list *stack_b = NULL;
-
+	l_list *a_starts = NULL;
+	l_list *b_starts = NULL;
 	if (checking(argv, argc) == false) // function returns 1 if something wrong, 0 if all right
 	{
 		write(2, "ERROR\n", 6); // printing error to standard error output
 		return(0);
 		exit(0);
 	}
-	stack_b = NULL;
 	stack_a = create_list(argc, argv);
 
+	quicksort(&stack_a, &stack_b, &a_starts, &b_starts);
 	
+	printf("\nEND MAIN\n\n");
 
-	mid_point_algo(&stack_a, &stack_b);
+	// mid_point_algo(&stack_a, &stack_b, &a_starts, &b_starts);
 
 	//printf("bool is sorted: %d\n", is_sorted(stack_a, NULL));
 
 	// int dunno = sort(stack_a, NULL);
 	// printf("perfect pivot: %d\n", dunno);
-	print_list(&stack_a, "stack_a");
-	print_list(&stack_b, "stack_b");
-	free_list(stack_a);
-	free_list(stack_b);
+	// print_list(&stack_a, "stack_a");
+	// print_list(&stack_b, "stack_b");
+	// free_list(stack_a);
+	// free_list(stack_b);
 
 
 }

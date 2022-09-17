@@ -6,7 +6,7 @@
 /*   By: mmensing <mmensing@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 16:06:16 by mmensing          #+#    #+#             */
-/*   Updated: 2022/09/17 17:07:45 by mmensing         ###   ########.fr       */
+/*   Updated: 2022/09/18 00:16:20 by mmensing         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,11 @@ typedef struct l_list
 # define CYN   "\x1B[36m"
 # define WHT   "\x1B[37m"
 # define RESET "\x1B[0m"
+
+
+// -----  quicksort.c  -----
+void quick_to_b(l_list **stack_a, l_list **stack_b, l_list **a_starts, l_list **b_starts);
+
 
 // -----  mid_point_algo.c  -----
 void mid_point_algo(l_list **stack_a, l_list **stack_b);
