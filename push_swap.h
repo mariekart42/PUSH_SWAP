@@ -6,7 +6,7 @@
 /*   By: mmensing <mmensing@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 16:06:16 by mmensing          #+#    #+#             */
-/*   Updated: 2022/09/16 14:21:42 by mmensing         ###   ########.fr       */
+/*   Updated: 2022/09/17 17:07:45 by mmensing         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,9 @@ typedef struct l_list
 
 // -----  mid_point_algo.c  -----
 void mid_point_algo(l_list **stack_a, l_list **stack_b);
-void sort_stack_b();
-void create_list_c_start_and_c_end(l_list *stack_b, l_list **c_start, l_list **c_end);
-void edit_list_c_start_and_c_end(l_list **stack_b, l_list **c_start, l_list **c_end);
+void sort_stack_b(l_list **stack_a, l_list **stack_b, l_list **c_b_start, l_list **c_b_end);
+void create_list_start_end(l_list *stack_b, l_list **start, l_list **end);
+void edit_list_start_end(l_list *stack, l_list **start, l_list **end);
 
 
 // -----  delete_later_funcs.c  -----

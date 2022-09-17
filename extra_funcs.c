@@ -6,7 +6,7 @@
 /*   By: mmensing <mmensing@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 17:18:05 by mmensing          #+#    #+#             */
-/*   Updated: 2022/09/16 14:22:11 by mmensing         ###   ########.fr       */
+/*   Updated: 2022/09/17 17:08:11 by mmensing         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,21 +97,6 @@ l_list *second_last(l_list *head)
 	return(temp);
 }
 
-// // function compares whole list to given digit
-// // returns true if found duplication
-// // false if not
-// bool l_duplication(l_list *head, int content)
-// {
-// 	if (head == NULL)
-// 		return (false);
-// 	while (head != NULL)
-// 	{
-// 		if (head->val == content)
-// 			return (true);
-// 		head = head->next;
-// 	}
-// 	return (false);
-// }
 
 long int ft_atol(const char *str)
 {
@@ -194,62 +179,6 @@ void hardcode_case_4(l_list **node)
 	else if(((*node)->next->next->next)->val == smallest_val)
 		rra(node, false);
 	hardcode_case_3(&((*node)->next));
-}
-
-void sort_stack_b(l_list **stack_a, l_list **stack_b, l_list **c_start, l_list **c_end)
-{
-	int pivot = 0;
-	int count = 0;
-	l_list *temp = *stack_b;
-	// printf("len list stack b: %d\n\n", list_len(*stack_b));
-	while(list_len(*stack_b) > 4)
-	{
-		// printf(GRN"CHECK\n"RESET);
-		// print_list(c_start, "C_START");
-		printf("\nlast c end: %d\n", last_nodes_content(*c_end));
-		printf("first c end: %d\n\n", last_nodes_content(*c_start));
-		if(lst_is_sorted(stack_b, last_nodes_content(*c_end),last_nodes_content(*c_start)) == false)
-		{
-			pivot = perfect_pivot(lst_last(*c_start), lst_last(*c_end));
-			print_list(stack_b, "STACK_B");
-			printf("PIVOT: %d\n", pivot);
-			while(temp->next != second_last(*c_start) && temp->next != NULL)
-			{
-				if(pivot > temp->val)
-				{
-					temp = temp->next;
-					
-					// from top b to top a
-					pa(stack_a, stack_b);
-				}
-				else if(pivot <= temp->val)
-				{
-					// guard for stop loop if hitting piviot again
-					if(temp->val == pivot)
-						count++;
-					if(count >1 && temp->val == pivot)
-						break ;
-					
-					temp = temp->next;
-					// shift first digit to bottom of b
-					ra(stack_a, true);
-				}
-			}
-			edit_list_c_start_and_c_end(stack_b, c_start, c_end);
-			print_list(c_end, "C_END");
-			print_list(c_start, "C_START");
-			count = 0;
-		}
-		
-		
-
-	}
-	printf(RED"NOPE\n"RESET);
-	stack_a++;
-	c_end++;
-	
-	
-	// hardcode cases for 2, 3 and 4
 }
 
 

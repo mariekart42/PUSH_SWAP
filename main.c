@@ -6,7 +6,7 @@
 /*   By: mmensing <mmensing@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 18:42:45 by mmensing          #+#    #+#             */
-/*   Updated: 2022/09/15 22:22:57 by mmensing         ###   ########.fr       */
+/*   Updated: 2022/09/17 17:42:30 by mmensing         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ int32_t main(int32_t argc, char **argv)
 	}
 	stack_b = NULL;
 	stack_a = create_list(argc, argv);
+
+	
 
 	mid_point_algo(&stack_a, &stack_b);
 
