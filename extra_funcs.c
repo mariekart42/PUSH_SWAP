@@ -6,7 +6,7 @@
 /*   By: mmensing <mmensing@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 17:18:05 by mmensing          #+#    #+#             */
-/*   Updated: 2022/09/17 23:35:22 by mmensing         ###   ########.fr       */
+/*   Updated: 2022/09/18 14:46:13 by mmensing         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,7 @@ l_list *lst_last(l_list *head)
 	return(head);	
 }
 
+// returns NULL if head is NULL or the next is also NULL
 l_list *second_last(l_list *head)
 {
 	l_list *temp;
@@ -200,4 +201,39 @@ bool lst_is_sorted(l_list **head, int32_t end, int32_t start)
 		temp = temp->next;
 	}
 	return(true);	
+}
+
+//prev returns the previouse content of node in stack
+//if node is NULL, function returns the content before NULL 
+//  in the current stack
+//function doesnt handle cases where there is no prev of node
+//  or node or stack are NULL!
+l_list *prev(l_list *stack, l_list*node)
+{
+	l_list *temp = NULL;
+	printf("node: %d\n\n", node->val);
+	print_list(&stack, "STACK");
+	if(stack == node || stack == NULL)
+	{
+		printf(RED"\n!! i prev function case appeared\n\n"RESET);
+		return(NULL);
+	}
+	while(stack->next->val != node->val && stack->next != NULL)
+	{
+		stack = stack->next;
+	}
+	return(stack);
+}
+
+// function calculates the amount of nodes(including end)
+int32_t range(l_list* begin, l_list *end)
+{
+	int count = 1;
+	while(begin->val != end->end)
+	{
+		begin = begin->next;
+		count++;
+	}
+	return(count);
+
 }

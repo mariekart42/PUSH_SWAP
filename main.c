@@ -6,7 +6,7 @@
 /*   By: mmensing <mmensing@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 18:42:45 by mmensing          #+#    #+#             */
-/*   Updated: 2022/09/18 01:19:50 by mmensing         ###   ########.fr       */
+/*   Updated: 2022/09/18 14:12:38 by mmensing         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,13 @@ int32_t main(int32_t argc, char **argv)
 	}
 	stack_a = create_list(argc, argv);
 
-	quicksort(&stack_a, &stack_b, &a_starts, &b_starts);
+	l_list test[1] = {5};
+	l_list * brr = NULL;
+	brr = prev(stack_a, test);
+	
+	printf("prev: %d\n", brr->val);
+
+	// quicksort(&stack_a, &stack_b, &a_starts, &b_starts);
 	
 	printf("\nEND MAIN\n\n");
 

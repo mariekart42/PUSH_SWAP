@@ -6,7 +6,7 @@
 /*   By: mmensing <mmensing@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 16:06:16 by mmensing          #+#    #+#             */
-/*   Updated: 2022/09/18 00:16:20 by mmensing         ###   ########.fr       */
+/*   Updated: 2022/09/18 15:45:11 by mmensing         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,9 @@ typedef struct l_list
 
 
 // -----  quicksort.c  -----
-void quick_to_b(l_list **stack_a, l_list **stack_b, l_list **a_starts, l_list **b_starts);
+bool quick_to_b(l_list **stack_a, l_list **stack_b, l_list **a_starts, l_list **b_starts);
+bool quicksort(l_list **stack_a, l_list **stack_b, l_list **a_starts, l_list **b_starts);
+bool quick_to_a(l_list **stack_a, l_list **stack_b, l_list **a_starts, l_list **b_starts);
 
 
 // -----  mid_point_algo.c  -----
@@ -82,7 +84,7 @@ l_list *second_last(l_list *head);
 void hardcode_case_3(l_list **node);
 void hardcode_case_4(l_list **node);
 bool lst_is_sorted(l_list **head, int32_t end, int32_t start);
-
+l_list *prev(l_list *stack, l_list*node);
 
 
 /* - - - RULES - - - */

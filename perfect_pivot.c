@@ -6,7 +6,7 @@
 /*   By: mmensing <mmensing@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 20:35:43 by mmensing          #+#    #+#             */
-/*   Updated: 2022/09/11 15:03:19 by mmensing         ###   ########.fr       */
+/*   Updated: 2022/09/18 13:20:50 by mmensing         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ int32_t half_list_val(int *array, int len_list)
 // create array with content of list
 // sort array
 // find half
+// pivot every time the bigger one!
 int32_t perfect_pivot(l_list *start, l_list *end)
 {
     int i = 0;

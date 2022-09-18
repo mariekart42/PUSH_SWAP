@@ -6,13 +6,13 @@
 /*   By: mmensing <mmensing@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/17 23:28:29 by mmensing          #+#    #+#             */
-/*   Updated: 2022/09/18 01:29:56 by mmensing         ###   ########.fr       */
+/*   Updated: 2022/09/18 15:56:49 by mmensing         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void quicksort(l_list **stack_a, l_list **stack_b, l_list **a_starts, l_list **b_starts)
+bool quicksort(l_list **stack_a, l_list **stack_b, l_list **a_starts, l_list **b_starts)
 {
 	bool end_b = false;
 	bool end_a = false;
@@ -25,9 +25,63 @@ void quicksort(l_list **stack_a, l_list **stack_b, l_list **a_starts, l_list **b
 
 bool quick_to_a(l_list **stack_a, l_list **stack_b, l_list **a_starts, l_list **b_starts)
 {
-	if(a_starts == NULL)
+    l_list *temp = NULL;
+    int pivot = 0;
+    l_list *last_node = lst_last(stack_b);
+    
+	if(*a_starts == NULL)
 		a_starts = new_node((*stack_a)->val);
-	else
+	// else
+    //     (lst_last(a_starts))->next = new_node((*stack_a)->val);
+    
+    while(list_len(*stack_b) > 5) // guess more argument
+    {
+        temp = *stack_b;
+        
+        // if b_starts has less then 2 nodes, function returns NULL
+        while(temp->next != second_last(&b_starts))
+        {
+            if(range(temp, second_last(&b_starts)) < 5)
+            {
+                hardcode()
+                
+            }
+            // pivot of first chunk
+            pivot = perfect_pivot(lst_last(*stack_b), prev(stack_b, second_last(&b_starts)));
+            if(temp->val > pivot)
+            {
+                temp = temp->next;
+                pa(stack_a, stack_b);
+            }
+            else if(temp->val <= pivot)
+            {
+                temp = temp->next;
+                rb(stack_b, true);
+            }
+        }
+        
+        // edit a starts
+        lst_last(a_starts)->next = new_node((*stack_a)->val);
+
+        // command rb pushed something to the end of stack b
+        // solution that sucks and is mies inefficient but i'm too stupid for something better rn
+        // pushes everything that is at the bottom again to the top of stack b ->> rrb
+        if(last_node->next == NULL)
+        {
+            while(last_node->next != NULL)
+            {
+                last_node = last_node->next;
+                rrb(&stack_b, false);
+            }
+            // replacing the last node of previouse b start with new b start
+            lst_last(b_starts) = *stack_b;
+            return(false);
+        }
+        
+        // something if current a chunk is unsorted send back to b
+        
+    }
+    
 		
 }
 
