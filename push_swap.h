@@ -6,7 +6,7 @@
 /*   By: mmensing <mmensing@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 16:06:16 by mmensing          #+#    #+#             */
-/*   Updated: 2022/09/18 15:45:11 by mmensing         ###   ########.fr       */
+/*   Updated: 2022/09/18 21:36:16 by mmensing         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,17 +39,23 @@ typedef struct l_list
 # define RESET "\x1B[0m"
 
 
-// -----  quicksort.c  -----
-bool quick_to_b(l_list **stack_a, l_list **stack_b, l_list **a_starts, l_list **b_starts);
-bool quicksort(l_list **stack_a, l_list **stack_b, l_list **a_starts, l_list **b_starts);
-bool quick_to_a(l_list **stack_a, l_list **stack_b, l_list **a_starts, l_list **b_starts);
+// -----  move_chunk.c  -----
+void quicksort(l_list **stack_a, l_list **stack_b, l_list **a_starts, l_list **b_starts);
+void quick_to_b(l_list **stack_a, l_list **stack_b, l_list **a_starts, l_list **b_starts);
 
 
-// -----  mid_point_algo.c  -----
-void mid_point_algo(l_list **stack_a, l_list **stack_b);
-void sort_stack_b(l_list **stack_a, l_list **stack_b, l_list **c_b_start, l_list **c_b_end);
-void create_list_start_end(l_list *stack_b, l_list **start, l_list **end);
-void edit_list_start_end(l_list *stack, l_list **start, l_list **end);
+
+// // -----  quicksort.c  -----
+// bool quick_to_b(l_list **stack_a, l_list **stack_b, l_list **a_starts, l_list **b_starts);
+// bool quicksort(l_list **stack_a, l_list **stack_b, l_list **a_starts, l_list **b_starts);
+// bool quick_to_a(l_list **stack_a, l_list **stack_b, l_list **a_starts, l_list **b_starts);
+
+
+// // -----  mid_point_algo.c  -----
+// void mid_point_algo(l_list **stack_a, l_list **stack_b);
+// void sort_stack_b(l_list **stack_a, l_list **stack_b, l_list **c_b_start, l_list **c_b_end);
+// void create_list_start_end(l_list *stack_b, l_list **start, l_list **end);
+// void edit_list_start_end(l_list *stack, l_list **start, l_list **end);
 
 
 // -----  delete_later_funcs.c  -----

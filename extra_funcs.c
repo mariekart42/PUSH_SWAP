@@ -6,7 +6,7 @@
 /*   By: mmensing <mmensing@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 17:18:05 by mmensing          #+#    #+#             */
-/*   Updated: 2022/09/18 14:46:13 by mmensing         ###   ########.fr       */
+/*   Updated: 2022/09/18 20:58:48 by mmensing         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -185,6 +185,20 @@ void hardcode_case_4(l_list **node)
 }
 
 
+// checks if th stack is sorted
+bool stack_sorted(l_list **stack)
+{
+	l_list *temp;
+	// temp should know have the same val as int start
+	temp = *stack;
+	while(temp->next != NULL)
+	{
+		if (temp->val > temp->next->val)
+			return(false);
+		temp = temp->next;
+	}
+	return(true);	
+}
 
 bool lst_is_sorted(l_list **head, int32_t end, int32_t start)
 {
@@ -210,7 +224,6 @@ bool lst_is_sorted(l_list **head, int32_t end, int32_t start)
 //  or node or stack are NULL!
 l_list *prev(l_list *stack, l_list*node)
 {
-	l_list *temp = NULL;
 	printf("node: %d\n\n", node->val);
 	print_list(&stack, "STACK");
 	if(stack == node || stack == NULL)
@@ -229,7 +242,7 @@ l_list *prev(l_list *stack, l_list*node)
 int32_t range(l_list* begin, l_list *end)
 {
 	int count = 1;
-	while(begin->val != end->end)
+	while(begin->val != end->val)
 	{
 		begin = begin->next;
 		count++;
