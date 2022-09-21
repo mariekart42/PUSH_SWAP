@@ -6,7 +6,7 @@
 /*   By: mmensing <mmensing@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 17:18:05 by mmensing          #+#    #+#             */
-/*   Updated: 2022/09/21 10:51:32 by mmensing         ###   ########.fr       */
+/*   Updated: 2022/09/21 20:53:49 by mmensing         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,11 +151,11 @@ void free_list(l_list *head)
 void hardcode_case_3(l_list **node)
 {
 	// print_list(node, "HERE NODE before");
-	while((*node)->val > ((*node)->next->next)->val)
+	while((*node)->val < ((*node)->next->next)->val)
 		ra(node, false);
-	if(((*node)->next->next)->val < ((*node)->next)->val)
+	if(((*node)->next->next)->val > ((*node)->next)->val)
 		rra(node, false);
-	if((*node)->val > ((*node)->next)->val)
+	if((*node)->val < ((*node)->next)->val)
 		sa(node, false);
 	// print_list(node, "HERE NODE after");
 }
@@ -167,7 +167,7 @@ void hardcode_case_4(l_list **node)
 	temp = temp->next;
 	while (temp != NULL)
 	{
-		if(temp->val < smallest_val)
+		if(temp->val > smallest_val)
 			smallest_val = temp->val;
 		temp = temp->next;
 	}
@@ -252,17 +252,39 @@ int32_t range(l_list* begin, l_list *end)
 }
 
 
+// // function compares the actual ending digit with the given input
+// bool check_ending(l_list *stack, l_list *content)
+// {
+// 	l_list *temp = NULL;
+// 	while (temp->next != NULL)
+// 		temp = temp->next;
+// 	if (temp->val == content->val)
+// 		return(true);
+// 	else 
+// 		return(false);
+// }
 
-
-
-// function compares the actual ending digit with the given input
-bool check_ending(l_list *stack, l_list *content)
+void create_b_starts(l_list *stack_b, l_list **b_starts, l_list *tmp)
 {
-	l_list *temp = NULL;
-	while (temp->next != NULL)
-		temp = temp->next;
-	if (temp->val == content->val)
-		return(true);
-	else 
-		return(false);
+	
+	if(*b_starts == NULL)
+	{
+		*b_starts = new_node(last_nodes_content(stack_b));
+		return ;
+	}
+	(lst_last(*b_starts))->next = new_node((prev(stack_b, lst_last(tmp)))->val);
+	// print_list(b_starts, "B STARTS");
+}
+
+// hardcode function for the last 2 till 5 digits
+void hardcode(l_list** stack)
+{
+	if (list_len(*stack) == 3)
+		hardcode_case_3(stack);
+	else if (list_len(*stack) == 4)
+		hardcode_case_4(stack);
+	else if (list_len(*stack) == 2 && ((*stack)->val > (*stack)->next->val))
+		ra(stack, true);
+
+
 }

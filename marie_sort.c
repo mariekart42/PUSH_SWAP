@@ -6,7 +6,7 @@
 /*   By: mmensing <mmensing@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 10:12:30 by mmensing          #+#    #+#             */
-/*   Updated: 2022/09/21 11:35:53 by mmensing         ###   ########.fr       */
+/*   Updated: 2022/09/21 20:57:14 by mmensing         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,11 @@ void marie_sort(l_list **stack_a, l_list ** stack_b, l_list** a_starts, l_list**
 {
     quick_to_b(stack_a, stack_b, a_starts, b_starts);
     
-    l_list *b_down = NULL;
+    // l_list *b_down = NULL;
     // no need for a down cause there is never more then one content
     
     l_list *last_a = lst_last(*stack_a);
-    l_list *last_b = lst_last(*stack_b);
+    // l_list *last_b = lst_last(*stack_b);
     
     printf("last a :%d\n", last_a->val);
     
@@ -59,14 +59,13 @@ printf(BLU"\nAFTER\n\n"RESET);
 
 
 
-
-
 // very first step
 void quick_to_b(l_list **stack_a, l_list **stack_b, l_list **a_starts, l_list **b_starts)
 {
     int pivot = 0;
-    l_list *temp = *stack_a;
-	
+    l_list *temp_a = *stack_a;
+    l_list *tmp= new_node(-1);
+    // l_list *temp_start = NULL;
 	// for guarding that the same number will not hit twice
     int64_t guard = 999999999999; //12 times 9, so no int val will ever be this
 
@@ -82,39 +81,38 @@ void quick_to_b(l_list **stack_a, l_list **stack_b, l_list **a_starts, l_list **
         
         //first iter last of a starts will be NULL
         // otherwise the last of a starts -> or has it to be second last -> look after second iter
-        // while (temp->next != lst_last(*a_starts))
-        while (temp->next != NULL)
+        // while (temp_a->next != lst_last(*a_starts))
+        while (temp_a->next != NULL)
         {
-            printf(RED"\nITER\n\n"RESET);
-            if (pivot > temp->val)
+            // printf(RED"\nITER\n\n"RESET);
+            if (pivot > temp_a->val)
             {
-                temp = temp->next;
+                temp_a = temp_a->next;
                 pb(stack_a, stack_b);
             }
-            else if (pivot <= temp->val)
+            else if (pivot <= temp_a->val)
             {
-				if(guard == temp->val)
+				if(guard == temp_a->val)
 					break ; // or return?
                 if (guard == 999999999999)
-					guard = temp->val;
-                temp = temp->next;
+					guard = temp_a->val;
+                temp_a = temp_a->next;
                 ra(stack_a, true);     
             }
         }
+print_list(stack_a, "stack a");
+print_list(stack_b, "stack b");
+print_list(a_starts, "a_starts");
+print_list(b_starts, "b_starts");
 		guard = 999999999999;
 		
-        // if there is nothing in start
-        if (*b_starts == NULL)
-            *b_starts = new_node((*stack_b)->val);
-        else
-            (lst_last(*b_starts))->next = new_node((*stack_b)->val);
+        create_b_starts(*stack_b, b_starts, tmp);
+        lst_last(tmp)->next = new_node((*stack_b)->val); 
+        // printf(BLU"CHECK\n"RESET);
     }
+    // free all nodes of tmp start
+    
 	// hardcode cases
-	if (list_len(*stack_a) == 3)
-		hardcode_case_3(stack_a);
-	else if (list_len(*stack_a) == 4)
-		hardcode_case_4(stack_a);
-	else if (list_len(*stack_a) == 2 && ((*stack_a)->val > (*stack_a)->next->val))
-		ra(stack_a, true);
-    *a_starts = new_node((*stack_a)->val);
+    hardcode(stack_a);
+    *a_starts = new_node((lst_last(*stack_a))->val);
 }

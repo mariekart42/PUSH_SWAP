@@ -6,7 +6,7 @@
 /*   By: mmensing <mmensing@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 15:43:26 by mmensing          #+#    #+#             */
-/*   Updated: 2022/09/13 13:03:34 by mmensing         ###   ########.fr       */
+/*   Updated: 2022/09/21 19:33:44 by mmensing         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ void ss(l_list **stack_a, l_list **stack_b)
 void	pa(l_list **stack_a, l_list **stack_b)
 {
 	l_list *head = NULL;
-	l_list *prev_content = *stack_b;
+	l_list *prev_content = *stack_a;
 	if (*stack_b == NULL) // if stack_a is empty
 	{
 		printf("stack_b is empty\n"); // delete later
