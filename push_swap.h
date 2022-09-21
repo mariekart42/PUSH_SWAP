@@ -6,7 +6,7 @@
 /*   By: mmensing <mmensing@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 16:06:16 by mmensing          #+#    #+#             */
-/*   Updated: 2022/09/18 21:36:16 by mmensing         ###   ########.fr       */
+/*   Updated: 2022/09/21 10:29:59 by mmensing         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,15 @@ typedef struct l_list
 # define RESET "\x1B[0m"
 
 
-// -----  move_chunk.c  -----
-void quicksort(l_list **stack_a, l_list **stack_b, l_list **a_starts, l_list **b_starts);
+// -----  marie_sort.c  -----
 void quick_to_b(l_list **stack_a, l_list **stack_b, l_list **a_starts, l_list **b_starts);
+void marie_sort(l_list **stack_a, l_list ** stack_b, l_list** a_starts, l_list** b_starts);
+
+
+
+// // -----  move_chunk.c  -----
+// void quicksort(l_list **stack_a, l_list **stack_b, l_list **a_starts, l_list **b_starts);
+// void quick_to_b(l_list **stack_a, l_list **stack_b, l_list **a_starts, l_list **b_starts);
 
 
 
@@ -91,6 +97,7 @@ void hardcode_case_3(l_list **node);
 void hardcode_case_4(l_list **node);
 bool lst_is_sorted(l_list **head, int32_t end, int32_t start);
 l_list *prev(l_list *stack, l_list*node);
+bool stack_sorted(l_list **stack);
 
 
 /* - - - RULES - - - */

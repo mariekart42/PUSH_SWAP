@@ -6,7 +6,7 @@
 #    By: mmensing <mmensing@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/08 12:21:27 by mmensing          #+#    #+#              #
-#    Updated: 2022/09/18 20:56:13 by mmensing         ###   ########.fr        #
+#    Updated: 2022/09/21 10:26:16 by mmensing         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ CFLAGS= -Wall -Werror -Wextra
 HEADER= push_swap.h
 RM= rm -rf
 
-FILES= extra_funcs.c main.c rules.c delete_later_funcs.c checking.c perfect_pivot.c move_chunk.c
+FILES= extra_funcs.c main.c rules.c delete_later_funcs.c checking.c perfect_pivot.c marie_sort.c
 
 O_FILES= $(FILES:%.c=%.o)
 

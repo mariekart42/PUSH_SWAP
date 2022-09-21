@@ -6,7 +6,7 @@
 /*   By: mmensing <mmensing@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 17:18:05 by mmensing          #+#    #+#             */
-/*   Updated: 2022/09/18 20:58:48 by mmensing         ###   ########.fr       */
+/*   Updated: 2022/09/21 10:51:32 by mmensing         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -249,4 +249,20 @@ int32_t range(l_list* begin, l_list *end)
 	}
 	return(count);
 
+}
+
+
+
+
+
+// function compares the actual ending digit with the given input
+bool check_ending(l_list *stack, l_list *content)
+{
+	l_list *temp = NULL;
+	while (temp->next != NULL)
+		temp = temp->next;
+	if (temp->val == content->val)
+		return(true);
+	else 
+		return(false);
 }

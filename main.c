@@ -6,7 +6,7 @@
 /*   By: mmensing <mmensing@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 18:42:45 by mmensing          #+#    #+#             */
-/*   Updated: 2022/09/18 21:35:23 by mmensing         ###   ########.fr       */
+/*   Updated: 2022/09/21 10:30:35 by mmensing         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,11 @@ int32_t main(int32_t argc, char **argv)
 	// brr = prev(stack_a, test);
 	
 	// printf("prev: %d\n", brr->val);
-	if(stack_sorted(stack_a) == true && list_len(stack_b) == 0)
+	if(stack_sorted(&stack_a) == true && list_len(stack_b) == 0)
 	{
 		return(0);
 	}
-	quicksort(&stack_a, &stack_b, &a_starts, &b_starts);
+	marie_sort(&stack_a, &stack_b, &a_starts, &b_starts);
 	
 	printf("\nEND MAIN\n\n");
 
