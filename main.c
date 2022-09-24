@@ -6,7 +6,7 @@
 /*   By: mmensing <mmensing@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 18:42:45 by mmensing          #+#    #+#             */
-/*   Updated: 2022/09/21 20:31:25 by mmensing         ###   ########.fr       */
+/*   Updated: 2022/09/22 19:15:15 by mmensing         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ int32_t main(int32_t argc, char **argv)
 	l_list *stack_b = NULL;
 	l_list *a_starts = NULL;
 	l_list *b_starts = NULL;
+	// l_list *temp_b_starts = NULL;
 	if (checking(argv, argc) == false) // function returns 1 if something wrong, 0 if all right
 	{
 		write(2, "ERROR\n", 6); // printing error to standard error output
@@ -36,17 +37,27 @@ int32_t main(int32_t argc, char **argv)
 	// brr = prev(stack_a, test);
 	
 	// printf("prev: %d\n", brr->val);
+	
+
+	print_list(&stack_a, "stack_a");
+	print_list(&stack_b, "stack_b");
+
 	if(stack_sorted(&stack_a) == true && list_len(stack_b) == 0)
 	{
 		return(0);
 	}
-	marie_sort(&stack_a, &stack_b, &a_starts, &b_starts);
 	
-	print_list(&stack_a, "stack a");
-print_list(&stack_b, "stack b");
-print_list(&a_starts, "a_starts");
-print_list(&b_starts, "b_starts");
+	quick_to_b(&stack_a, &stack_b, &a_starts, &b_starts);
+	// marie_sort(&stack_a, &stack_b, &a_starts, &b_starts, &temp_b_starts);
+	
+	
+	print_list(&stack_a, "stack_a");
+	print_list(&stack_b, "stack_b");
+	print_list(&a_starts, "a_starts");
+	print_list(&b_starts, "b_starts");
+	
 	printf("\nEND MAIN\n\n");
+
 	// mid_point_algo(&stack_a, &stack_b, &a_starts, &b_starts);
 
 	//printf("bool is sorted: %d\n", is_sorted(stack_a, NULL));
@@ -60,31 +71,6 @@ print_list(&b_starts, "b_starts");
 
 
 }
-
-// int main(int32_t argc, char **argv)
-// {
-// 	l_list *stack_a = NULL;
-// 	l_list *stack_b = NULL;
-// 	if (checking(argv, argc) == false) // function returns 1 if something wrong, 0 if all right
-// 	{
-// 		write(2, "ERROR\n", 6); // printing error to standard error output
-// 		return(0);
-// 		exit(0);
-// 	}
-// 	stack_a = create_list(argc, argv);
-
-// 	print_list(&stack_a, "stack_a");
-// 	print_list(&stack_b, "stack_b");
-// 	printf(GRN"\nRULE: pa\n\n"RESET);
-// 	rra(&stack_a, false);
-// 	// pb(&stack_a, &stack_b);
-// 	// pa(&stack_a, &stack_b);
-// 	// pa(&stack_a, &stack_b);
-// 	print_list(&stack_a, "stack_a");
-// 	print_list(&stack_b, "stack_b");
-
-
-// }
 
 // // main without argv argc
 // int32_t main(void)

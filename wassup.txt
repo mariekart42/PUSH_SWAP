@@ -15,6 +15,7 @@ UPDATE:
 CHUNK LIST done
 - continue with sort_stack_b function 
 - hardcode case 4 and 5 nums 
+- continue quick to a
 
 NEXT:
-- continue quick to a
+- conclude hardcode funcs in one 

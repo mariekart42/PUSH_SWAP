@@ -6,7 +6,7 @@
 /*   By: mmensing <mmensing@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 10:12:30 by mmensing          #+#    #+#             */
-/*   Updated: 2022/09/21 20:57:14 by mmensing         ###   ########.fr       */
+/*   Updated: 2022/09/21 14:13:25 by mmensing         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,11 @@ printf(BLU"\nAFTER\n\n"RESET);
     // ->> higer to top of a
     // ->> smoler to top of b
     
-    //something under stack b && 
+    // ELSE
+    // delete last content of b_starts
 }
+
+
 
 
 
@@ -63,9 +66,8 @@ printf(BLU"\nAFTER\n\n"RESET);
 void quick_to_b(l_list **stack_a, l_list **stack_b, l_list **a_starts, l_list **b_starts)
 {
     int pivot = 0;
-    l_list *temp_a = *stack_a;
-    l_list *tmp= new_node(-1);
-    // l_list *temp_start = NULL;
+    l_list *temp = *stack_a;
+	
 	// for guarding that the same number will not hit twice
     int64_t guard = 999999999999; //12 times 9, so no int val will ever be this
 
@@ -81,38 +83,39 @@ void quick_to_b(l_list **stack_a, l_list **stack_b, l_list **a_starts, l_list **
         
         //first iter last of a starts will be NULL
         // otherwise the last of a starts -> or has it to be second last -> look after second iter
-        // while (temp_a->next != lst_last(*a_starts))
-        while (temp_a->next != NULL)
+        // while (temp->next != lst_last(*a_starts))
+        while (temp->next != NULL)
         {
-            // printf(RED"\nITER\n\n"RESET);
-            if (pivot > temp_a->val)
+            printf(RED"\nITER\n\n"RESET);
+            if (pivot > temp->val)
             {
-                temp_a = temp_a->next;
+                temp = temp->next;
                 pb(stack_a, stack_b);
             }
-            else if (pivot <= temp_a->val)
+            else if (pivot <= temp->val)
             {
-				if(guard == temp_a->val)
+				if(guard == temp->val)
 					break ; // or return?
                 if (guard == 999999999999)
-					guard = temp_a->val;
-                temp_a = temp_a->next;
+					guard = temp->val;
+                temp = temp->next;
                 ra(stack_a, true);     
             }
         }
-print_list(stack_a, "stack a");
-print_list(stack_b, "stack b");
-print_list(a_starts, "a_starts");
-print_list(b_starts, "b_starts");
 		guard = 999999999999;
 		
-        create_b_starts(*stack_b, b_starts, tmp);
-        lst_last(tmp)->next = new_node((*stack_b)->val); 
-        // printf(BLU"CHECK\n"RESET);
+        // if there is nothing in start
+        if (*b_starts == NULL)
+            *b_starts = new_node((lst_last(*stack_b))->val);
+        else
+            (lst_last(*b_starts))->next = new_node((lst_last(*stack_b))->val);
     }
-    // free all nodes of tmp start
-    
 	// hardcode cases
-    hardcode(stack_a);
-    *a_starts = new_node((lst_last(*stack_a))->val);
+	if (list_len(*stack_a) == 3)
+		hardcode_case_3(stack_a);
+	else if (list_len(*stack_a) == 4)
+		hardcode_case_4(stack_a);
+	else if (list_len(*stack_a) == 2 && ((*stack_a)->val > (*stack_a)->next->val))
+		ra(stack_a, true);
+    *a_starts = new_node((*stack_a)->val);
 }

@@ -6,7 +6,7 @@
 /*   By: mmensing <mmensing@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 15:43:26 by mmensing          #+#    #+#             */
-/*   Updated: 2022/09/21 19:33:44 by mmensing         ###   ########.fr       */
+/*   Updated: 2022/09/22 12:17:02 by mmensing         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,13 +78,13 @@ void ss(l_list **stack_a, l_list **stack_b)
 
 
 // first element of stack b to top of stack a
-// first element of stack b gets removed!
-// Do nothing if a is empty
+// first element of stack a gets removed!
+// Do nothing if b is empty
 void	pa(l_list **stack_a, l_list **stack_b)
 {
 	l_list *head = NULL;
 	l_list *prev_content = *stack_a;
-	if (*stack_b == NULL) // if stack_a is empty
+	if (*stack_b == NULL) // if stack_b is empty
 	{
 		printf("stack_b is empty\n"); // delete later
 		return ;

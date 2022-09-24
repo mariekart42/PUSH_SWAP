@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmensing <mmensing@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/21 14:19:20 by mmensing          #+#    #+#             */
-/*   Updated: 2022/09/22 13:04:53 by mmensing         ###   ########.fr       */
+/*   Created: 2022/08/04 16:06:16 by mmensing          #+#    #+#             */
+/*   Updated: 2022/09/21 10:29:59 by mmensing         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,27 @@ typedef struct l_list
 
 // -----  marie_sort.c  -----
 void quick_to_b(l_list **stack_a, l_list **stack_b, l_list **a_starts, l_list **b_starts);
-void marie_sort(l_list** stack_a, l_list** stack_b, l_list** a_starts, l_list** b_starts, l_list**temp_b_starts);
+void marie_sort(l_list **stack_a, l_list ** stack_b, l_list** a_starts, l_list** b_starts);
 
+
+
+// // -----  move_chunk.c  -----
+// void quicksort(l_list **stack_a, l_list **stack_b, l_list **a_starts, l_list **b_starts);
+// void quick_to_b(l_list **stack_a, l_list **stack_b, l_list **a_starts, l_list **b_starts);
+
+
+
+// // -----  quicksort.c  -----
+// bool quick_to_b(l_list **stack_a, l_list **stack_b, l_list **a_starts, l_list **b_starts);
+// bool quicksort(l_list **stack_a, l_list **stack_b, l_list **a_starts, l_list **b_starts);
+// bool quick_to_a(l_list **stack_a, l_list **stack_b, l_list **a_starts, l_list **b_starts);
+
+
+// // -----  mid_point_algo.c  -----
+// void mid_point_algo(l_list **stack_a, l_list **stack_b);
+// void sort_stack_b(l_list **stack_a, l_list **stack_b, l_list **c_b_start, l_list **c_b_end);
+// void create_list_start_end(l_list *stack_b, l_list **start, l_list **end);
+// void edit_list_start_end(l_list *stack, l_list **start, l_list **end);
 
 
 // -----  delete_later_funcs.c  -----
@@ -79,7 +98,6 @@ void hardcode_case_4(l_list **node);
 bool lst_is_sorted(l_list **head, int32_t end, int32_t start);
 l_list *prev(l_list *stack, l_list*node);
 bool stack_sorted(l_list **stack);
-void del_last(l_list **node);
 
 
 /* - - - RULES - - - */
