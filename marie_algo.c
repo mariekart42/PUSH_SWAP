@@ -6,7 +6,7 @@
 /*   By: mmensing <mmensing@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 14:19:06 by mmensing          #+#    #+#             */
-/*   Updated: 2022/09/24 11:17:36 by mmensing         ###   ########.fr       */
+/*   Updated: 2022/09/25 15:03:13 by mmensing         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,15 +27,21 @@ void marie_sort(l_list** stack_a, l_list** stack_b, l_list** a_starts, l_list** 
         }
         else if((*stack_a)->val != last_node_content(*a_starts))
         {
-            some_above_a();
+            some_above_a(stack_a, stack_b, b_starts, temp_b_starts, a_starts);
         }
         else if (lst_last(*stack_a) != last_a)
         {
-            some_under_a();
+                //hardcoding
+            if(range(last_a->next, lst_last(*stack_a)) < 5)
+            {
+                push_all_to_a("under_a", stack_a, stack_b);
+                
+            }
+            some_under_a(stack_a, stack_b, b_starts, temp_b_starts);
         }
         else if((*stack_b)->val != last_node_content(*b_starts))
         {
-            some_above_b();
+            some_above_b(stack_a, stack_b, b_starts, temp_b_starts, b_down);
         }
         else if(*b_starts != lst_last(*stack_b))
         {
@@ -46,6 +52,83 @@ void marie_sort(l_list** stack_a, l_list** stack_b, l_list** a_starts, l_list** 
     }
 }
 
+void some_above_a(l_list** stack_a, l_list** stack_b, l_list** b_starts, l_list**temp_b_starts, l_list**a_starts)
+{
+    int pivot = 0;
+    if(range(*stack_a, prev(*stack_a, lst_last(a_starts))) < 5)
+    {
+        hardcode_func(); // add stack_a in a_starts
+        return ;
+    }
+    l_list *temp_a = *stack_a;
+    
+    if(*stack_a != lst_last(*b_starts) || *stack_a != lst_last(temp_b_starts))
+    {
+        if(temp_b_starts == NULL)
+            temp_b_starts = new_node((*stack_b)->val);
+        else
+            (lst_last(temp_b_starts))->next = new_node((*stack_b)->val);
+    }
+    
+    pivot = perfect_pivot(*stack_a, prev(*stack_a, lst_last(*a_starts)));
+    while(temp_a != lst_last(*a_starts))
+    {
+        if(temp->val > pivot)
+        {
+            temp_a = temp_a->next;
+            ra(stack_a, true);
+        }
+        else if(temp_a->val <= pivot)
+        {
+            temp_a = temp_a->next;
+            pb(stack_a, stack_b);
+        }
+    }
+}
+
+void push_all_to_a(char *from, l_list**start, l_list** end, l_list **stack_a, l_list** stack_b)
+{
+    l_list *temp = *start;
+    if(ft_strncmp(from, "under_a") == 0)
+    {
+        while(temp != end)
+        {
+            temp = temp->next;
+            rra(stack_a, true);
+        }
+    }
+    if(ft_strncmp(from, "under_b") == 0)
+    if(ft_strncmp(from, "above_b") == 0)
+}
+
+void some_under_a(l_list** stack_a, l_list** stack_b, l_list** b_starts, l_list**temp_b_starts)
+{
+    l_list *temp_a = *stack_a;
+
+    if(*stack_b != lst_last(*b_starts) || *stack_b != lst(last(temp_b_starts))
+    {
+        if(temp_b_starts != NULL)
+            temp_b_starts = new_node((*stack_b)->val);
+        else
+            (lst_last(*temp_b_starts))->next = new_node((*stack_a)->val);
+    }
+    pivot = perfect_pivot(*stack_a, prev(*stack_a, lst_last(*a_starts)));
+    while(temp_a != lst_last(*a_starts))
+    {
+        if(temp_a->val > pivot)
+        {
+            temp_a = temp_a->next;
+            rra(stack_a, stack_b);
+        }
+        else if(temp_a->val <= pivot)
+        {
+            temp_a = temp_a->next;
+            rra(stack_a, true);
+            pb(*stack_a, stack_b);
+        }
+    }
+    
+}
 void some_above_b(l_list** stack_a, l_list** stack_b, l_list** b_starts, l_list**temp_b_starts, l_list **b_down)
 {
     // can get hardcoded in stack a
