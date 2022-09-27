@@ -6,7 +6,7 @@
 /*   By: mmensing <mmensing@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 17:18:05 by mmensing          #+#    #+#             */
-/*   Updated: 2022/09/27 19:50:52 by mmensing         ###   ########.fr       */
+/*   Updated: 2022/09/28 00:45:46 by mmensing         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -287,7 +287,9 @@ void del_last(l_list **node)
 	if((*node)->next == NULL)
 	{
 		*node = NULL;
-		free((*node)->next);
+		//free((*node)->next);
+		printf(YEL"DONE\n\n"RESET);
+		// print_list(*stack_b, "stack b");
 		return ;
 	}
 	while(temp->next->next != NULL)
@@ -344,11 +346,27 @@ l_list *after(l_list *stack, l_list* node)
 void push_all_to_a(char *from, l_list*start, l_list* end, l_list **stack_a, l_list** stack_b)
 {
     l_list *temp = start;
-	// printf("HERE\n");
+	printf("HERE\n");
+	printf("from: %s\n\n", from);
+	print_list(stack_a, "stack_a");
+	print_list(stack_b, "stack_b");
 	// printf("temp %d\n", temp->val);
 	// printf("end %d\n", end->val);
-	while(temp != end)
+	// while((end != NULL && temp->val != end->val) || temp != NULL)
+	if(end == NULL && ft_strncmp(from, "under_b", 7) == 0)
 	{
+		//only the case for b starts is empty so far
+		while(temp != NULL)
+		{
+			pa(stack_a, stack_b);
+			temp = temp->next;
+		}
+		return ;
+	}
+	while(temp->val != end->val)
+	{
+	// printf("temp %d\n", temp->val);
+	// printf("end %d\n", end->val);
     	if(ft_strncmp(from, "under_a", 7) == 0)
 		{
 			temp = temp->next;
@@ -370,6 +388,13 @@ void push_all_to_a(char *from, l_list*start, l_list* end, l_list **stack_a, l_li
 
 		// temp = temp->next;
 	}
+	
+	// if(temp == NULL)
+	// {
+	// 	rrb(stack_b, true);
+	// 	pa(stack_a, stack_b);
+	// }
+
 }
 
 // void hardcode_func(l_list **stack_a)
@@ -386,7 +411,7 @@ void hardcode_func(l_list**stack_a, l_list **stack_b, l_list *end)
 		temp = temp->next;
 		len++;
 	}
-	len++;
+	// len++;
 	printf("LEN: %d\n", len);
 	if(len == 1)
 		printf("ONLY ONE IN HARDCODE FUNC (should not happen)");
@@ -421,7 +446,8 @@ void hc_three(l_list **stack_a)
 		rra(stack_a, true);
 		sa(stack_a, true);
 		rra(stack_a, true);
-		sa(stack_a, true);
+		if((*stack_a)->val > (*stack_a)->next->val)
+			sa(stack_a, true);
 	}
 	else if((*stack_a)->val > (*stack_a)->next->val && (*stack_a)->val > (*stack_a)->next->next->val)
 	{
@@ -436,7 +462,7 @@ void hc_three(l_list **stack_a)
 		sa(stack_a, true);
 		rra(stack_a, true);
 	}
-	else if((*stack_a)->val > (*stack_a)->next->val)
+	if((*stack_a)->val > (*stack_a)->next->val)
 		sa(stack_a, true);
 }
 
@@ -445,18 +471,18 @@ void hc_three(l_list **stack_a)
 int smol(l_list *stack_a)
 {
 	l_list *temp = stack_a;
-	int i = 0;
-	int smol = temp->val;
-	while(i != 2)
-	{
-		if(smol < stack_a->next->next->next->val &&  smol < stack_a->next->next->val)
-			return (smol);
-		if(temp->next->val < smol)
-			smol = temp->next->val;
-		temp = temp->next;
-		i++;
-	}
-	return (smol);
+	
+	// first smaller then sec & third OR sec & four OR third & four
+	if((temp->val < stack_a->next->next->next->val && temp->val < stack_a->next->next->val)
+		|| (temp->val < stack_a->next->next->next->val && temp->val < stack_a->next->val)
+		|| (temp->val < stack_a->next->next->val && temp->val < stack_a->next->val))
+		return (temp->val);
+	else if((temp->next->val < stack_a->next->next->val && temp->next->val < stack_a->val)
+		|| (temp->next->val < stack_a->next->next->next->val && temp->next->val < stack_a->val))
+		return(temp->next->val);
+	else
+		return(temp->next->next->val);
+
 }
 
 void hc_four(l_list **stack_a, l_list **stack_b)
@@ -490,8 +516,8 @@ void hc_four(l_list **stack_a, l_list **stack_b)
 	}
 	hc_three(stack_a);
 	// print_list(stack_a, "after HC 3");
-	if((*stack_a)->val > (*stack_a)->next->val)
-		sa(stack_a, true);
+	// if((*stack_a)->val > (*stack_a)->next->val)
+	// 	sa(stack_a, true);
 	rra(stack_a, stack_b);
 	if((*stack_a)->val > (*stack_a)->next->val)
 		sa(stack_a, true);

@@ -6,7 +6,7 @@
 /*   By: mmensing <mmensing@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 14:19:06 by mmensing          #+#    #+#             */
-/*   Updated: 2022/09/27 19:56:01 by mmensing         ###   ########.fr       */
+/*   Updated: 2022/09/28 00:44:11 by mmensing         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void marie_sort(l_list** stack_a, l_list** stack_b, l_list** a_starts, l_list** 
         if((*stack_a)->val != last_node_content(*a_starts) && lst_last(*stack_a) != last_a)
         {
             printf(GRN"CHECKER SPECIAL CASE\n"RESET);
-            return ;
+            // return ;
             special_case(stack_a, stack_b, last_a, temp_b_starts, b_starts);
         }
         else if((*stack_a)->val != last_node_content(*a_starts))
@@ -40,12 +40,18 @@ void marie_sort(l_list** stack_a, l_list** stack_b, l_list** a_starts, l_list** 
             // return ;
             some_above_a(stack_a, stack_b, b_starts, temp_b_starts, a_starts);
         }
+        if(*b_starts == NULL && list_len(*stack_b) != 0)
+        {
+            print_list(stack_b, "stack b");
+            printf(GRN"B STARTS EMPTY CASE\n\n"RESET);
+            b_starts_empty(stack_a, stack_b, &b_down);
+        }
         else if (lst_last(*stack_a) != last_a)
         {
             printf(GRN"CHECKER UNDER A\n"RESET);
-            return ;
+            // return ;
             //hardcoding -> can be here cause down list dont need to be updated
-            if (range(last_a->next, lst_last(*stack_a)) < 5)
+            if (range(last_a->next, lst_last(*stack_a)) < 6)
                 push_all_to_a("under_a", last_a->next, (lst_last(*stack_a))->next, stack_a, stack_b);
             else
                 some_under_a(stack_a, stack_b, b_starts, temp_b_starts, a_starts);
@@ -56,13 +62,16 @@ void marie_sort(l_list** stack_a, l_list** stack_b, l_list** a_starts, l_list** 
             printf(GRN"CHECKER ABOVE B\n"RESET);
             some_above_b(&stack_a, &stack_b, &b_starts, &temp_b_starts, &b_down);
             printf(YEL"DONE ABOVE B\n"RESET);
-            
+            print_list(b_starts, "B STARTS");
+            print_list(a_starts, "A STARTS");
+            print_list(stack_a, "stack_a");
+            print_list(stack_b, "stack_b");
             // return ;
         }
         else if(*b_starts != lst_last(*stack_b))
         {
             printf(GRN"CHECKER UNDER B\n"RESET);
-            return ;
+            // return ;
             some_under_b(stack_a, stack_b, &b_down, b_starts);
         }
         else 
@@ -73,16 +82,54 @@ void marie_sort(l_list** stack_a, l_list** stack_b, l_list** a_starts, l_list** 
     }
 }
 
+void b_starts_empty(l_list** stack_a, l_list** stack_b, l_list**b_down)
+{
+    int pivot = 0;
+    l_list *temp_b = NULL;
+    if(range(*stack_b, lst_last(*stack_b)) < 6)
+    {
+        push_all_to_a("under_b", *stack_b, NULL, stack_a, stack_b);
+        // deleting a list?
+        return ;
+    }
+    if(*b_down == NULL)
+    {
+        pivot = perfect_pivot(*stack_b, lst_last(*stack_b));
+        temp_b = *stack_b;
+    }
+    else if(*b_down != NULL)
+    {
+        pivot = perfect_pivot((lst_last(*b_down))->next, lst_last(*stack_b));
+        temp_b = (lst_last(*b_down))->next;
+    }
+    while(temp_b != NULL)
+    {
+        if(temp_b->val > pivot)
+        {
+            temp_b = temp_b->next;
+            // dunno lol
+            rrb(stack_b, true);
+        }
+        else if(temp_b->val <= pivot)
+        {
+            temp_b = temp_b->next;
+            rrb(stack_b, true);
+
+        }
+        
+    }
+    
+}
 
 // write hardcode func then done
 void some_above_a(l_list** stack_a, l_list** stack_b, l_list** b_starts, l_list**temp_b_starts, l_list**a_starts)
 {
     printf(GRN"------------ SOME ABOVE A -------------\n\n"RESET);
     int pivot = 0;
-    if(range(*stack_a, prev(*stack_a, lst_last(*a_starts))) < 5)
+    if(range(*stack_a, prev(*stack_a, lst_last(*a_starts))) < 6)
     {
         
-        hardcode_func(stack_a, stack_b, prev(*stack_a, lst_last(*a_starts))); // add stack_a in a_starts
+        hardcode_func(stack_a, stack_b, lst_last(*a_starts)); // add stack_a in a_starts
         // print_list(stack_a, "A BEFORE");
         // print_list(a_starts, "A STARST BEFORE");
         (lst_last(*a_starts))->next = new_node((*stack_a)->val); 
@@ -164,12 +211,12 @@ void some_above_b(l_list*** stack_a, l_list*** stack_b, l_list*** b_starts, l_li
         del_last(*temp_b_starts);
         return ;
     }
-    else if(range(**stack_b, prev(**stack_b, lst_last(**b_starts))) < 5)
+    else if(range(**stack_b, lst_last(**b_starts)) < 5)
     {
         printf(YEL"\n 2 CHECKER\n\n"RESET);
         // print_list(*stack_b, "stack b");
         // printf("lst last b starts: %d\n", (lst_last(**b_starts))->val);
-        push_all_to_a("above_b", **stack_b, after(**stack_b, lst_last(**b_starts)), *stack_a, *stack_b);
+        push_all_to_a("above_b", **stack_b, lst_last(**b_starts), *stack_a, *stack_b);
         // push_all_to_a("above_b", **stack_b, prev(**stack_b, lst_last(**b_starts)), *stack_a, *stack_b);
         // printf(YEL"\n 2 CHECKER\n\n"RESET);
         // print_list(*stack_a, "STACK A");
@@ -181,7 +228,7 @@ void some_above_b(l_list*** stack_a, l_list*** stack_b, l_list*** b_starts, l_li
         // printf(RED"\n CHECKER\n\n"RESET);
     
     // if there is already something under b -> updating b_down list
-    if(**b_starts != lst_last(**stack_b))
+    if((**b_starts)->val != (lst_last(**stack_b))->val)
     {
         if(*b_down == NULL)
             *b_down = new_node(last_node_content(**stack_b));
@@ -207,11 +254,12 @@ void some_above_b(l_list*** stack_a, l_list*** stack_b, l_list*** b_starts, l_li
         // printf("PIVOT: %d\n", pivot);
 
     }
+    int stop = 0;
     printf("PIVOT: %d\n", pivot);
     printf("TEMP B: %d\n", temp_b->val);
     printf("lst last: %d\n", (lst_last(**b_starts))->val);
     // while next start of b_starts occurs, or if there is something in temp_b_starts next starts there
-    while((temp_b->val != lst_last(**b_starts)->val) && temp_b != NULL)// || (**temp_b_starts != NULL && temp_b != lst_last(**temp_b_starts)))
+    while(((temp_b->val != lst_last(**b_starts)->val)) && temp_b != NULL)// || (**temp_b_starts != NULL && temp_b != lst_last(**temp_b_starts)))
     {
     printf("lst last: %d\n", (lst_last(**b_starts))->val);
     printf("TEMP B: %d\n", temp_b->val);
@@ -229,12 +277,21 @@ void some_above_b(l_list*** stack_a, l_list*** stack_b, l_list*** b_starts, l_li
         {
             // push to bottom of a
             temp_b = temp_b->next;
-            pa(*stack_a, *stack_b);
-            ra(*stack_a, true);
+            rb(*stack_b, true);
+            // pa(*stack_a, *stack_b);
+            // ra(*stack_a, true);
         }
-        else 
-            break;
     }
+    // hitting the beginning of b_starts
+    if(temp_b->val == (**b_starts)->val)
+    {
+        del_last(*b_starts);
+        if(temp_b->val > pivot)
+            pa(*stack_a, *stack_b);
+        else
+            rb(*stack_b, true);
+    }
+    
     printf(BLU"OUT\n"RESET);
     // if there was something in temp chunk, remove last content
     del_last(*temp_b_starts);
@@ -247,7 +304,7 @@ void some_under_b(l_list **stack_a, l_list **stack_b, l_list** b_down, l_list** 
     l_list *temp_b = NULL;
     int pivot = 0;
     // hardcode from b down
-    if(b_down != NULL && range(lst_last(*b_down), lst_last(*stack_b)) < 5)
+    if(b_down != NULL && range(lst_last(*b_down), lst_last(*stack_b)) < 6)
     {
         push_all_to_a("under_b", lst_last(*b_down), lst_last(*stack_b), stack_a, stack_b);
         del_last(b_down);

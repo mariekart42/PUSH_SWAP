@@ -6,7 +6,7 @@
 /*   By: mmensing <mmensing@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 14:19:20 by mmensing          #+#    #+#             */
-/*   Updated: 2022/09/27 18:01:20 by mmensing         ###   ########.fr       */
+/*   Updated: 2022/09/27 23:49:21 by mmensing         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void some_above_a(l_list** stack_a, l_list** stack_b, l_list** b_starts, l_list*
 void some_under_a(l_list** stack_a, l_list** stack_b, l_list** b_starts, l_list**temp_b_starts, l_list **a_starts);
 void some_above_b(l_list*** stack_a, l_list*** stack_b, l_list*** b_starts, l_list***temp_b_starts, l_list **b_down);
 void some_under_b(l_list **stack_a, l_list **stack_b, l_list** b_down, l_list** b_starts);
-
+void b_starts_empty(l_list** stack_a, l_list** stack_b, l_list**b_down);
 
 // -----  delete_later_funcs.c  -----
 l_list *create_list_alone(int32_t len, int32_t *content); //deleter later
