@@ -6,14 +6,14 @@
 #    By: mmensing <mmensing@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/08 12:21:27 by mmensing          #+#    #+#              #
-#    Updated: 2022/09/21 14:26:48 by mmensing         ###   ########.fr        #
+#    Updated: 2022/09/27 16:05:53 by mmensing         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME= push_swap.a
 
 CC = gcc
-CFLAGS= -Wall -Werror -Wextra
+#CFLAGS= -Wall -Werror -Wextra
 HEADER= push_swap.h
 RM= rm -rf
 

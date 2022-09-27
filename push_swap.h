@@ -6,7 +6,7 @@
 /*   By: mmensing <mmensing@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 14:19:20 by mmensing          #+#    #+#             */
-/*   Updated: 2022/09/22 13:04:53 by mmensing         ###   ########.fr       */
+/*   Updated: 2022/09/27 18:01:20 by mmensing         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,10 @@ typedef struct l_list
 // -----  marie_sort.c  -----
 void quick_to_b(l_list **stack_a, l_list **stack_b, l_list **a_starts, l_list **b_starts);
 void marie_sort(l_list** stack_a, l_list** stack_b, l_list** a_starts, l_list** b_starts, l_list**temp_b_starts);
-
+void some_above_a(l_list** stack_a, l_list** stack_b, l_list** b_starts, l_list**temp_b_starts, l_list**a_starts);
+void some_under_a(l_list** stack_a, l_list** stack_b, l_list** b_starts, l_list**temp_b_starts, l_list **a_starts);
+void some_above_b(l_list*** stack_a, l_list*** stack_b, l_list*** b_starts, l_list***temp_b_starts, l_list **b_down);
+void some_under_b(l_list **stack_a, l_list **stack_b, l_list** b_down, l_list** b_starts);
 
 
 // -----  delete_later_funcs.c  -----
@@ -67,7 +70,7 @@ bool only_nums(char **argv, int32_t argc);
 l_list *create_list(int32_t len, char **content);
 int32_t list_len(l_list *head);
 l_list *new_node(int32_t content);
-int32_t last_nodes_content(l_list *head);
+int32_t last_node_content(l_list *head);
 l_list *lst_last(l_list *head);
 long int ft_atol(const char *str);
 int	ft_isdigit(int val);
@@ -80,7 +83,18 @@ bool lst_is_sorted(l_list **head, int32_t end, int32_t start);
 l_list *prev(l_list *stack, l_list*node);
 bool stack_sorted(l_list **stack);
 void del_last(l_list **node);
+int	ft_strncmp(const char *s1, const char *s2, size_t n);
+void push_all_to_a(char *from, l_list*start, l_list* end, l_list **stack_a, l_list** stack_b);
+int32_t range(l_list* begin, l_list *end);
 
+l_list* after(l_list *stack, l_list* node);
+
+void hc_three(l_list **stack_a);
+int smol(l_list *stack_a);
+void hc_four(l_list **stack_a, l_list **stack_b);
+
+void hardcode_func(l_list**stack_a, l_list **stack_b, l_list *end);
+void special_case(l_list **stack_a, l_list** stack_b, l_list *last_a, l_list**temp_b_starts, l_list**b_starts);
 
 /* - - - RULES - - - */
 void sa(l_list **stack_a, bool output);

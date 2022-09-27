@@ -6,7 +6,7 @@
 /*   By: mmensing <mmensing@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 17:18:05 by mmensing          #+#    #+#             */
-/*   Updated: 2022/09/25 14:54:09 by mmensing         ###   ########.fr       */
+/*   Updated: 2022/09/27 19:50:52 by mmensing         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ l_list *new_node(int32_t content)
 	return (new);
 }
 
-int32_t last_nodes_content(l_list *head)
+int32_t last_node_content(l_list *head)
 {
 	while (head->next != NULL)
 		head = head->next;
@@ -76,6 +76,8 @@ int32_t last_nodes_content(l_list *head)
 //returns last node in list
 l_list *lst_last(l_list *head)
 {
+	printf(RED"CHUFT\n"RESET);
+	
 	if(head == NULL)
 		return(NULL);
 	while(head->next != NULL)
@@ -226,17 +228,23 @@ bool lst_is_sorted(l_list **head, int32_t end, int32_t start)
 //  or node or stack are NULL!
 l_list *prev(l_list *stack, l_list*node)
 {
-	printf("node: %d\n\n", node->val);
-	print_list(&stack, "STACK");
-	if(stack == node || stack == NULL)
+	// printf("node: %d\n\n", node->val);
+	// print_list(&stack, "STACK");
+	if(stack == node)// || node == NULL)
 	{
 		printf(RED"\n!! i prev function case appeared\n\n"RESET);
 		return(NULL);
 	}
-	while(stack->next->val != node->val && stack->next != NULL)
+	// printf("\n\nIN PREV\n\n");
+	// printf("stack val: %d (should be 91)\n", stack->val);
+	// printf("node val: %d (should be 36)\n", node->val);
+	while(stack->next != NULL && stack->next->val != node->val)
 	{
+	// printf("stack val: %d\n", stack->val);
+	// printf("node val: %d\n\n", node->val);
 		stack = stack->next;
 	}
+	// printf("new stack val: %d (should be 39)\n", stack->val);
 	return(stack);
 }
 
@@ -312,4 +320,200 @@ int	ft_strncmp(const char *s1, const char *s2, size_t n)
 	i++;
 	}
 	return (0);
+}
+
+
+
+l_list *after(l_list *stack, l_list* node)
+{
+	if(stack == node)
+	{
+		printf(RED"\n!! in after function case appeared\n\n"RESET);
+		return(NULL);
+	}
+	while(stack != NULL && stack->val != node->val)
+	{
+		stack = stack->next;
+	}
+	if(stack != NULL)
+		stack = stack->next;
+	// printf("new stack val: %d (should be 39)\n", stack->val);
+	return(stack);
+}
+
+void push_all_to_a(char *from, l_list*start, l_list* end, l_list **stack_a, l_list** stack_b)
+{
+    l_list *temp = start;
+	// printf("HERE\n");
+	// printf("temp %d\n", temp->val);
+	// printf("end %d\n", end->val);
+	while(temp != end)
+	{
+    	if(ft_strncmp(from, "under_a", 7) == 0)
+		{
+			temp = temp->next;
+			rra(stack_a, true);
+		}
+		else if (ft_strncmp(from, "above_b", 7) == 0)
+		{
+			temp = temp->next;
+			pa(stack_a, stack_b);
+		}
+		else if (ft_strncmp(from, "under_b", 7) == 0)
+		{
+			temp = temp->next;
+			rrb(stack_b, true);
+			pa(stack_a, stack_b);
+		}
+		else
+			printf(RED"\nERROR in push all to a func\n\n"RESET);
+
+		// temp = temp->next;
+	}
+}
+
+// void hardcode_func(l_list **stack_a)
+void hardcode_func(l_list**stack_a, l_list **stack_b, l_list *end)
+{
+	printf(GRN"\nCALLED HARDCODE FUNC\n\n"RESET);
+	int len = 0;
+	l_list *temp = *stack_a;
+	// print_list(stack_a, "STACK A");
+	// printf("temp: %d\n", temp->val);
+	// printf("end: %d\n", end->val);
+	while(temp->val != end->val)
+	{
+		temp = temp->next;
+		len++;
+	}
+	len++;
+	printf("LEN: %d\n", len);
+	if(len == 1)
+		printf("ONLY ONE IN HARDCODE FUNC (should not happen)");
+	else if(len == 2)
+	{
+		if((*stack_a)->val > (*stack_a)->next->val)
+			sa(stack_a, false);
+	}
+	else if(len == 3)
+	{
+		// printf("3 HERE\n");
+		hc_three(stack_a);
+	}
+	else if(len == 4)
+		hc_four(stack_a, stack_b);
+	// print_list(stack_a, "AFTER");
+		
+}
+
+
+void hc_three(l_list **stack_a)
+{
+	printf("IN HC THREE stack a: %d\n", (*stack_a)->val);
+	// print_list(stack_a, "STACK A");
+
+	if(!(((*stack_a)->next->next->val < (*stack_a)->val) && ((*stack_a)->next->next->val < (*stack_a)->next->val)))
+	{
+		if((*stack_a)->val > (*stack_a)->next->val)
+			sa(stack_a, true);
+		ra(stack_a, true);
+		ra(stack_a, true);
+		rra(stack_a, true);
+		sa(stack_a, true);
+		rra(stack_a, true);
+		sa(stack_a, true);
+	}
+	else if((*stack_a)->val > (*stack_a)->next->val && (*stack_a)->val > (*stack_a)->next->next->val)
+	{
+		sa(stack_a, true);
+		ra(stack_a, true);
+		sa(stack_a, true);
+		rra(stack_a, true);
+	}
+	else if((*stack_a)->next->val > (*stack_a)->next->next->val)
+	{
+		ra(stack_a, true);
+		sa(stack_a, true);
+		rra(stack_a, true);
+	}
+	else if((*stack_a)->val > (*stack_a)->next->val)
+		sa(stack_a, true);
+}
+
+
+// function returns the fist found number that is smollest or second smollest
+int smol(l_list *stack_a)
+{
+	l_list *temp = stack_a;
+	int i = 0;
+	int smol = temp->val;
+	while(i != 2)
+	{
+		if(smol < stack_a->next->next->next->val &&  smol < stack_a->next->next->val)
+			return (smol);
+		if(temp->next->val < smol)
+			smol = temp->next->val;
+		temp = temp->next;
+		i++;
+	}
+	return (smol);
+}
+
+void hc_four(l_list **stack_a, l_list **stack_b)
+{
+	int smolst_int;
+	
+	smolst_int = smol(*stack_a);
+	if((*stack_a)->next->next->val == smolst_int)
+	{
+		// printf(YEL"FIRST\n"RESET);
+		ra(stack_a, true);
+		sa(stack_a, false);
+		rra(stack_a, true);
+		sa(stack_a, true);
+		ra(stack_a, true);
+	}
+	else if((*stack_a)->next->val == smolst_int)
+	{
+		// printf(YEL"SEC\n"RESET);
+		sa(stack_a, true);
+		ra(stack_a, true);
+	}
+	else if((*stack_a)->val == smolst_int)
+	{
+		// printf(YEL"THIRD\n"RESET);
+		// printf("stack a: %d\n", (*stack_a)->val);
+		// print_list(stack_a, "STACK A");
+		ra(stack_a, true);
+		// printf("stack a: %d\n", (*stack_a)->val);
+		// print_list(stack_a, "STACK A");
+	}
+	hc_three(stack_a);
+	// print_list(stack_a, "after HC 3");
+	if((*stack_a)->val > (*stack_a)->next->val)
+		sa(stack_a, true);
+	rra(stack_a, stack_b);
+	if((*stack_a)->val > (*stack_a)->next->val)
+		sa(stack_a, true);
+	// print_list(stack_a, "after all HC");
+}
+
+
+void special_case(l_list **stack_a, l_list** stack_b, l_list *last_a, l_list**temp_b_starts, l_list**b_starts)
+{
+	l_list* temp = last_a->next;
+	if(*stack_b != lst_last(*temp_b_starts) || *stack_b != lst_last(*b_starts))
+	{
+		if(temp_b_starts == NULL)
+			*temp_b_starts = new_node((*stack_b)->val);
+		else if(*temp_b_starts != NULL)
+			(lst_last(*temp_b_starts))->next = new_node((*stack_b)->val);
+	}
+	printf(GRN"\nCALLED SPECIAL CASE FUNC (in special case func)\n\n"RESET);
+	while(temp != NULL)
+	{
+		temp = temp->next;
+		rra(stack_a, true);
+		pb(stack_a, stack_b);
+	}
 }
