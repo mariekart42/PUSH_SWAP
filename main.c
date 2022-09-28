@@ -6,7 +6,7 @@
 /*   By: mmensing <mmensing@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 18:42:45 by mmensing          #+#    #+#             */
-/*   Updated: 2022/09/27 16:13:22 by mmensing         ###   ########.fr       */
+/*   Updated: 2022/09/28 10:43:48 by mmensing         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,8 @@ int32_t main(int32_t argc, char **argv)
 
 	// int dunno = sort(stack_a, NULL);
 	// printf("perfect pivot: %d\n", dunno);
-	// print_list(&stack_a, "stack_a");
-	// print_list(&stack_b, "stack_b");
+	print_list(&stack_a, "stack_a");
+	print_list(&stack_b, "stack_b");
 	// free_list(stack_a);
 	// free_list(stack_b);
 

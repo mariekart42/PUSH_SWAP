@@ -6,7 +6,7 @@
 /*   By: mmensing <mmensing@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 17:18:05 by mmensing          #+#    #+#             */
-/*   Updated: 2022/09/28 00:45:46 by mmensing         ###   ########.fr       */
+/*   Updated: 2022/09/28 11:31:55 by mmensing         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -249,12 +249,14 @@ l_list *prev(l_list *stack, l_list*node)
 }
 
 // function calculates the amount of nodes(including end)
-int32_t range(l_list* begin, l_list *end)
+int32_t range(l_list* stack, l_list* begin, l_list *end)
 {
 	int count = 1;
-	while(begin->val != end->val)
+	while(stack->val != begin->val)
+		stack = stack->next;
+	while(stack->val != end->val)
 	{
-		begin = begin->next;
+		stack = stack->next;
 		count++;
 	}
 	return(count);
@@ -356,7 +358,7 @@ void push_all_to_a(char *from, l_list*start, l_list* end, l_list **stack_a, l_li
 	if(end == NULL && ft_strncmp(from, "under_b", 7) == 0)
 	{
 		//only the case for b starts is empty so far
-		while(temp != NULL)
+		while(list_len(*stack_b) != 0)
 		{
 			pa(stack_a, stack_b);
 			temp = temp->next;
@@ -427,7 +429,8 @@ void hardcode_func(l_list**stack_a, l_list **stack_b, l_list *end)
 	}
 	else if(len == 4)
 		hc_four(stack_a, stack_b);
-	// print_list(stack_a, "AFTER");
+	print_list(stack_a, "AFTER");
+	print_list(stack_b, "b");
 		
 }
 
@@ -437,32 +440,18 @@ void hc_three(l_list **stack_a)
 	printf("IN HC THREE stack a: %d\n", (*stack_a)->val);
 	// print_list(stack_a, "STACK A");
 
-	if(!(((*stack_a)->next->next->val < (*stack_a)->val) && ((*stack_a)->next->next->val < (*stack_a)->next->val)))
+	if((*stack_a)->next->next->val < (*stack_a)->val || (*stack_a)->next->next->val < (*stack_a)->next->val)
 	{
 		if((*stack_a)->val > (*stack_a)->next->val)
 			sa(stack_a, true);
 		ra(stack_a, true);
-		ra(stack_a, true);
-		rra(stack_a, true);
-		sa(stack_a, true);
+		if((*stack_a)->val > (*stack_a)->next->val)
+			sa(stack_a, true);
 		rra(stack_a, true);
 		if((*stack_a)->val > (*stack_a)->next->val)
 			sa(stack_a, true);
 	}
-	else if((*stack_a)->val > (*stack_a)->next->val && (*stack_a)->val > (*stack_a)->next->next->val)
-	{
-		sa(stack_a, true);
-		ra(stack_a, true);
-		sa(stack_a, true);
-		rra(stack_a, true);
-	}
-	else if((*stack_a)->next->val > (*stack_a)->next->next->val)
-	{
-		ra(stack_a, true);
-		sa(stack_a, true);
-		rra(stack_a, true);
-	}
-	if((*stack_a)->val > (*stack_a)->next->val)
+	else if((*stack_a)->val > (*stack_a)->next->val)
 		sa(stack_a, true);
 }
 

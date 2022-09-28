@@ -6,7 +6,7 @@
 /*   By: mmensing <mmensing@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 14:19:20 by mmensing          #+#    #+#             */
-/*   Updated: 2022/09/27 23:49:21 by mmensing         ###   ########.fr       */
+/*   Updated: 2022/09/28 11:32:25 by mmensing         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ bool stack_sorted(l_list **stack);
 void del_last(l_list **node);
 int	ft_strncmp(const char *s1, const char *s2, size_t n);
 void push_all_to_a(char *from, l_list*start, l_list* end, l_list **stack_a, l_list** stack_b);
-int32_t range(l_list* begin, l_list *end);
+int32_t range(l_list* stack, l_list* begin, l_list *end);
 
 l_list* after(l_list *stack, l_list* node);
 
