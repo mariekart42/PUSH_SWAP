@@ -6,7 +6,7 @@
 /*   By: mmensing <mmensing@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 14:19:06 by mmensing          #+#    #+#             */
-/*   Updated: 2022/09/28 11:35:21 by mmensing         ###   ########.fr       */
+/*   Updated: 2022/09/28 12:45:20 by mmensing         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -207,6 +207,7 @@ void some_above_b(l_list*** stack_a, l_list*** stack_b, l_list*** b_starts, l_li
     
     // can get hardcoded in stack a
     // either stuff in above stack b is under 5 digits or content of stack b chunk is under 5
+    // CHECK: NO
     if((**temp_b_starts != NULL) && (range(**stack_b, **stack_b, prev(**stack_b, lst_last(**temp_b_starts))) < 5))
     {
         // push everything to top of a
@@ -214,7 +215,7 @@ void some_above_b(l_list*** stack_a, l_list*** stack_b, l_list*** b_starts, l_li
         del_last(*temp_b_starts);
         return ;
     }
-    else if(range(**stack_b, **stack_b, lst_last(**b_starts)) < 5)
+    else if(range(**stack_b, **stack_b, lst_last(**b_starts)) < 6)
     {
         printf(YEL"\n 2 CHECKER\n\n"RESET);
         // print_list(*stack_b, "stack b");
@@ -310,6 +311,7 @@ void some_under_b(l_list **stack_a, l_list **stack_b, l_list** b_down, l_list** 
     l_list *delete = after(*stack_b, *b_starts);
         // printf("b starts next: %d\n", (after(*stack_b, *b_starts))->val);
         // printf("b starts last: %d\n", (lst_last(*stack_b))->val);
+    print_list(b_starts, "B starst");
     if(*b_down != NULL && range(*stack_b, lst_last(*b_down), lst_last(*stack_b)) < 6)
     {
             push_all_to_a("under_b", lst_last(*b_down), lst_last(*stack_b), stack_a, stack_b);
