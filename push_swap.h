@@ -6,7 +6,7 @@
 /*   By: mmensing <mmensing@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 14:19:20 by mmensing          #+#    #+#             */
-/*   Updated: 2022/09/28 11:32:25 by mmensing         ###   ########.fr       */
+/*   Updated: 2022/09/28 15:13:33 by mmensing         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void print_list(l_list **list, char *name);
 
 // -----  perfect_pivot.c  -----
 int32_t perfect_pivot(l_list *start, l_list *end);
-int32_t lst_len_end(l_list *start, l_list *end);
+int32_t lst_len_end(l_list **start, l_list **end);
 int32_t half_list_val(int *array, int len_list);
 bool is_sorted(int *array, int len_list);
 

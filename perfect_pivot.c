@@ -6,7 +6,7 @@
 /*   By: mmensing <mmensing@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 20:35:43 by mmensing          #+#    #+#             */
-/*   Updated: 2022/09/18 13:20:50 by mmensing         ###   ########.fr       */
+/*   Updated: 2022/09/28 13:42:10 by mmensing         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,23 +14,33 @@
 
 // count len from start to end
 // works!!
-int32_t lst_len_end(l_list *start, l_list *end)
+int32_t lst_len_end(l_list **start, l_list **end)
 {
+    l_list *temp = *start;
     int count = 0;
     // should not happen i guess
-    if(start == NULL)
+    if(temp == NULL)
     {
         printf("wrong in lst_len_end\n\n");//delete later
         return(0);
     }
     
-    if (start == end)
+    if (temp == *end)
         return(1);
-        
-    while(start != end && start != NULL)
+    
+    if(*end == NULL)
+    {
+        while (temp != NULL)
+        {
+            count++;
+            temp = temp->next;
+        }
+        return (count);
+    }
+    while(temp->val != (*end)->val)
     {
         count++;
-        start = start->next;
+        temp = temp->next;
     }
     // printf("count: %d\n", count);
     return(count);
@@ -75,7 +85,7 @@ int32_t perfect_pivot(l_list *start, l_list *end)
 {
     int i = 0;
     int len_list;
-    len_list = lst_len_end(start, end);
+    len_list = lst_len_end(&start, &end);
     int temp;
     int *array;
     array = (int *)malloc(sizeof(int) * len_list + 1);

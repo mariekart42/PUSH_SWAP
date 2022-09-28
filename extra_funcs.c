@@ -6,7 +6,7 @@
 /*   By: mmensing <mmensing@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 17:18:05 by mmensing          #+#    #+#             */
-/*   Updated: 2022/09/28 11:31:55 by mmensing         ###   ########.fr       */
+/*   Updated: 2022/09/28 21:05:46 by mmensing         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -355,20 +355,39 @@ void push_all_to_a(char *from, l_list*start, l_list* end, l_list **stack_a, l_li
 	// printf("temp %d\n", temp->val);
 	// printf("end %d\n", end->val);
 	// while((end != NULL && temp->val != end->val) || temp != NULL)
-	if(end == NULL && ft_strncmp(from, "under_b", 7) == 0)
+	if(end == NULL && ft_strncmp(from, "b_starts_empty", 14) == 0)
 	{
 		//only the case for b starts is empty so far
-		while(list_len(*stack_b) != 0)
+		// while(temp != NULL)
+		while(list_len(*stack_b) != 0) // -> worked good for if b starts empty
 		{
 			pa(stack_a, stack_b);
 			temp = temp->next;
 		}
 		return ;
 	}
+	if(end == NULL && ft_strncmp(from, "under_b", 7) == 0)
+	{
+		temp = prev(*stack_b, temp);
+		while(temp->next != NULL)
+		{
+			rrb(stack_b, true);
+			pa(stack_a, stack_b);
+			// temp = temp->next;
+		}
+		return ;
+	}
+	if(end == NULL && ft_strncmp(from, "under_a", 7) == 0)
+	{
+		temp = prev(*stack_a, temp);
+		while(temp->next != NULL)
+		{
+			rra(stack_a, true);
+		}
+		return;
+	}
 	while(temp->val != end->val)
 	{
-	// printf("temp %d\n", temp->val);
-	// printf("end %d\n", end->val);
     	if(ft_strncmp(from, "under_a", 7) == 0)
 		{
 			temp = temp->next;
@@ -390,12 +409,6 @@ void push_all_to_a(char *from, l_list*start, l_list* end, l_list **stack_a, l_li
 
 		// temp = temp->next;
 	}
-	
-	// if(temp == NULL)
-	// {
-	// 	rrb(stack_b, true);
-	// 	pa(stack_a, stack_b);
-	// }
 
 }
 
