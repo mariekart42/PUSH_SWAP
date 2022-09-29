@@ -6,7 +6,7 @@
 /*   By: mmensing <mmensing@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 17:18:05 by mmensing          #+#    #+#             */
-/*   Updated: 2022/09/28 21:05:46 by mmensing         ###   ########.fr       */
+/*   Updated: 2022/09/29 12:51:15 by mmensing         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -348,10 +348,10 @@ l_list *after(l_list *stack, l_list* node)
 void push_all_to_a(char *from, l_list*start, l_list* end, l_list **stack_a, l_list** stack_b)
 {
     l_list *temp = start;
-	printf("HERE\n");
-	printf("from: %s\n\n", from);
-	print_list(stack_a, "stack_a");
-	print_list(stack_b, "stack_b");
+	// printf("HERE\n");
+	// printf("from: %s\n\n", from);
+	// print_list(stack_a, "stack_a");
+	// print_list(stack_b, "stack_b");
 	// printf("temp %d\n", temp->val);
 	// printf("end %d\n", end->val);
 	// while((end != NULL && temp->val != end->val) || temp != NULL)

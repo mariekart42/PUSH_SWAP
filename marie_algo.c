@@ -6,7 +6,7 @@
 /*   By: mmensing <mmensing@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 14:19:06 by mmensing          #+#    #+#             */
-/*   Updated: 2022/09/28 21:37:27 by mmensing         ###   ########.fr       */
+/*   Updated: 2022/09/29 13:04:17 by mmensing         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void marie_sort(l_list** stack_a, l_list** stack_b, l_list** a_starts, l_list** 
         else if((*stack_b)->val != last_node_content(*b_starts))
         {
 
-            printf(GRN"CHECKER ABOVE B\n"RESET);
+            // printf(GRN"CHECKER ABOVE B\n"RESET);
             some_above_b(&stack_a, &stack_b, &b_starts, &temp_b_starts, &b_down);
             // printf(YEL"DONE ABOVE B\n"RESET);
             // print_list(b_starts, "B STARTS");
@@ -70,11 +70,11 @@ void marie_sort(l_list** stack_a, l_list** stack_b, l_list** a_starts, l_list** 
         }
         else if((*b_starts)->val != (lst_last(*stack_b))->val)
         {
-            printf(GRN"CHECKER UNDER B\n"RESET);
-            // return ;
-            printf("b starst: %d\n", (lst_last(*b_starts))->val);
-            printf("last stack b: %d\n", (lst_last(*stack_b))->val);
-            printf("range: %d\n", range(*stack_b, lst_last(*b_starts), lst_last(*stack_b)));
+            // printf(GRN"CHECKER UNDER B\n"RESET);
+            // // return ;
+            // printf("b starst: %d\n", (lst_last(*b_starts))->val);
+            // printf("last stack b: %d\n", (lst_last(*stack_b))->val);
+            // printf("range: %d\n", range(*stack_b, lst_last(*b_starts), lst_last(*stack_b)));
             some_under_b(stack_a, stack_b, &b_down, b_starts);
         }
         else 
@@ -289,14 +289,14 @@ void some_above_b(l_list*** stack_a, l_list*** stack_b, l_list*** b_starts, l_li
         // printf("while\n");
         if(temp_b == NULL)
             printf(BLU"last seen\n"RESET);
-        if(temp_b->val > pivot)
+        if(temp_b->val >= pivot)
         {
             // push to top of a
         // printf(BLU"OKAZ\n"RESET);
             temp_b = temp_b->next;
             pa(*stack_a, *stack_b);
         }
-        else if (temp_b->val <= pivot)
+        else if (temp_b->val < pivot)
         {
             // push to bottom of a
             temp_b = temp_b->next;
