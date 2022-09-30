@@ -6,7 +6,7 @@
 /*   By: mmensing <mmensing@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 17:18:05 by mmensing          #+#    #+#             */
-/*   Updated: 2022/09/29 12:51:15 by mmensing         ###   ########.fr       */
+/*   Updated: 2022/09/29 14:17:56 by mmensing         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -544,4 +544,19 @@ void special_case(l_list **stack_a, l_list** stack_b, l_list *last_a, l_list**te
 		rra(stack_a, true);
 		pb(stack_a, stack_b);
 	}
+}
+
+// function returns pointer to place in given stack of content node
+l_list *place(l_list*stack, l_list*node)
+{
+	if(stack == NULL)
+	{
+		printf("error in function PLACE\n\n");
+		return(NULL);
+	}
+	while(stack->val != node->val)
+	{
+		stack = stack->next; 
+	}
+	return(stack);
 }
