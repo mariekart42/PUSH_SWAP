@@ -6,7 +6,7 @@
 /*   By: mmensing <mmensing@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 14:19:06 by mmensing          #+#    #+#             */
-/*   Updated: 2022/09/29 19:18:46 by mmensing         ###   ########.fr       */
+/*   Updated: 2022/09/30 20:07:15 by mmensing         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,7 +154,7 @@ void some_above_a(l_list** stack_a, l_list** stack_b, l_list** b_starts, l_list*
     // {
         
     // }
-    if(*b_starts != NULL && (*stack_b != lst_last(*b_starts) || *stack_b != lst_last(*temp_b_starts)))
+    if(*b_starts != NULL && *stack_b != place(*stack_b, lst_last(*b_starts)) && *stack_b != place(*stack_b, lst_last(*temp_b_starts)))
     {
         if(*temp_b_starts == NULL)
             *temp_b_starts = new_node((*stack_b)->val);
@@ -232,7 +232,7 @@ void some_above_b(l_list*** stack_a, l_list*** stack_b, l_list*** b_starts, l_li
     if((**temp_b_starts != NULL) && (range(**stack_b, **stack_b, prev(**stack_b, lst_last(**temp_b_starts))) < 5))
     {
         // push everything to top of a
-        push_all_to_a("above_b", **stack_b, prev(**stack_b, lst_last(**temp_b_starts)), *stack_a, *stack_b);
+        push_all_to_a("above_b", **stack_b, lst_last(**temp_b_starts), *stack_a, *stack_b);
         del_last(*temp_b_starts);
         return ;
     }
