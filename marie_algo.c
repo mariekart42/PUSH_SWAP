@@ -6,7 +6,7 @@
 /*   By: mmensing <mmensing@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 14:19:06 by mmensing          #+#    #+#             */
-/*   Updated: 2022/10/03 15:52:39 by mmensing         ###   ########.fr       */
+/*   Updated: 2022/10/03 22:48:04 by mmensing         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,16 +18,14 @@ void marie_sort(l_list** stack_a, l_list** stack_b, l_list** a_starts, l_list** 
     l_list *last_a = lst_last(*stack_a);
     l_list *b_down = NULL;
     printf(BLU"\nSTART MARIE ALGO\n"RESET);
-    // print_list(stack_a, "STACKA A");
-    // print_list(stack_b, "STACKA B");
-    // print_list(a_starts, "A STARTS");
-    // print_list(b_starts, "B STARTS");
-    // print_list(temp_b_starts, "TEMP B STARTS");
+
     while((stack_sorted(stack_a) == false) || (list_len(*stack_b) != 0))
     {
         // special case
         // there is something above stack a && under stack a
         // push everything from under a to top of b
+        if(*temp_b_starts != NULL && b_down != NULL && (*stack_b)->val < last_node_content(*stack_b))
+            push_all_to_b(stack_b, lst_last(b_down), NULL);
         if((*stack_a)->val != last_node_content(*a_starts) && lst_last(*stack_a) != last_a)
         {
             special_case(stack_a, stack_b, last_a, temp_b_starts, b_starts);
@@ -97,7 +95,7 @@ void b_starts_empty(l_list** stack_a, l_list** stack_b, l_list**b_down, l_list**
     while(len > 0)
     {
         rrb(stack_b, true);
-        if((*stack_b)->val > pivot)
+        if((*stack_b)->val > pivot)// do = sign and try
             pa(stack_a, stack_b);
         else if(*b_starts == NULL)
             *b_starts = new_node((*stack_b)->val);

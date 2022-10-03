@@ -6,7 +6,7 @@
 /*   By: mmensing <mmensing@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 17:18:05 by mmensing          #+#    #+#             */
-/*   Updated: 2022/10/03 15:11:26 by mmensing         ###   ########.fr       */
+/*   Updated: 2022/10/03 22:50:35 by mmensing         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -479,4 +479,13 @@ void push_all_to_a(char *from, l_list*start, l_list* end, l_list **stack_a, l_li
 			pa(stack_a, stack_b);
 	}
 	return ;
+}
+
+void push_all_to_b(l_list** stack, l_list*start, l_list*end)
+{
+	
+	while((*stack)->val != start->val)
+		*stack = (*stack)->next;
+	while(*stack != end)
+		rrb(stack, true);
 }
