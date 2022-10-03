@@ -6,7 +6,7 @@
 /*   By: mmensing <mmensing@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 20:35:43 by mmensing          #+#    #+#             */
-/*   Updated: 2022/09/28 13:42:10 by mmensing         ###   ########.fr       */
+/*   Updated: 2022/10/01 14:28:51 by mmensing         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ int32_t lst_len_end(l_list **start, l_list **end)
         count++;
         temp = temp->next;
     }
-    // printf("count: %d\n", count);
     return(count);
 }
 

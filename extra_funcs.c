@@ -6,7 +6,7 @@
 /*   By: mmensing <mmensing@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 17:18:05 by mmensing          #+#    #+#             */
-/*   Updated: 2022/09/29 14:17:56 by mmensing         ###   ########.fr       */
+/*   Updated: 2022/10/03 14:05:26 by mmensing         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -345,72 +345,7 @@ l_list *after(l_list *stack, l_list* node)
 	return(stack);
 }
 
-void push_all_to_a(char *from, l_list*start, l_list* end, l_list **stack_a, l_list** stack_b)
-{
-    l_list *temp = start;
-	// printf("HERE\n");
-	// printf("from: %s\n\n", from);
-	// print_list(stack_a, "stack_a");
-	// print_list(stack_b, "stack_b");
-	// printf("temp %d\n", temp->val);
-	// printf("end %d\n", end->val);
-	// while((end != NULL && temp->val != end->val) || temp != NULL)
-	if(end == NULL && ft_strncmp(from, "b_starts_empty", 14) == 0)
-	{
-		//only the case for b starts is empty so far
-		// while(temp != NULL)
-		while(list_len(*stack_b) != 0) // -> worked good for if b starts empty
-		{
-			pa(stack_a, stack_b);
-			temp = temp->next;
-		}
-		return ;
-	}
-	if(end == NULL && ft_strncmp(from, "under_b", 7) == 0)
-	{
-		temp = prev(*stack_b, temp);
-		while(temp->next != NULL)
-		{
-			rrb(stack_b, true);
-			pa(stack_a, stack_b);
-			// temp = temp->next;
-		}
-		return ;
-	}
-	if(end == NULL && ft_strncmp(from, "under_a", 7) == 0)
-	{
-		temp = prev(*stack_a, temp);
-		while(temp->next != NULL)
-		{
-			rra(stack_a, true);
-		}
-		return;
-	}
-	while(temp->val != end->val)
-	{
-    	if(ft_strncmp(from, "under_a", 7) == 0)
-		{
-			temp = temp->next;
-			rra(stack_a, true);
-		}
-		else if (ft_strncmp(from, "above_b", 7) == 0)
-		{
-			temp = temp->next;
-			pa(stack_a, stack_b);
-		}
-		else if (ft_strncmp(from, "under_b", 7) == 0)
-		{
-			temp = temp->next;
-			rrb(stack_b, true);
-			pa(stack_a, stack_b);
-		}
-		else
-			printf(RED"\nERROR in push all to a func\n\n"RESET);
 
-		// temp = temp->next;
-	}
-
-}
 
 // void hardcode_func(l_list **stack_a)
 void hardcode_func(l_list**stack_a, l_list **stack_b, l_list *end)
@@ -554,9 +489,128 @@ l_list *place(l_list*stack, l_list*node)
 		printf("error in function PLACE\n\n");
 		return(NULL);
 	}
+	if(node == NULL)
+	{
+		return(NULL);
+	}
 	while(stack->val != node->val)
 	{
 		stack = stack->next; 
 	}
 	return(stack);
+}
+
+
+// we always give the first digit that also gets pushed and the last digit that gets NOT pushed
+void push_all_to_a(char *from, l_list*start, l_list* end, l_list **stack_a, l_list** stack_b)
+{
+    l_list *temp = start;
+	
+	if(ft_strncmp(from, "above_b", 7) == 0)// or above a
+	{
+		while(temp != end)
+		{
+			if(ft_strncmp(from, "above_b", 7) == 0)
+			{
+				temp = temp->next;
+				pa(stack_a, stack_b);
+			}
+		}
+	}
+	else if(ft_strncmp(from, "under_b", 7) == 0 || ft_strncmp(from, "under_a", 7) == 0)
+	{
+		while(temp->next != NULL)
+		{
+			if(ft_strncmp(from, "under_b", 7) == 0)
+			{
+				rrb(stack_b, true);
+				pa(stack_a, stack_b);
+			}
+			else if(ft_strncmp(from, "under_a", 7) == 0)
+			{
+				rra(stack_a, true);
+			}
+			
+		}
+	}
+	else if(ft_strncmp(from, "make_b_empty", 12) == 0)
+	{
+		while(list_len(*stack_b) > 0)
+		{
+			pa(stack_a, stack_b);
+		}
+	}
+	return ;
+	
+
+
+
+
+
+	// if(end == NULL && ft_strncmp(from, "b_starts_empty_b_down_empty", 27) == 0)
+	// {
+	// 	//only the case for b starts is empty so far
+	// 	// while(temp != NULL)
+	// 	while(list_len(*stack_b) != 0) // -> worked good for if b starts empty
+	// 	{
+	// 		pa(stack_a, stack_b);
+	// 		temp = temp->next;
+	// 	}
+	// 	return ;
+	// }
+	// else if(end == NULL && ft_strncmp(from, "b_starts_empty_b_down_not", 25) == 0)
+	// {
+	// 	while(start->next != NULL)
+	// 	{
+	// 		rrb(stack_b, true);
+	// 		pa(stack_a, stack_b);
+	// 	}
+	// 	rrb(stack_b, true);
+	// 	pa(stack_a, stack_b);
+	// 	return ;
+	// }
+	// if(end == NULL && ft_strncmp(from, "under_b", 7) == 0)
+	// {
+	// 	temp = prev(*stack_b, temp);
+	// 	while(temp->next != NULL)
+	// 	{
+	// 		rrb(stack_b, true);
+	// 		pa(stack_a, stack_b);
+	// 		// temp = temp->next;
+	// 	}
+	// 	return ;
+	// }
+	// if(end == NULL && ft_strncmp(from, "under_a", 7) == 0)
+	// {
+	// 	temp = prev(*stack_a, temp);
+	// 	while(temp->next != NULL)
+	// 	{
+	// 		rra(stack_a, true);
+	// 	}
+	// 	return;
+	// }
+	// while(temp->val != end->val)
+	// {
+    // 	if(ft_strncmp(from, "under_a", 7) == 0)
+	// 	{
+	// 		temp = temp->next;
+	// 		rra(stack_a, true);
+	// 	}
+	// 	else if (ft_strncmp(from, "above_b", 7) == 0)
+	// 	{
+	// 		temp = temp->next;
+	// 		pa(stack_a, stack_b);
+	// 	}
+	// 	else if (ft_strncmp(from, "under_b", 7) == 0)
+	// 	{
+	// 		temp = temp->next;
+	// 		rrb(stack_b, true);
+	// 		pa(stack_a, stack_b);
+	// 	}
+	// 	else
+	// 		printf(RED"\nERROR in push all to a func\n\n"RESET);
+
+	// 	// temp = temp->next;
+	// }
+
 }
