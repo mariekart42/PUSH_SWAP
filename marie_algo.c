@@ -6,7 +6,7 @@
 /*   By: mmensing <mmensing@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 14:19:06 by mmensing          #+#    #+#             */
-/*   Updated: 2022/10/03 14:19:49 by mmensing         ###   ########.fr       */
+/*   Updated: 2022/10/03 15:52:39 by mmensing         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,8 @@ void marie_sort(l_list** stack_a, l_list** stack_b, l_list** a_starts, l_list** 
         else if (lst_last(*stack_a) != last_a)
         {
             //hardcoding -> can be here cause down list dont need to be updated
-            if (range(*stack_a, last_a->next, lst_last(*stack_a)) < 5)
+            // max 4 cause these are actually the nums we want to push
+            if (range(*stack_a, last_a->next, lst_last(*stack_a)) <= 4)
                 push_all_to_a("under_a", place(*stack_a, *a_starts), NULL, stack_a, stack_b);
             else
                 some_under_a(stack_a, stack_b, b_starts, temp_b_starts, a_starts);
@@ -172,13 +173,14 @@ void some_under_a(l_list** stack_a, l_list** stack_b, l_list** b_starts, l_list*
 }
 
 
-// DONE
 void some_above_b(l_list*** stack_a, l_list*** stack_b, l_list*** b_starts, l_list***temp_b_starts, l_list **b_down)
 {
     printf(GRN"------------ SOME ABOVE B -------------\n\n"RESET);
     int pivot = 0;
 
     // the stuff between top of b to [excluding] last node of temp b_starts is max 4
+    // 5 cause last node gets not pushed in if statement
+    //if((**temp_b_starts != NULL) && (range(**stack_b, **stack_b, prev(**stack_b, lst_last(**temp_b_starts))) <= 5))
     if((**temp_b_starts != NULL) && (range(**stack_b, **stack_b, prev(**stack_b, lst_last(**temp_b_starts))) <= 4))
     {
         // push everything from top of b till [excluding] last node of temp_b_starts to a
@@ -188,14 +190,23 @@ void some_above_b(l_list*** stack_a, l_list*** stack_b, l_list*** b_starts, l_li
     }
     
     // maybe problem here cause if b starts has one last digit
-    else if(range(**stack_b, **stack_b, lst_last(**b_starts)) < 5)
+    // first: we dont push very first b_starts so number can be 5 but we actually just push 4
+    // second: if there is the very last b_starts we want to push it as well
+    //         -> number has to be 4
+    
+    // else if(range(**stack_b, **stack_b, lst_last(**b_starts)) < 5)
+    else if((list_len(**b_starts) > 1 && range(**stack_b, **stack_b, lst_last(**b_starts)) <= 5) || (list_len(**b_starts) == 1 && range(**stack_b, **stack_b, lst_last(**b_starts)) <= 4))
     {
         // push all to a -> from stack_b till [excluding] last node of b_starts
         push_all_to_a("above_b", **stack_b, place(**stack_b, lst_last(**b_starts)), *stack_a, *stack_b);
         
-        // if we reach very last digit of above b -> special case and we push it as well
+        // if we reach very last digit of above b
+        //  -> special case and we push it as well
         if((**stack_b)->val == (**b_starts)->val)
+        {
             pa(*stack_a, *stack_b);
+            del_last(*b_starts); // THIS IS NEW
+        }
         return ;
     }
 
@@ -258,7 +269,8 @@ void some_under_b(l_list **stack_a, l_list **stack_b, l_list** b_down, l_list** 
     l_list *temp_b = NULL;
     int pivot = 0;
 
-    if(*b_down != NULL && range(*stack_b, lst_last(*b_down), lst_last(*stack_b)) < 6)
+    // 5 cause we dont want to push the very first digit (lst_last(b_down))
+    if(*b_down != NULL && range(*stack_b, lst_last(*b_down), lst_last(*stack_b)) <= 5)
     {
         push_all_to_a("under_b", place(*stack_b, lst_last(*b_down)), NULL, stack_a, stack_b);
         del_last(b_down);
