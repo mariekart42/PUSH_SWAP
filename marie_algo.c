@@ -6,7 +6,7 @@
 /*   By: mmensing <mmensing@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 14:19:06 by mmensing          #+#    #+#             */
-/*   Updated: 2022/10/03 22:48:04 by mmensing         ###   ########.fr       */
+/*   Updated: 2022/10/04 12:10:01 by mmensing         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 void marie_sort(l_list** stack_a, l_list** stack_b, l_list** a_starts, l_list** b_starts, l_list**temp_b_starts)
 {
+    int stupid = 0;
     l_list *last_a = lst_last(*stack_a);
     l_list *b_down = NULL;
     printf(BLU"\nSTART MARIE ALGO\n"RESET);
@@ -24,8 +25,8 @@ void marie_sort(l_list** stack_a, l_list** stack_b, l_list** a_starts, l_list** 
         // special case
         // there is something above stack a && under stack a
         // push everything from under a to top of b
-        if(*temp_b_starts != NULL && b_down != NULL && (*stack_b)->val < last_node_content(*stack_b))
-            push_all_to_b(stack_b, lst_last(b_down), NULL);
+        // if(*temp_b_starts != NULL && b_down != NULL && (*stack_b)->val < last_node_content(*stack_b))
+        //     push_all_to_b(stack_b, lst_last(b_down), NULL);
         if((*stack_a)->val != last_node_content(*a_starts) && lst_last(*stack_a) != last_a)
         {
             special_case(stack_a, stack_b, last_a, temp_b_starts, b_starts);
@@ -47,11 +48,14 @@ void marie_sort(l_list** stack_a, l_list** stack_b, l_list** a_starts, l_list** 
         {
             b_starts_empty(stack_a, stack_b, &b_down, b_starts);
         }
-        else if((*stack_b)->val != last_node_content(*b_starts))
+        else if((*stack_b)->val != last_node_content(*b_starts) && !(*b_starts != NULL && b_down != NULL && (*stack_b)->val < last_node_content(*stack_b)))
         {
-            print_list(stack_a, "a");
-            print_list(stack_b, "b");
-            some_above_b(&stack_a, &stack_b, &b_starts, &temp_b_starts, &b_down);
+            // alternative:
+            // if((*stack_b)->val < last_node_content(*stack_b))
+            // if(*b_starts != NULL && b_down != NULL && (*stack_b)->val < last_node_content(*stack_b))
+            //     stupid++;
+            // else
+                some_above_b(&stack_a, &stack_b, &b_starts, &temp_b_starts, &b_down);
         }
         else if((*b_starts)->val != (lst_last(*stack_b))->val)
         {
@@ -233,8 +237,12 @@ void some_above_b(l_list*** stack_a, l_list*** stack_b, l_list*** b_starts, l_li
     int stop = 0;
 
     // while next start of b_starts occurs, or if there is something in temp_b_starts next starts there
-    while(((temp_b->val != lst_last(**b_starts)->val)) && temp_b != NULL)
+    while(temp_b != NULL && temp_b->val != lst_last(**b_starts)->val)
     {
+        if(**temp_b_starts != NULL && temp_b->val == lst_last(**temp_b_starts)->val)
+        {
+            break ;
+        }
         if(temp_b->val >= pivot)
         {
             temp_b = temp_b->next;
