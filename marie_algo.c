@@ -6,7 +6,7 @@
 /*   By: mmensing <mmensing@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 14:19:06 by mmensing          #+#    #+#             */
-/*   Updated: 2022/10/04 12:10:01 by mmensing         ###   ########.fr       */
+/*   Updated: 2022/10/04 21:28:39 by mmensing         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -163,7 +163,7 @@ void some_under_a(l_list** stack_a, l_list** stack_b, l_list** b_starts, l_list*
         if(*temp_b_starts == NULL)
             *temp_b_starts = new_node((*stack_b)->val);
         else
-            (lst_last(*temp_b_starts))->next = new_node((*stack_a)->val);
+            (lst_last(*temp_b_starts))->next = new_node((*stack_b)->val);
     }
     pivot = perfect_pivot((place(*stack_a, *a_starts))->next, NULL);
     while(temp_a->next != NULL)
