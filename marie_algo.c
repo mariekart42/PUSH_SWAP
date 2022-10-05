@@ -6,7 +6,7 @@
 /*   By: mmensing <mmensing@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 14:19:06 by mmensing          #+#    #+#             */
-/*   Updated: 2022/10/04 21:28:39 by mmensing         ###   ########.fr       */
+/*   Updated: 2022/10/05 16:02:25 by mmensing         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void marie_sort(l_list** stack_a, l_list** stack_b, l_list** a_starts, l_list** 
         {
             b_starts_empty(stack_a, stack_b, &b_down, b_starts);
         }
-        else if((*stack_b)->val != last_node_content(*b_starts) && !(*b_starts != NULL && b_down != NULL && (*stack_b)->val < last_node_content(*stack_b)))
+        else if((*stack_b)->val != last_node_content(*b_starts) && !(*b_starts != NULL && (*stack_b)->val < last_node_content(*stack_b)))
         {
             // alternative:
             // if((*stack_b)->val < last_node_content(*stack_b))
@@ -73,7 +73,7 @@ void b_starts_empty(l_list** stack_a, l_list** stack_b, l_list**b_down, l_list**
     int pivot = 0;
     l_list *temp_b = NULL;
     // very last digit maybe not 5
-    if((range(*stack_b, *stack_b, lst_last(*stack_b)) <= 4) || (*b_down != NULL && range(*stack_b, (place(*stack_b, lst_last(*b_down)))->next, lst_last(*stack_b)) < 6))
+    if((*b_down == NULL && range(*stack_b, *stack_b, lst_last(*stack_b)) <= 4))
     {
         if(*b_down == NULL)
             push_all_to_a("make_b_empty", *stack_b, NULL, stack_a, stack_b);
@@ -81,6 +81,16 @@ void b_starts_empty(l_list** stack_a, l_list** stack_b, l_list**b_down, l_list**
             push_all_to_a("under_b", place(*stack_b, lst_last(*b_down)), NULL, stack_a, stack_b);
         del_last(b_down);
         return ;
+    }
+    else if(*b_down != NULL && range(*stack_b, (place(*stack_b, lst_last(*b_down)))->next, lst_last(*stack_b)) <= 4)
+    {
+        if(*b_down == NULL)
+            push_all_to_a("make_b_empty", *stack_b, NULL, stack_a, stack_b);
+        else if(*b_down != NULL)
+            push_all_to_a("under_b", place(*stack_b, lst_last(*b_down)), NULL, stack_a, stack_b);
+        del_last(b_down);
+        return ;
+        
     }
     int len = 0;
     if(*b_down == NULL)
@@ -93,7 +103,7 @@ void b_starts_empty(l_list** stack_a, l_list** stack_b, l_list**b_down, l_list**
     {
         pivot = perfect_pivot(place(*stack_b, (lst_last(*b_down)))->next, NULL);
         temp_b = (lst_last(*b_down))->next;
-        len = range(*stack_b, lst_last(*b_down), lst_last(*stack_b));
+        len = range(*stack_b, lst_last(*b_down), lst_last(*stack_b)) - 1;
     }
     
     while(len > 0)
@@ -105,6 +115,7 @@ void b_starts_empty(l_list** stack_a, l_list** stack_b, l_list**b_down, l_list**
             *b_starts = new_node((*stack_b)->val);
         len--;
     }
+    del_last(b_down);
 }
 
 // write hardcode func then done

@@ -6,7 +6,7 @@
 /*   By: mmensing <mmensing@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 14:19:20 by mmensing          #+#    #+#             */
-/*   Updated: 2022/10/03 22:48:43 by mmensing         ###   ########.fr       */
+/*   Updated: 2022/10/05 16:37:25 by mmensing         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,16 @@
 #include <limits.h> // int max/min macros
 #include <string.h> // strlen -> delete later & implement libft strlen
 
+
+
 typedef struct l_list 
 {
 	int val;
 	struct l_list *next;
 } l_list;
 
+
+int counti();
 
 //colour shit
 # define RED   "\x1B[31m"

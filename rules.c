@@ -6,17 +6,22 @@
 /*   By: mmensing <mmensing@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 15:43:26 by mmensing          #+#    #+#             */
-/*   Updated: 2022/09/22 12:17:02 by mmensing         ###   ########.fr       */
+/*   Updated: 2022/10/05 16:36:16 by mmensing         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"push_swap.h"
 
+
 // double pointers cause we want to pass the address in the main
 // to actually change the value of the pointers value
 // -> arguments needs to be passed with '&' to the function
+int count = 0;
 
-
+int counti()
+{
+	return count;
+}
 // swap first 2 elements of stack a
 // Do nothing if there is only one or no element in a
 void sa(l_list **stack_a, bool output)
@@ -41,6 +46,9 @@ void sa(l_list **stack_a, bool output)
 		write(1, "ss\n", 3);
 	else
 		write(1, "sa\n", 3);
+		
+
+	count++;
 }
 
 // swap first 2 elements of stack b
@@ -55,7 +63,6 @@ void sb(l_list **stack_b, bool output)
 		printf("[sb rule] nothing or just one elemtent\n"); // delete later
 		return ;
 	}
-
 	l_list *head = NULL;
 	head = *stack_b;
 	
@@ -67,6 +74,9 @@ void sb(l_list **stack_b, bool output)
 		write(1, "ss\n", 3);
 	else
 		write(1, "sa\n", 3);
+		
+		
+	count++;
 }
 
 // rule sa and sb at the same time
@@ -94,6 +104,9 @@ void	pa(l_list **stack_a, l_list **stack_b)
 	*stack_a = head;
 	(*stack_a)->next = prev_content;
 	write(1, "pa\n", 3);
+	
+
+	count++;
 }
 
 // first element of stack a to stack b
@@ -114,6 +127,9 @@ void	pb(l_list **stack_a, l_list **stack_b)
 	*stack_b = head;
 	(*stack_b)->next = prev_content;
 	write(1, "pb\n", 3);
+	
+
+	count++;
 }
 
 
@@ -124,6 +140,7 @@ void ra(l_list **stack_a, bool output)
 {
 	if ((*stack_a)->next == NULL)
 		return ; //some error thing
+
 	l_list *temp = NULL;
 	l_list *first_node = NULL;
 	
@@ -139,6 +156,9 @@ void ra(l_list **stack_a, bool output)
 		write(1, "rr\n", 3);
 	else if(output == true)
 		write(1, "ra\n", 3);
+		
+
+	count++;
 }
 
 // Shift up all elements of stack b by 1
@@ -147,6 +167,7 @@ void rb(l_list **stack_b, bool output)
 {
 	if ((*stack_b)->next == NULL)
 		return ; //some error thing
+		
 	l_list *temp = NULL;
 	l_list *first_node = NULL;
 	
@@ -162,6 +183,9 @@ void rb(l_list **stack_b, bool output)
 		write(1, "rr\n", 3);
 	else
 		write(1, "rb\n", 3);
+		
+
+	count++;
 }
 // is working correctly 
 
@@ -200,6 +224,9 @@ void rra(l_list **stack_a, bool output)
 		write(1, "rrr\n", 4);
 	else
 		write(1, "rra\n", 4);
+		
+
+	count++;
 }
 
 // shift down all elements of stack b by 1
@@ -229,6 +256,9 @@ void rrb(l_list **stack_b, bool output)
 		write(1, "rrr\n", 4);
 	else
 		write(1, "rrb\n", 4);
+		
+
+	count++;
 }
 
 // rra and rrb at the same time

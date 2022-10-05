@@ -6,11 +6,14 @@
 /*   By: mmensing <mmensing@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 18:42:45 by mmensing          #+#    #+#             */
-/*   Updated: 2022/09/28 10:43:48 by mmensing         ###   ########.fr       */
+/*   Updated: 2022/10/05 16:42:57 by mmensing         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+
+
 
 // checking for valid arguments
 // -> YEE no duplicates YEE
@@ -56,7 +59,11 @@ int32_t main(int32_t argc, char **argv)
 	// print_list(&a_starts, "a_starts");
 	// print_list(&b_starts, "b_starts");
 	
-	printf("\nEND MAIN\n\n");
+	print_list(&stack_a, "stack_a");
+	print_list(&stack_b, "stack_b");
+	// printf("\n\nCOUNT: %d\n", counti());
+
+	// printf("\nEND MAIN\n\n");
 
 	// mid_point_algo(&stack_a, &stack_b, &a_starts, &b_starts);
 
@@ -64,8 +71,6 @@ int32_t main(int32_t argc, char **argv)
 
 	// int dunno = sort(stack_a, NULL);
 	// printf("perfect pivot: %d\n", dunno);
-	print_list(&stack_a, "stack_a");
-	print_list(&stack_b, "stack_b");
 	// free_list(stack_a);
 	// free_list(stack_b);
 
