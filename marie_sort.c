@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   marie_algo.c                                       :+:      :+:    :+:   */
+/*   marie_sort.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmensing <mmensing@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 14:19:06 by mmensing          #+#    #+#             */
-/*   Updated: 2022/10/07 12:32:30 by mmensing         ###   ########.fr       */
+/*   Updated: 2022/10/07 13:02:07 by mmensing         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,19 +17,14 @@ void marie_sort(l_list** stack_a, l_list** stack_b, l_list** a_starts, l_list** 
 {
     l_list *last_a = lst_last(*stack_a);
     l_list *b_down = NULL;
-    // return;
     while((stack_sorted(stack_a) == false) || (list_len(*stack_b) != 0))
     {
         // there is something above stack a && under stack a
         // push everything from under a to top of b
         if((*stack_a)->val != last_node_content(*a_starts) && lst_last(*stack_a) != last_a)
-        {
             special_case(stack_a, stack_b, last_a, temp_b_starts, b_starts);
-        }
         else if((*stack_a)->val != last_node_content(*a_starts))
-        {
             some_above_a(stack_a, stack_b, b_starts, temp_b_starts, a_starts);
-        }
         else if (lst_last(*stack_a) != last_a)
         {
             //hardcoding -> can be here cause down list dont need to be updated
@@ -40,31 +35,20 @@ void marie_sort(l_list** stack_a, l_list** stack_b, l_list** a_starts, l_list** 
                 some_under_a(stack_a, stack_b, b_starts, temp_b_starts, a_starts);
         }
         else if(*b_starts == NULL && list_len(*stack_b) != 0)
-        {
             b_starts_empty(stack_a, stack_b, &b_down, b_starts);
-        }
         else if((*stack_b)->val != last_node_content(*b_starts) && !(*b_starts != NULL && after(*stack_b, *b_starts) != NULL && (*stack_b)->val < last_node_content(*stack_b)))
-        {
             some_above_b(&stack_a, &stack_b, &b_starts, &temp_b_starts, &b_down);
-        }
         else if((*b_starts)->val != (lst_last(*stack_b))->val)
-        {
             some_under_b(stack_a, stack_b, &b_down, b_starts, temp_b_starts);
-        }
         else 
-        {
             del_last(b_starts);
-            // return;
-        }
     }
-    // free_list(b_down);
 }
 
 void b_starts_empty(l_list** stack_a, l_list** stack_b, l_list**b_down, l_list**b_starts)
 {
     int pivot = 0;
     l_list *temp_b = NULL;
-    // very last digit maybe not 5
     if((*b_down == NULL && range(*stack_b, *stack_b, lst_last(*stack_b)) <= 4))
     {
         if(*b_down == NULL)
@@ -101,7 +85,7 @@ void b_starts_empty(l_list** stack_a, l_list** stack_b, l_list**b_down, l_list**
     while(len > 0)
     {
         rrb(stack_b, true);
-        if((*stack_b)->val > pivot)// do = sign and try
+        if((*stack_b)->val > pivot)
             pa(stack_a, stack_b);
         else if(*b_starts == NULL)
             *b_starts = new_node((*stack_b)->val);
@@ -110,7 +94,7 @@ void b_starts_empty(l_list** stack_a, l_list** stack_b, l_list**b_down, l_list**
     del_last(b_down);
 }
 
-// write hardcode func then done
+
 void some_above_a(l_list** stack_a, l_list** stack_b, l_list** b_starts, l_list**temp_b_starts, l_list**a_starts)
 {    
     int pivot = 0;
@@ -168,7 +152,7 @@ void some_under_a(l_list** stack_a, l_list** stack_b, l_list** b_starts, l_list*
     while(temp_a->next != NULL)
     {
         rra(stack_a, stack_b);
-        if((*stack_a)->val <= pivot) // TRY rm the = sign
+        if((*stack_a)->val < pivot)
             pb(stack_a, stack_b);
     }
 }
@@ -176,12 +160,10 @@ void some_under_a(l_list** stack_a, l_list** stack_b, l_list** b_starts, l_list*
 
 void some_above_b(l_list*** stack_a, l_list*** stack_b, l_list*** b_starts, l_list***temp_b_starts, l_list **b_down)
 {
-    printf(GRN"------------ SOME ABOVE B -------------\n\n"RESET);
     int pivot = 0;
 
     // the stuff between top of b to [excluding] last node of temp b_starts is max 4
     // 5 cause last node gets not pushed in if statement
-    //if((**temp_b_starts != NULL) && (range(**stack_b, **stack_b, prev(**stack_b, lst_last(**temp_b_starts))) <= 5))
     if((**temp_b_starts != NULL) && (range(**stack_b, **stack_b, prev(**stack_b, lst_last(**temp_b_starts))) <= 4))
     {
         // push everything from top of b till [excluding] last node of temp_b_starts to a
@@ -190,12 +172,9 @@ void some_above_b(l_list*** stack_a, l_list*** stack_b, l_list*** b_starts, l_li
         return ;
     }
     
-    // maybe problem here cause if b starts has one last digit
     // first: we dont push very first b_starts so number can be 5 but we actually just push 4
     // second: if there is the very last b_starts we want to push it as well
     //         -> number has to be 4
-    
-    // else if(range(**stack_b, **stack_b, lst_last(**b_starts)) < 5)
     else if((list_len(**b_starts) > 1 && range(**stack_b, **stack_b, lst_last(**b_starts)) <= 5) || (list_len(**b_starts) == 1 && range(**stack_b, **stack_b, lst_last(**b_starts)) <= 4))
     {
         // push all to a -> from stack_b till [excluding] last node of b_starts
@@ -206,7 +185,7 @@ void some_above_b(l_list*** stack_a, l_list*** stack_b, l_list*** b_starts, l_li
         if((**stack_b)->val == (**b_starts)->val)
         {
             pa(*stack_a, *stack_b);
-            del_last(*b_starts); // THIS IS NEW
+            del_last(*b_starts);
         }
         return ;
     }
@@ -223,24 +202,17 @@ void some_above_b(l_list*** stack_a, l_list*** stack_b, l_list*** b_starts, l_li
     
     // either pivot for chunk in temp starts, or pivot in actual b_starts chunk 
     if(**temp_b_starts != NULL)
-    {
-        printf(YEL"NOT NULL"RESET);
-        // CHANGED HERE
         pivot = perfect_pivot(**stack_b, lst_last(**temp_b_starts));
-    }
     else if (list_len(**b_starts) == 1)
         pivot = perfect_pivot(**stack_b, (place(**stack_b, lst_last(**b_starts)))->next);
     else
         pivot = perfect_pivot(**stack_b, lst_last(**b_starts));
-    
 
     // while next start of b_starts occurs, or if there is something in temp_b_starts next starts there
     while(temp_b != NULL && temp_b->val != lst_last(**b_starts)->val)
     {
         if(**temp_b_starts != NULL && temp_b->val == lst_last(**temp_b_starts)->val)
-        {
             break ;
-        }
         if(temp_b->val >= pivot)
         {
             temp_b = temp_b->next;
@@ -248,7 +220,6 @@ void some_above_b(l_list*** stack_a, l_list*** stack_b, l_list*** b_starts, l_li
         }
         else if (temp_b->val < pivot)
         {
-            // push to bottom of b
             temp_b = temp_b->next;
             rb(*stack_b, true);
         }
@@ -269,7 +240,6 @@ void some_above_b(l_list*** stack_a, l_list*** stack_b, l_list*** b_starts, l_li
 
 void some_under_b(l_list **stack_a, l_list **stack_b, l_list** b_down, l_list** b_starts, l_list **temp_b_starts)
 {
-    printf(GRN"------------ SOME UNDER B -------------\n\n"RESET);
     l_list *temp_b = NULL;
     int pivot = 0;
 
@@ -300,12 +270,8 @@ void some_under_b(l_list **stack_a, l_list **stack_b, l_list** b_down, l_list** 
     else 
         (lst_last(*temp_b_starts))->next = new_node((*stack_b)->val);
     while(temp_b->next != NULL)
-    {
-        // temp_b = temp_b->next;
         rrb(stack_b, true);
-    }
     rrb(stack_b, true);
-    
     del_last(b_down);
 }
 
@@ -323,25 +289,20 @@ void quick_to_b(l_list **stack_a, l_list **stack_b, l_list **a_starts, l_list **
 
     // i the first iteration it will stop when everything besides max numbers is in stack b
     // in second an continue iteration will stop when current a_chunk is sorted
-    // while(temp_a->next != NULL)
-    while (list_len(*stack_a) > 4)// || is_sorted(*stack_a, ))  >> add something for second iter
+    while (list_len(*stack_a) > 4)
     {
-        // finding pivot from start of stack a to the second last content of a_starts
-        // second_last returns NULL if there is nothing
-        // pivot = perfect_pivot(*stack_a, second_last(*a_starts)); // or last node? ->> see in second iter
         pivot = perfect_pivot(*stack_a, NULL);
 
         //first iter last of a starts will be NULL
-        // otherwise the last of a starts -> or has it to be second last -> look after second iter
-        // while (temp->next != lst_last(*a_starts))
+        // otherwise the last of a starts
         while (temp_a->next != NULL)
         {
-            if (pivot > temp_a->val)
+            if (pivot >= temp_a->val)
             {
                 temp_a = temp_a->next;
                 pb(stack_a, stack_b);
             }
-            else if (pivot <= temp_a->val)
+            else if (pivot < temp_a->val)
             {
 				if(guard == temp_a->val)
 					break ;
@@ -352,8 +313,6 @@ void quick_to_b(l_list **stack_a, l_list **stack_b, l_list **a_starts, l_list **
             }
         }
 		guard = 999999999999;
-		
-        // if there is nothing in start
         if (*b_starts == NULL)
             *b_starts = new_node((lst_last(*stack_b))->val);
         (lst_last(*b_starts))->next = new_node((*stack_b)->val);
@@ -366,7 +325,7 @@ void quick_to_b(l_list **stack_a, l_list **stack_b, l_list **a_starts, l_list **
 	else if (list_len(*stack_a) == 2 && ((*stack_a)->val > (*stack_a)->next->val))
 		ra(stack_a, true);
             
-    // first and second a stars ->> needs to be there
+    // first and second a starts ->> needs to be there
     *a_starts = new_node((lst_last(*stack_a))->val);
     (*a_starts)->next = new_node((*stack_a)->val);
     del_last(b_starts);

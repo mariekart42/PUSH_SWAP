@@ -6,7 +6,7 @@
 /*   By: mmensing <mmensing@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 17:18:05 by mmensing          #+#    #+#             */
-/*   Updated: 2022/10/07 01:32:48 by mmensing         ###   ########.fr       */
+/*   Updated: 2022/10/07 13:07:18 by mmensing         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ l_list *create_list(int32_t len, char **content)
 	return(head);
 }
 
+
 int32_t list_len(l_list *head)
 {
 	int32_t len = 0;
@@ -54,41 +55,18 @@ int32_t list_len(l_list *head)
 	return (len+1);
 }
 
+
 l_list *new_node(int32_t content)
 {
 	l_list *new = NULL;
 	new = (l_list *)malloc(sizeof(l_list));
 	if (!new)
 		return(NULL);
-	// free(new);
 	new->val = content;
 	new->next = NULL;
 	return (new);
-
-	
-	//     //create a new node
-    // struct node *newNode = malloc(sizeof(struct node));
-    // newNode->data = val;
-    // newNode->next     = NULL;
-
-    // //if head is NULL, it is an empty list
-    // if(*head == NULL)
-    //      *head = newNode;
-    // //Otherwise, find the last node and add the newNode
-    // else
-    // {
-    //     struct node *lastNode = *head;
-
-    //     //last node's next address will be NULL.
-    //     while(lastNode->next != NULL)
-    //     {
-    //         lastNode = lastNode->next;
-    //     }
-
-    //     //add the newNode at the end of the linked list
-    //     lastNode->next = newNode;
-    // }
 }
+
 
 int32_t last_node_content(l_list *head)
 {
@@ -97,12 +75,9 @@ int32_t last_node_content(l_list *head)
 	return (head->val);
 }
 
-
 //returns last node in list
 l_list *lst_last(l_list *head)
 {
-	printf(RED"CHUFT\n"RESET);
-	
 	if(head == NULL)
 		return(NULL);
 	while(head->next != NULL)
@@ -110,24 +85,24 @@ l_list *lst_last(l_list *head)
 	return(head);	
 }
 
-// returns NULL if head is NULL or the next is also NULL
-l_list *second_last(l_list *head)
-{
-	l_list *temp;
-	if(head == NULL || head->next == NULL)
-		return(NULL);
-	if(head->next->next == NULL)
-	{
-		return(head);
+// // returns NULL if head is NULL or the next is also NULL
+// l_list *second_last(l_list *head)
+// {
+// 	l_list *temp;
+// 	if(head == NULL || head->next == NULL)
+// 		return(NULL);
+// 	if(head->next->next == NULL)
+// 	{
+// 		return(head);
 		
-	}
-	while(head->next->next != NULL)
-	{
-		temp = head;
-		head = head->next;
-	}
-	return(temp);
-}
+// 	}
+// 	while(head->next->next != NULL)
+// 	{
+// 		temp = head;
+// 		head = head->next;
+// 	}
+// 	return(temp);
+// }
 
 
 long int ft_atol(const char *str)
@@ -156,6 +131,7 @@ long int ft_atol(const char *str)
 	return (val * minus);
 }
 
+
 int	ft_isdigit(int val)
 {
 	if (val >= 48 && val <= 57)
@@ -175,6 +151,155 @@ void free_list(l_list *head)
 		free(temp);
 	}
 }
+
+// checks if th stack is sorted
+bool stack_sorted(l_list **stack)
+{
+	l_list *temp;
+	temp = *stack;
+	while(temp->next != NULL)
+	{
+		if (temp->val > temp->next->val)
+			return(false);
+		temp = temp->next;
+	}
+	return(true);	
+}
+
+/**
+compares 2 char arrays if one of them is greater, less or equal
+stop point is a fixed variable n
+for extendet ascii using unsigned char
+e.g. 
+"abc" > "aba"   ->    returns 1
+  ""  =  ""     ->    returns 0
+ "a"  < "abc"   ->    returns -1
+*/
+int	ft_strncmp(const char *s1, const char *s2, size_t n)
+{
+	size_t	i;
+
+	i = 0;
+	while ((i < n) && (s1[i] != '\0' || s2[i] != '\0'))
+	{
+		if (s1[i] != s2[i])
+			return ((unsigned char)(s1[i]) - ((unsigned char)s2[i]));
+	i++;
+	}
+	return (0);
+}
+
+// function calculates the amount of nodes(including end)
+int32_t range(l_list* stack, l_list* begin, l_list *end)
+{
+	int count = 1;
+	while(stack->val != begin->val)
+		stack = stack->next;
+	while(stack->val != end->val)
+	{
+		stack = stack->next;
+		count++;
+	}
+	return(count);
+}
+
+// function returns pointer to place in given stack of content node
+l_list *place(l_list*stack, l_list*node)
+{
+	if(stack == NULL)
+	{
+		printf("error in function PLACE\n\n");
+		return(NULL);
+	}
+	if(node == NULL)
+		return(NULL);
+	while(stack->val != node->val)
+		stack = stack->next; 
+	return(stack);
+}
+
+// for the ABOVE nums: 
+//   -> "start" [gets pushed]  
+//      "end" [gets NOT pushed]
+//
+// for the UNDER nums:
+//   -> "start" [gets NOT pushed]  
+//      "end" [gets NOT pushed]
+//
+// make b empty:
+//   -> everything gets pushed
+void push_all_to_a(char *from, l_list*start, l_list* end, l_list **stack_a, l_list** stack_b)
+{
+    l_list *temp = start;
+	
+	if(ft_strncmp(from, "above_b", 7) == 0)
+	{
+		while(temp != end)
+		{
+			if(ft_strncmp(from, "above_b", 7) == 0)
+			{
+				temp = temp->next;
+				pa(stack_a, stack_b);
+			}
+		}
+	}
+	else if(ft_strncmp(from, "under_b", 7) == 0 || ft_strncmp(from, "under_a", 7) == 0)
+	{
+		while(temp->next != NULL)
+		{
+			if(ft_strncmp(from, "under_b", 7) == 0)
+			{
+				rrb(stack_b, true);
+				pa(stack_a, stack_b);
+			}
+			else if(ft_strncmp(from, "under_a", 7) == 0)
+				rra(stack_a, true);			
+		}
+	}
+	else if(ft_strncmp(from, "make_b_empty", 12) == 0)
+	{
+		while(list_len(*stack_b) > 0)
+			pa(stack_a, stack_b);
+	}
+	return ;
+}
+
+void push_all_to_b(l_list** stack, l_list*start, l_list*end)
+{
+	
+	while((*stack)->val != start->val)
+		*stack = (*stack)->next;
+	while(*stack != end)
+		rrb(stack, true);
+}
+
+
+void del_last(l_list **node)
+{
+	l_list *temp = *node;
+	if(*node == NULL)
+		return ;
+		
+	if((*node)->next == NULL)
+	{
+		*node = NULL;
+		return ;
+	}
+	while(temp->next->next != NULL)
+		temp = temp->next;
+	free(temp->next);
+	(temp)->next = NULL;
+}
+
+
+
+
+
+
+
+
+
+
 
 // algo for only 3 digits -> max 2 rules! works
 void hardcode_case_3(l_list **node)
@@ -213,20 +338,6 @@ void hardcode_case_4(l_list **node)
 }
 
 
-// checks if th stack is sorted
-bool stack_sorted(l_list **stack)
-{
-	l_list *temp;
-	// temp should know have the same val as int start
-	temp = *stack;
-	while(temp->next != NULL)
-	{
-		if (temp->val > temp->next->val)
-			return(false);
-		temp = temp->next;
-	}
-	return(true);	
-}
 
 
 bool lst_is_sorted(l_list **head, int32_t end, int32_t start)
@@ -253,74 +364,11 @@ bool lst_is_sorted(l_list **head, int32_t end, int32_t start)
 //  or node or stack are NULL!
 l_list *prev(l_list *stack, l_list*node)
 {
-	if(stack == node)// || node == NULL)
-	{
-		printf(RED"\n!! i prev function case appeared\n\n"RESET);
+	if(stack == node)
 		return(NULL);
-	}
 	while(stack->next != NULL && stack->next->val != node->val)
 		stack = stack->next;
 	return(stack);
-}
-
-// function calculates the amount of nodes(including end)
-int32_t range(l_list* stack, l_list* begin, l_list *end)
-{
-	int count = 1;
-	while(stack->val != begin->val)
-		stack = stack->next;
-	while(stack->val != end->val)
-	{
-		stack = stack->next;
-		count++;
-	}
-	return(count);
-
-}
-
-
-void del_last(l_list **node)
-{
-	l_list *temp = *node;
-	if(*node == NULL)
-		return ;
-		
-	if((*node)->next == NULL)
-	{
-		*node = NULL;
-		return ;
-	}
-	while(temp->next->next != NULL)
-		temp = temp->next;
-	// free((*node)->next);
-	free(temp->next);
-	(temp)->next = NULL;
-}
-
-
-/**
-compares 2 char arrays if one of them is greater, less or equal
-stop point is a fixed variable n
-for extendet ascii using unsigned char
-e.g. 
-"abc" > "aba"   ->    returns 1
-  ""  =  ""     ->    returns 0
- "a"  < "abc"   ->    returns -1
-*/
-int	ft_strncmp(const char *s1, const char *s2, size_t n)
-{
-	size_t	i;
-
-	i = 0;
-	while ((i < n) && (s1[i] != '\0' || s2[i] != '\0'))
-	{
-		if (s1[i] != s2[i])
-		{
-			return ((unsigned char)(s1[i]) - ((unsigned char)s2[i]));
-		}
-	i++;
-	}
-	return (0);
 }
 
 
@@ -444,72 +492,5 @@ void special_case(l_list **stack_a, l_list** stack_b, l_list *last_a, l_list**te
 	}
 }
 
-// function returns pointer to place in given stack of content node
-l_list *place(l_list*stack, l_list*node)
-{
-	if(stack == NULL)
-	{
-		printf("error in function PLACE\n\n");
-		return(NULL);
-	}
-	if(node == NULL)
-		return(NULL);
-	while(stack->val != node->val)
-		stack = stack->next; 
-	return(stack);
-}
 
-// for the ABOVE nums: 
-//   -> "start" [gets pushed]  
-//      "end" [gets NOT pushed]
-//
-// for the UNDER nums:
-//   -> "start" [gets NOT pushed]  
-//      "end" [gets NOT pushed]
-//
-// make b empty:
-//   -> everything gets pushed
-void push_all_to_a(char *from, l_list*start, l_list* end, l_list **stack_a, l_list** stack_b)
-{
-    l_list *temp = start;
-	
-	if(ft_strncmp(from, "above_b", 7) == 0)// or above a
-	{
-		while(temp != end)
-		{
-			if(ft_strncmp(from, "above_b", 7) == 0)
-			{
-				temp = temp->next;
-				pa(stack_a, stack_b);
-			}
-		}
-	}
-	else if(ft_strncmp(from, "under_b", 7) == 0 || ft_strncmp(from, "under_a", 7) == 0)
-	{
-		while(temp->next != NULL)
-		{
-			if(ft_strncmp(from, "under_b", 7) == 0)
-			{
-				rrb(stack_b, true);
-				pa(stack_a, stack_b);
-			}
-			else if(ft_strncmp(from, "under_a", 7) == 0)
-				rra(stack_a, true);			
-		}
-	}
-	else if(ft_strncmp(from, "make_b_empty", 12) == 0)
-	{
-		while(list_len(*stack_b) > 0)
-			pa(stack_a, stack_b);
-	}
-	return ;
-}
 
-void push_all_to_b(l_list** stack, l_list*start, l_list*end)
-{
-	
-	while((*stack)->val != start->val)
-		*stack = (*stack)->next;
-	while(*stack != end)
-		rrb(stack, true);
-}

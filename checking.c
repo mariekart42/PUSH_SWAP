@@ -6,7 +6,7 @@
 /*   By: mmensing <mmensing@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 17:37:08 by mmensing          #+#    #+#             */
-/*   Updated: 2022/09/15 22:34:36 by mmensing         ###   ########.fr       */
+/*   Updated: 2022/10/07 12:58:06 by mmensing         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,16 +17,11 @@
 // normal pointer so we get the copy of stack_a and dont change anything
 bool checking(char **argv, int32_t argc)
 {
-	// if statement returns false directly 
-	// -> not every function needs to be executed
-	// ->> more efficient
-		
 	if (argc < 2 || dupli_and_min_max(argv, argc) == false || only_nums(argv, argc) == false)
-	{
 		return (false);
-	}
 	return (true);
 }
+
 
 bool dupli_and_min_max(char **argv, int32_t argc)
 {
@@ -41,9 +36,7 @@ bool dupli_and_min_max(char **argv, int32_t argc)
 			return (false);
 		k++;
 	}
-	all[k] = '\0';
-	//IS WORKING!
-	
+	all[k] = '\0';	
 	int32_t i = 0;
     int32_t n = 1;
     // checks for duplicates
@@ -63,7 +56,8 @@ bool dupli_and_min_max(char **argv, int32_t argc)
     }
 	return (true);
 }
-	// printf("hEEEEEEreeRR\n");
+
+
 // checks if there are only numbers (works now also with neg nums)
 bool only_nums(char **argv, int32_t argc)
 {
