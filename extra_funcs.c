@@ -6,7 +6,7 @@
 /*   By: mmensing <mmensing@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 17:18:05 by mmensing          #+#    #+#             */
-/*   Updated: 2022/10/03 22:50:35 by mmensing         ###   ########.fr       */
+/*   Updated: 2022/10/07 01:32:48 by mmensing         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,9 +60,34 @@ l_list *new_node(int32_t content)
 	new = (l_list *)malloc(sizeof(l_list));
 	if (!new)
 		return(NULL);
-	new->next = NULL;
+	// free(new);
 	new->val = content;
+	new->next = NULL;
 	return (new);
+
+	
+	//     //create a new node
+    // struct node *newNode = malloc(sizeof(struct node));
+    // newNode->data = val;
+    // newNode->next     = NULL;
+
+    // //if head is NULL, it is an empty list
+    // if(*head == NULL)
+    //      *head = newNode;
+    // //Otherwise, find the last node and add the newNode
+    // else
+    // {
+    //     struct node *lastNode = *head;
+
+    //     //last node's next address will be NULL.
+    //     while(lastNode->next != NULL)
+    //     {
+    //         lastNode = lastNode->next;
+    //     }
+
+    //     //add the newNode at the end of the linked list
+    //     lastNode->next = newNode;
+    // }
 }
 
 int32_t last_node_content(l_list *head)
@@ -267,8 +292,9 @@ void del_last(l_list **node)
 	}
 	while(temp->next->next != NULL)
 		temp = temp->next;
+	// free((*node)->next);
 	free(temp->next);
-	temp->next = NULL;
+	(temp)->next = NULL;
 }
 
 
@@ -325,9 +351,7 @@ void hardcode_func(l_list**stack_a, l_list **stack_b, l_list *end)
 		temp = temp->next;
 		len++;
 	}
-	if(len == 1)
-		printf("ONLY ONE IN HARDCODE FUNC (should not happen)");
-	else if(len == 2)
+	if(len == 2)
 	{
 		if((*stack_a)->val > (*stack_a)->next->val)
 			sa(stack_a, false);

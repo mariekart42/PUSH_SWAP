@@ -6,7 +6,7 @@
 /*   By: mmensing <mmensing@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 14:19:06 by mmensing          #+#    #+#             */
-/*   Updated: 2022/10/05 16:02:25 by mmensing         ###   ########.fr       */
+/*   Updated: 2022/10/07 01:55:07 by mmensing         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,18 +15,13 @@
 
 void marie_sort(l_list** stack_a, l_list** stack_b, l_list** a_starts, l_list** b_starts, l_list**temp_b_starts)
 {
-    int stupid = 0;
     l_list *last_a = lst_last(*stack_a);
     l_list *b_down = NULL;
-    printf(BLU"\nSTART MARIE ALGO\n"RESET);
-
+    // return;
     while((stack_sorted(stack_a) == false) || (list_len(*stack_b) != 0))
     {
-        // special case
         // there is something above stack a && under stack a
         // push everything from under a to top of b
-        // if(*temp_b_starts != NULL && b_down != NULL && (*stack_b)->val < last_node_content(*stack_b))
-        //     push_all_to_b(stack_b, lst_last(b_down), NULL);
         if((*stack_a)->val != last_node_content(*a_starts) && lst_last(*stack_a) != last_a)
         {
             special_case(stack_a, stack_b, last_a, temp_b_starts, b_starts);
@@ -50,12 +45,7 @@ void marie_sort(l_list** stack_a, l_list** stack_b, l_list** a_starts, l_list** 
         }
         else if((*stack_b)->val != last_node_content(*b_starts) && !(*b_starts != NULL && (*stack_b)->val < last_node_content(*stack_b)))
         {
-            // alternative:
-            // if((*stack_b)->val < last_node_content(*stack_b))
-            // if(*b_starts != NULL && b_down != NULL && (*stack_b)->val < last_node_content(*stack_b))
-            //     stupid++;
-            // else
-                some_above_b(&stack_a, &stack_b, &b_starts, &temp_b_starts, &b_down);
+            some_above_b(&stack_a, &stack_b, &b_starts, &temp_b_starts, &b_down);
         }
         else if((*b_starts)->val != (lst_last(*stack_b))->val)
         {
@@ -64,8 +54,10 @@ void marie_sort(l_list** stack_a, l_list** stack_b, l_list** a_starts, l_list** 
         else 
         {
             del_last(b_starts);
+            // return;
         }
     }
+    // free_list(b_down);
 }
 
 void b_starts_empty(l_list** stack_a, l_list** stack_b, l_list**b_down, l_list**b_starts)
@@ -120,9 +112,7 @@ void b_starts_empty(l_list** stack_a, l_list** stack_b, l_list**b_down, l_list**
 
 // write hardcode func then done
 void some_above_a(l_list** stack_a, l_list** stack_b, l_list** b_starts, l_list**temp_b_starts, l_list**a_starts)
-{
-    printf(GRN"------------ SOME ABOVE A -------------\n\n"RESET);
-    
+{    
     int pivot = 0;
     // 6 cause we want max 4 but not the last digit including
     if(range(*stack_a, *stack_a, lst_last(*a_starts)) < 6)
@@ -162,10 +152,8 @@ void some_above_a(l_list** stack_a, l_list** stack_b, l_list** b_starts, l_list*
 }
 
 
-// DONE
 void some_under_a(l_list** stack_a, l_list** stack_b, l_list** b_starts, l_list**temp_b_starts, l_list **a_starts)
 {
-    printf(GRN"------------ SOME UNDER A -------------\n\n"RESET);
     int pivot = 0;
     l_list *temp_a = place(*stack_a, *a_starts);
 
@@ -245,7 +233,6 @@ void some_above_b(l_list*** stack_a, l_list*** stack_b, l_list*** b_starts, l_li
     else
         pivot = perfect_pivot(**stack_b, lst_last(**b_starts));
     
-    int stop = 0;
 
     // while next start of b_starts occurs, or if there is something in temp_b_starts next starts there
     while(temp_b != NULL && temp_b->val != lst_last(**b_starts)->val)
