@@ -6,7 +6,7 @@
 /*   By: mmensing <mmensing@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 14:19:20 by mmensing          #+#    #+#             */
-/*   Updated: 2022/10/05 16:37:25 by mmensing         ###   ########.fr       */
+/*   Updated: 2022/10/07 12:32:13 by mmensing         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void marie_sort(l_list** stack_a, l_list** stack_b, l_list** a_starts, l_list** 
 void some_above_a(l_list** stack_a, l_list** stack_b, l_list** b_starts, l_list**temp_b_starts, l_list**a_starts);
 void some_under_a(l_list** stack_a, l_list** stack_b, l_list** b_starts, l_list**temp_b_starts, l_list **a_starts);
 void some_above_b(l_list*** stack_a, l_list*** stack_b, l_list*** b_starts, l_list***temp_b_starts, l_list **b_down);
-void some_under_b(l_list **stack_a, l_list **stack_b, l_list** b_down, l_list** b_starts);
+void some_under_b(l_list **stack_a, l_list **stack_b, l_list** b_down, l_list** b_starts, l_list **temp_b_starts);
 void b_starts_empty(l_list** stack_a, l_list** stack_b, l_list**b_down, l_list**b_starts);
 
 // -----  delete_later_funcs.c  -----

@@ -6,7 +6,7 @@
 /*   By: mmensing <mmensing@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 14:19:06 by mmensing          #+#    #+#             */
-/*   Updated: 2022/10/07 11:57:53 by mmensing         ###   ########.fr       */
+/*   Updated: 2022/10/07 12:32:30 by mmensing         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void marie_sort(l_list** stack_a, l_list** stack_b, l_list** a_starts, l_list** 
         }
         else if((*b_starts)->val != (lst_last(*stack_b))->val)
         {
-            some_under_b(stack_a, stack_b, &b_down, b_starts);
+            some_under_b(stack_a, stack_b, &b_down, b_starts, temp_b_starts);
         }
         else 
         {
@@ -267,7 +267,7 @@ void some_above_b(l_list*** stack_a, l_list*** stack_b, l_list*** b_starts, l_li
 }
 
 
-void some_under_b(l_list **stack_a, l_list **stack_b, l_list** b_down, l_list** b_starts)
+void some_under_b(l_list **stack_a, l_list **stack_b, l_list** b_down, l_list** b_starts, l_list **temp_b_starts)
 {
     printf(GRN"------------ SOME UNDER B -------------\n\n"RESET);
     l_list *temp_b = NULL;
@@ -295,6 +295,10 @@ void some_under_b(l_list **stack_a, l_list **stack_b, l_list** b_down, l_list** 
         pivot = perfect_pivot((place(*stack_b, lst_last(*b_down)))->next, NULL);
         temp_b = (place(*stack_b, lst_last(*b_down)))->next;
     }
+    if(*temp_b_starts == NULL)
+        *temp_b_starts = new_node((*stack_b)->val);
+    else 
+        (lst_last(*temp_b_starts))->next = new_node((*stack_b)->val);
     while(temp_b->next != NULL)
     {
         // temp_b = temp_b->next;
