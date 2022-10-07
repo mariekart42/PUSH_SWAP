@@ -6,7 +6,7 @@
 /*   By: mmensing <mmensing@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 14:19:06 by mmensing          #+#    #+#             */
-/*   Updated: 2022/10/07 01:55:07 by mmensing         ###   ########.fr       */
+/*   Updated: 2022/10/07 11:57:53 by mmensing         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void marie_sort(l_list** stack_a, l_list** stack_b, l_list** a_starts, l_list** 
         {
             b_starts_empty(stack_a, stack_b, &b_down, b_starts);
         }
-        else if((*stack_b)->val != last_node_content(*b_starts) && !(*b_starts != NULL && (*stack_b)->val < last_node_content(*stack_b)))
+        else if((*stack_b)->val != last_node_content(*b_starts) && !(*b_starts != NULL && after(*stack_b, *b_starts) != NULL && (*stack_b)->val < last_node_content(*stack_b)))
         {
             some_above_b(&stack_a, &stack_b, &b_starts, &temp_b_starts, &b_down);
         }

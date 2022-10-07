@@ -6,7 +6,7 @@
 #    By: mmensing <mmensing@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/08 12:21:27 by mmensing          #+#    #+#              #
-#    Updated: 2022/10/07 01:55:58 by mmensing         ###   ########.fr        #
+#    Updated: 2022/10/07 11:34:48 by mmensing         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,6 +37,6 @@ fclean: clean
 re: fclean all
 
 g:
-	@gcc -g -fsanitize=address $(FILES) $(CFLAGS)
+	@gcc -g $(FILES) $(CFLAGS)
 # -fsanitize=address
 .PHONY: all clean fclean re
