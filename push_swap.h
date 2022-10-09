@@ -6,7 +6,7 @@
 /*   By: mmensing <mmensing@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 14:19:20 by mmensing          #+#    #+#             */
-/*   Updated: 2022/10/07 13:07:34 by mmensing         ###   ########.fr       */
+/*   Updated: 2022/10/09 21:54:21 by mmensing         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,7 @@ l_list *place(l_list*stack, l_list*node);
 void push_all_to_a(char *from, l_list*start, l_list* end, l_list **stack_a, l_list** stack_b);
 void push_all_to_b(l_list** stack, l_list*start, l_list*end);
 void del_last(l_list **node);
+void	ft_putstr_fd(char *s, int fd);
 
 
 // l_list *second_last(l_list *head);

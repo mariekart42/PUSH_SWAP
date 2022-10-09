@@ -6,7 +6,7 @@
 /*   By: mmensing <mmensing@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 17:18:05 by mmensing          #+#    #+#             */
-/*   Updated: 2022/10/07 13:07:18 by mmensing         ###   ########.fr       */
+/*   Updated: 2022/10/09 22:06:20 by mmensing         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -291,6 +291,26 @@ void del_last(l_list **node)
 	(temp)->next = NULL;
 }
 
+/**
+ * @brief Outputs the string ’s’ to the given file descriptor
+ * 
+ * @param s string to output
+ * @param fd given file descriptor
+ */
+void	ft_putstr_fd(char *s, int fd)
+{
+	int		i;
+
+	if (!s)
+		return ;
+	i = 0;
+	while (s[i] != '\0')
+	{
+		write(fd, &s[i], 1);
+		i++;
+	}
+}
+
 
 
 
@@ -305,11 +325,11 @@ void del_last(l_list **node)
 void hardcode_case_3(l_list **node)
 {
 	while((*node)->val > ((*node)->next->next)->val)
-		ra(node, false);
+		ra(node, true);
 	if(((*node)->next->next)->val < ((*node)->next)->val)
-		rra(node, false);
+		rra(node, true);
 	if((*node)->val > ((*node)->next)->val)
-		sa(node, false);
+		sa(node, true);
 }
 
 
@@ -326,14 +346,14 @@ void hardcode_case_4(l_list **node)
 	}
 	free(temp); // dunno lol
 	if(((*node)->next)->val == smallest_val)
-		sa(node, false);
+		sa(node, true);
 	else if(((*node)->next->next)->val == smallest_val)
 	{
-		rra(node, false);
-		rra(node, false);
+		rra(node, true);
+		rra(node, true);
 	}
 	else if(((*node)->next->next->next)->val == smallest_val)
-		rra(node, false);
+		rra(node, true);
 	hardcode_case_3(&((*node)->next));
 }
 
@@ -402,7 +422,7 @@ void hardcode_func(l_list**stack_a, l_list **stack_b, l_list *end)
 	if(len == 2)
 	{
 		if((*stack_a)->val > (*stack_a)->next->val)
-			sa(stack_a, false);
+			sa(stack_a, true);
 	}
 	else if(len == 3)
 		hc_three(stack_a);
@@ -455,7 +475,7 @@ void hc_four(l_list **stack_a, l_list **stack_b)
 	if((*stack_a)->next->next->val == smolst_int)
 	{
 		ra(stack_a, true);
-		sa(stack_a, false);
+		sa(stack_a, true);
 		rra(stack_a, true);
 		sa(stack_a, true);
 		ra(stack_a, true);

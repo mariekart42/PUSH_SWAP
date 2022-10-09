@@ -6,7 +6,7 @@
 /*   By: mmensing <mmensing@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 18:42:45 by mmensing          #+#    #+#             */
-/*   Updated: 2022/10/07 01:17:54 by mmensing         ###   ########.fr       */
+/*   Updated: 2022/10/09 21:59:23 by mmensing         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,19 +28,14 @@ int32_t main(int32_t argc, char **argv)
 	l_list *b_starts = NULL;
 	l_list *temp_b_starts = NULL;
 	
-	if (checking(argv, argc) == false) // function returns 1 if something wrong, 0 if all right
+	if (checking(argv, argc) == false)
 	{
-		write(2, "ERROR\n", 6); // printing error to standard error output
+		ft_putstr_fd("Error\n", 2);
 		return(0);
-		exit(0);
 	}
 	stack_a = create_list(argc, argv);
-	
 
-	// print_list(&stack_a, "stack_a");
-	// print_list(&stack_b, "stack_b");
-
-	if(stack_sorted(&stack_a) == true && list_len(stack_b) == 0)
+	if (stack_sorted(&stack_a) == true && list_len(stack_b) == 0)
 	{
 		free_list(stack_a); // YESS
 		return(0);
@@ -48,23 +43,20 @@ int32_t main(int32_t argc, char **argv)
 	
 	quick_to_b(&stack_a, &stack_b, &a_starts, &b_starts);
 	marie_sort(&stack_a, &stack_b, &a_starts, &b_starts, &temp_b_starts);
-	
-	
-	// print_list(&stack_a, "MAIN A");
-	// print_list(&stack_b, "stack_b");
-	// print_list(&a_starts, "a_starts");
-	// print_list(&b_starts, "b_starts");
+
 	
 	print_list(&stack_a, "stack_a");
 	print_list(&stack_b, "stack_b");
 	printf("\n\nCOUNT: %d\n", counti());
 	
 	printf(GRN"HERE\n"RESET);
+	
 	free_list(b_starts); // YESS
 	free_list(stack_b); // YESS
 	free_list(stack_a); // YESS
 	free_list(a_starts); // YESS
 	free_list(temp_b_starts);
+	
 	write(1, "\n\nOKKKKK\n", 9);
 
 
