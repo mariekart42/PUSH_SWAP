@@ -6,7 +6,7 @@
 /*   By: mmensing <mmensing@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 17:37:08 by mmensing          #+#    #+#             */
-/*   Updated: 2022/10/07 12:58:06 by mmensing         ###   ########.fr       */
+/*   Updated: 2022/10/10 18:24:47 by mmensing         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,8 @@ bool checking(char **argv, int32_t argc)
 bool dupli_and_min_max(char **argv, int32_t argc)
 {
 	int32_t k = 0;
-	int64_t all[argc]; // long int so we can check for INT_MAX/MIN
+	int64_t all[argc];
 	argv++;
-	// checks if number is out of integwer range
 	while (k < argc - 1)
 	{
 		all[k] = ft_atol(argv[k]);
@@ -39,16 +38,12 @@ bool dupli_and_min_max(char **argv, int32_t argc)
 	all[k] = '\0';	
 	int32_t i = 0;
     int32_t n = 1;
-    // checks for duplicates
     while (argc - 2 > i)
     {
         while (argc - 2 - i >= n)
         {
             if (all[i] == all[n + i])
-			{
-				printf("found duplicate: %lld\n\n", all[i]);
-                return(false);
-			}
+                return (false);
             n++;
         }
         n=1;

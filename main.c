@@ -6,7 +6,7 @@
 /*   By: mmensing <mmensing@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 18:42:45 by mmensing          #+#    #+#             */
-/*   Updated: 2022/10/09 21:59:23 by mmensing         ###   ########.fr       */
+/*   Updated: 2022/10/10 18:12:09 by mmensing         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ int32_t main(int32_t argc, char **argv)
 	l_list *a_starts = NULL;
 	l_list *b_starts = NULL;
 	l_list *temp_b_starts = NULL;
-	
+	if (argc == 1)
+		return 0;
 	if (checking(argv, argc) == false)
 	{
 		ft_putstr_fd("Error\n", 2);
@@ -45,11 +46,11 @@ int32_t main(int32_t argc, char **argv)
 	marie_sort(&stack_a, &stack_b, &a_starts, &b_starts, &temp_b_starts);
 
 	
-	print_list(&stack_a, "stack_a");
-	print_list(&stack_b, "stack_b");
-	printf("\n\nCOUNT: %d\n", counti());
+	// print_list(&stack_a, "stack_a");
+	// print_list(&stack_b, "stack_b");
+	// printf("\n\nCOUNT: %d\n", counti());
 	
-	printf(GRN"HERE\n"RESET);
+	// printf(GRN"HERE\n"RESET);
 	
 	free_list(b_starts); // YESS
 	free_list(stack_b); // YESS
@@ -57,7 +58,7 @@ int32_t main(int32_t argc, char **argv)
 	free_list(a_starts); // YESS
 	free_list(temp_b_starts);
 	
-	write(1, "\n\nOKKKKK\n", 9);
+	// write(1, "\n\nOKKKKK\n", 9);
 
 
 }
