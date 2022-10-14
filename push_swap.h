@@ -6,7 +6,7 @@
 /*   By: mmensing <mmensing@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 14:19:20 by mmensing          #+#    #+#             */
-/*   Updated: 2022/10/14 18:34:59 by mmensing         ###   ########.fr       */
+/*   Updated: 2022/10/14 18:47:28 by mmensing         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ bool decider_hc_above_a(t_holder *l_hold);
 
 
 // --- some_under_a.c --------
-void some_under_a(t_holder *l_hold);
+void some_under_a(t_holder *l_hold, t_list *l);
 
 
 // --- some_above_b.c -------

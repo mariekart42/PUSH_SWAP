@@ -6,35 +6,35 @@
 /*   By: mmensing <mmensing@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 14:19:06 by mmensing          #+#    #+#             */
-/*   Updated: 2022/10/14 18:28:46 by mmensing         ###   ########.fr       */
+/*   Updated: 2022/10/14 18:49:06 by mmensing         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void marie_sort(t_holder *l_hold, t_list *list)
+void	marie_sort(t_holder *l_hold, t_list *list)
 {
 	list->last_a = l_last(l_hold->a);
 	while ((stack_sorted(&l_hold->a) == false) || (list_len(l_hold->b) != 0))
 	{
-		if ((l_hold->a)->val != last_node_content(l_hold->a_start) && l_last(l_hold->a) != list->last_a)
-			special_case(&l_hold->a, &l_hold->b, list->last_a, &l_hold->tmp_b_start, &l_hold->b_start);
+		if ((l_hold->a)->val != last_node_content(l_hold->a_start) \
+		&& l_last(l_hold->a) != list->last_a)
+			special_case(&l_hold->a, &l_hold->b, list->last_a, \
+			&l_hold->tmp_b_start, &l_hold->b_start);
 		else if ((l_hold->a)->val != last_node_content(l_hold->a_start))
 			some_above_a(l_hold);
 		else if (l_last(l_hold->a) != list->last_a)
-		{
-			if (range(l_hold->a, list->last_a->next, l_last(l_hold->a)) <= 4)
-				push_to_a("under_a", place(l_hold->a, l_hold->a_start), NULL, &l_hold->a, &l_hold->b);
-			else
-				some_under_a(l_hold);
-		}
+			some_under_a(l_hold, list);
 		else if (l_hold->b_start == NULL && list_len(l_hold->b) != 0)
 			b_start_empty(l_hold);
-		else if (l_hold->b->val != last_node_content(l_hold->b_start) && !(l_hold->b_start != NULL && after(l_hold->b, l_hold->b_start) != NULL && (l_hold->b)->val < last_node_content(l_hold->b)))
+		else if (l_hold->b->val != last_node_content(l_hold->b_start) \
+		&& !(l_hold->b_start != NULL \
+		&& after(l_hold->b, l_hold->b_start) != NULL \
+		&& (l_hold->b)->val < last_node_content(l_hold->b)))
 			some_above_b(l_hold, list);
 		else if ((l_hold->b_start)->val != (l_last(l_hold->b))->val)
 			some_under_b(l_hold, list);
-		else 
+		else
 			del_last(&l_hold->b_start);
 	}
 }
@@ -88,11 +88,6 @@ void b_start_empty(t_holder *l_hold)
 	}
 	del_last(&l_hold->b_down);
 }
-
-
-
-
-
 
 void	quick_to_b(t_holder *l_hold)
 {
