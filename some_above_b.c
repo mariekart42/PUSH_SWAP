@@ -6,7 +6,7 @@
 /*   By: mmensing <mmensing@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 17:33:48 by mmensing          #+#    #+#             */
-/*   Updated: 2022/10/14 18:15:31 by mmensing         ###   ########.fr       */
+/*   Updated: 2022/10/14 18:21:57 by mmensing         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int	decider_pivot_above_b(t_holder *l_hold)
 		return (perfect_pivot(l_hold->b, l_last(l_hold->b_start)));
 }	
 
-void update_b_down(t_holder *l_hold)
+void	update_b_down(t_holder *l_hold)
 {
 	if ((l_hold->b_start)->val != (l_last(l_hold->b))->val)
 	{
@@ -63,7 +63,7 @@ void update_b_down(t_holder *l_hold)
 	}
 }
 
-void end_of_b_start(t_holder *l_hold, int temp_b_val, int pivot)
+void	end_of_b_start(t_holder *l_hold, int temp_b_val, int pivot)
 {
 	if (temp_b_val == (l_hold->b_start)->val)
 	{

@@ -6,7 +6,7 @@
 /*   By: mmensing <mmensing@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 14:19:06 by mmensing          #+#    #+#             */
-/*   Updated: 2022/10/14 18:12:00 by mmensing         ###   ########.fr       */
+/*   Updated: 2022/10/14 18:28:46 by mmensing         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void marie_sort(t_holder *l_hold, t_list *list)
 		else if (l_hold->b->val != last_node_content(l_hold->b_start) && !(l_hold->b_start != NULL && after(l_hold->b, l_hold->b_start) != NULL && (l_hold->b)->val < last_node_content(l_hold->b)))
 			some_above_b(l_hold, list);
 		else if ((l_hold->b_start)->val != (l_last(l_hold->b))->val)
-			some_under_b(l_hold);
+			some_under_b(l_hold, list);
 		else 
 			del_last(&l_hold->b_start);
 	}
@@ -92,41 +92,7 @@ void b_start_empty(t_holder *l_hold)
 
 
 
-void some_under_b(t_holder *l_hold)
-{
-	t_list *temp_b = NULL;
-	int pivot = 0;
 
-	if (l_hold->b_down != NULL && range(l_hold->b, l_last(l_hold->b_down), l_last(l_hold->b)) <= 5)
-	{
-		push_to_a("under_b", place(l_hold->b, l_last(l_hold->b_down)), NULL, &l_hold->a, &l_hold->b);
-		del_last(&l_hold->b_down);
-		return ;
-	}
-	else if (l_hold->b_down == NULL && l_hold->b_start!= NULL && range(l_hold->b, place(l_hold->b, l_hold->b_start)->next, l_last(l_hold->b)) < 5)
-	{
-		push_to_a("under_b", place(l_hold->b, l_hold->b_start), NULL, &l_hold->a, &l_hold->b);
-		return ;
-	}
-	if (l_hold->b_down == NULL)
-	{
-		pivot = perfect_pivot((place(l_hold->b, l_hold->b_start))->next, NULL);
-		temp_b = (place(l_hold->b, l_hold->b_start))->next;
-	}
-	else if (l_hold->b_down != NULL)
-	{
-		pivot = perfect_pivot((place(l_hold->b, l_last(l_hold->b_down)))->next, NULL);
-		temp_b = (place(l_hold->b, l_last(l_hold->b_down)))->next;
-	}
-	if (l_hold->tmp_b_start == NULL)
-		l_hold->tmp_b_start = new_node((l_hold->b)->val);
-	else 
-		(l_last(l_hold->tmp_b_start))->next = new_node((l_hold->b)->val);
-	while (temp_b->next != NULL)
-		rrb(&l_hold->b, true);
-	rrb(&l_hold->b, true);
-	del_last(&l_hold->b_down);
-}
 
 void	quick_to_b(t_holder *l_hold)
 {

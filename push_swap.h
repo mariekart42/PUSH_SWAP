@@ -6,7 +6,7 @@
 /*   By: mmensing <mmensing@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 14:19:20 by mmensing          #+#    #+#             */
-/*   Updated: 2022/10/14 18:13:55 by mmensing         ###   ########.fr       */
+/*   Updated: 2022/10/14 18:34:59 by mmensing         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,10 +70,14 @@ void update_b_down(t_holder *l_hold);
 void end_of_b_start(t_holder *l_hold, int temp_b_val, int pivot);
 
 
+// --- some_under_b.c ----
+void some_under_b(t_holder *l_hold, t_list *l);
+int	decider_pivot_under_b(t_holder *l_hold);
+t_list	*decider_temp_b_under_b(t_holder *l_hold);
+
 // -----  marie_sort.c  -----
 void marie_sort(t_holder *l_hold, t_list *list);
 void b_start_empty(t_holder *l_hold);
-void some_under_b(t_holder *l_hold);
 void quick_to_b(t_holder *l_hold);
 
 
