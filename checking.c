@@ -6,7 +6,7 @@
 /*   By: mmensing <mmensing@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 17:37:08 by mmensing          #+#    #+#             */
-/*   Updated: 2022/10/10 18:24:47 by mmensing         ###   ########.fr       */
+/*   Updated: 2022/10/14 14:55:46 by mmensing         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 // function returns 1 or more if something wrong
 // 0 if everything is alright
-// normal pointer so we get the copy of stack_a and dont change anything
+// normal pointer so we get the copy of a and dont change anything
 bool checking(char **argv, int32_t argc)
 {
 	if (argc < 2 || dupli_and_min_max(argv, argc) == false || only_nums(argv, argc) == false)

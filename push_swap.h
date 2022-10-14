@@ -6,7 +6,7 @@
 /*   By: mmensing <mmensing@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 14:19:20 by mmensing          #+#    #+#             */
-/*   Updated: 2022/10/09 21:54:21 by mmensing         ###   ########.fr       */
+/*   Updated: 2022/10/14 15:52:25 by mmensing         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,23 @@
 #include <limits.h> // int max/min macros
 #include <string.h> // strlen -> delete later & implement libft strlen
 
-
-
-typedef struct l_list 
+typedef struct s_list 
 {
+	int32_t pivot;
+	int64_t guard;
 	int val;
-	struct l_list *next;
-} l_list;
+	struct s_list *next;
+} t_list;
 
+typedef struct s_holder
+{
+	t_list	*a;
+	t_list	*b;
+	t_list	*b_start;
+	t_list	*a_start;
+	t_list	*tmp_b_start;
+	t_list	*b_down;
+}	t_holder;
 
 int counti();
 
@@ -44,18 +53,18 @@ int counti();
 
 
 // -----  marie_sort.c  -----
-void marie_sort(l_list** stack_a, l_list** stack_b, l_list** a_starts, l_list** b_starts, l_list**temp_b_starts);
-void b_starts_empty(l_list** stack_a, l_list** stack_b, l_list**b_down, l_list**b_starts);
-void some_above_a(l_list** stack_a, l_list** stack_b, l_list** b_starts, l_list**temp_b_starts, l_list**a_starts);
-void some_under_a(l_list** stack_a, l_list** stack_b, l_list** b_starts, l_list**temp_b_starts, l_list **a_starts);
-void some_above_b(l_list*** stack_a, l_list*** stack_b, l_list*** b_starts, l_list***temp_b_starts, l_list **b_down);
-void some_under_b(l_list **stack_a, l_list **stack_b, l_list** b_down, l_list** b_starts, l_list **temp_b_starts);
-void quick_to_b(l_list **stack_a, l_list **stack_b, l_list **a_starts, l_list **b_starts);
+void marie_sort(t_holder *l_hold);
+void b_start_empty(t_holder *l_hold);
+void some_above_a(t_holder *l_hold);
+void some_under_a(t_holder *l_hold);
+void some_above_b(t_holder *l_hold);
+void some_under_b(t_holder *l_hold);
+void quick_to_b(t_holder *l_hold);
 
 
 // -----  delete_later_funcs.c  -----
-l_list *create_list_alone(int32_t len, int32_t *content);
-void print_list(l_list **list, char *name);
+t_list *create_list_alone(int32_t len, int32_t *content);
+void print_list(t_list **list, char *name);
 
 
 // -----  checking.c  -----
@@ -65,60 +74,65 @@ bool only_nums(char **argv, int32_t argc);
 
 
 // -----  perfect_pivot.c  -----
-int32_t perfect_pivot(l_list *start, l_list *end);
-int32_t lst_len_end(l_list **start, l_list **end);
+int32_t perfect_pivot(t_list *start, t_list *end);
+int32_t lst_len_end(t_list **start, t_list **end);
 int32_t half_list_val(int *array, int len_list);
 bool is_sorted(int *array, int len_list);
 
 
 // -----  extra_funcs.c  -----
-l_list *create_list(int32_t len, char **content);
-int32_t list_len(l_list *head);
-l_list *new_node(int32_t content);
-int32_t last_node_content(l_list *head);
-l_list *lst_last(l_list *head);
+t_list *create_list(int32_t len, char **content);
+int32_t list_len(t_list *head);
+t_list *new_node(int32_t content);
+int32_t last_node_content(t_list *head);
+t_list *lst_last(t_list *head);
 long int ft_atol(const char *str);
 int	ft_isdigit(int val);
-void free_list(l_list *head);
-bool stack_sorted(l_list **stack);
+void free_list(t_list *head);
+bool stack_sorted(t_list **stack);
 int	ft_strncmp(const char *s1, const char *s2, size_t n);
-int32_t range(l_list* stack, l_list* begin, l_list *end);
-l_list *place(l_list*stack, l_list*node);
-void push_all_to_a(char *from, l_list*start, l_list* end, l_list **stack_a, l_list** stack_b);
-void push_all_to_b(l_list** stack, l_list*start, l_list*end);
-void del_last(l_list **node);
+int32_t range(t_list* stack, t_list* begin, t_list *end);
+t_list *place(t_list*stack, t_list*node);
+void push_all_to_a(char *from, t_list*start, t_list* end, t_list **a, t_list** b);
+void push_all_to_b(t_list** stack, t_list*start, t_list*end);
+void del_last(t_list **node);
 void	ft_putstr_fd(char *s, int fd);
 
+void hc_quick(t_holder* l_hold);
+void hardcode_case_3(t_list **node);
+void hardcode_case_4(t_list **node, t_holder*l_hold);
 
-// l_list *second_last(l_list *head);
-// bool l_duplication(l_list *head, int content);
-void hardcode_case_3(l_list **node);
-void hardcode_case_4(l_list **node);
-bool lst_is_sorted(l_list **head, int32_t end, int32_t start);
-l_list *prev(l_list *stack, l_list*node);
-l_list* after(l_list *stack, l_list* node);
-void hc_three(l_list **stack_a);
-int smol(l_list *stack_a);
-void hc_four(l_list **stack_a, l_list **stack_b);
-void hardcode_func(l_list**stack_a, l_list **stack_b, l_list *end);
-void special_case(l_list **stack_a, l_list** stack_b, l_list *last_a, l_list**temp_b_starts, l_list**b_starts);
+
+
+// t_list *second_last(t_list *head);
+// bool l_duplication(t_list *head, int content);
+// void hardcode_case_3(t_list **node);
+// void hardcode_case_4(t_list **node);
+bool lst_is_sorted(t_list **head, int32_t end, int32_t start);
+t_list *prev(t_list *stack, t_list*node);
+t_list* after(t_list *stack, t_list* node);
+void hc_three(t_list **a);
+int smol(t_list *a);
+void hc_four(t_list **a, t_list **b);
+void hardcode_func(t_list**a, t_list **b, t_list *end);
+void special_case(t_list **a, t_list** b, t_list *last_a, t_list**tmp_b_start, t_list**b_start);
 
 
 
 /* - - - RULES - - - */
-void sa(l_list **stack_a, bool output);
-void sb(l_list **stack_b, bool output);
-void ss(l_list **stack_a, l_list **stack_b);
+void sa(t_list **a, bool output);
+void sb(t_list **b, bool output);
+void ss(t_list **a, t_list **b);
 
-void pa(l_list **stack_a, l_list **stack_b);
-void pb(l_list **stack_a, l_list **stack_b);
+void pa(t_list **a, t_list **b);
+void pb(t_list **a, t_list **b);
 
-void ra(l_list **stack_a, bool output);
-void rb(l_list **stack_b, bool output);
-void rr(l_list **stack_a, l_list **stack_b);
+void ra(t_list **a, bool output);
+void rb(t_list **b, bool output);
+void rr(t_list **a, t_list **b);
 
-void rra(l_list **stack_a, bool output);
-void rrb(l_list **stack_b, bool output);
-void rrr(l_list **stack_a, l_list **stack_b);
+void rra(t_list **a, bool output);
+void rrb(t_list **b, bool output);
+void rrr(t_list **a, t_list **b);
 
 #endif

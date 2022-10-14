@@ -6,327 +6,283 @@
 /*   By: mmensing <mmensing@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 14:19:06 by mmensing          #+#    #+#             */
-/*   Updated: 2022/10/07 13:02:07 by mmensing         ###   ########.fr       */
+/*   Updated: 2022/10/14 15:54:40 by mmensing         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-
-void marie_sort(l_list** stack_a, l_list** stack_b, l_list** a_starts, l_list** b_starts, l_list**temp_b_starts)
+void marie_sort(t_holder *l_hold)
 {
-    l_list *last_a = lst_last(*stack_a);
-    l_list *b_down = NULL;
-    while((stack_sorted(stack_a) == false) || (list_len(*stack_b) != 0))
+    t_list  *last_a;
+
+    last_a = lst_last(l_hold->a);
+    while ((stack_sorted(&l_hold->a) == false) || (list_len(l_hold->b) != 0))
     {
-        // there is something above stack a && under stack a
-        // push everything from under a to top of b
-        if((*stack_a)->val != last_node_content(*a_starts) && lst_last(*stack_a) != last_a)
-            special_case(stack_a, stack_b, last_a, temp_b_starts, b_starts);
-        else if((*stack_a)->val != last_node_content(*a_starts))
-            some_above_a(stack_a, stack_b, b_starts, temp_b_starts, a_starts);
-        else if (lst_last(*stack_a) != last_a)
+        if((l_hold->a)->val != last_node_content(l_hold->a_start) && lst_last(l_hold->a) != last_a)
+            special_case(&l_hold->a, &l_hold->b, last_a, &l_hold->tmp_b_start, &l_hold->b_start);
+        else if((l_hold->a)->val != last_node_content(l_hold->a_start))
+            some_above_a(l_hold);
+        else if (lst_last(l_hold->a) != last_a)
         {
-            //hardcoding -> can be here cause down list dont need to be updated
-            // max 4 cause these are actually the nums we want to push
-            if (range(*stack_a, last_a->next, lst_last(*stack_a)) <= 4)
-                push_all_to_a("under_a", place(*stack_a, *a_starts), NULL, stack_a, stack_b);
+            if (range(l_hold->a, last_a->next, lst_last(l_hold->a)) <= 4)
+                push_all_to_a("under_a", place(l_hold->a, l_hold->a_start), NULL, &l_hold->a, &l_hold->b);
             else
-                some_under_a(stack_a, stack_b, b_starts, temp_b_starts, a_starts);
+                some_under_a(l_hold);
         }
-        else if(*b_starts == NULL && list_len(*stack_b) != 0)
-            b_starts_empty(stack_a, stack_b, &b_down, b_starts);
-        else if((*stack_b)->val != last_node_content(*b_starts) && !(*b_starts != NULL && after(*stack_b, *b_starts) != NULL && (*stack_b)->val < last_node_content(*stack_b)))
-            some_above_b(&stack_a, &stack_b, &b_starts, &temp_b_starts, &b_down);
-        else if((*b_starts)->val != (lst_last(*stack_b))->val)
-            some_under_b(stack_a, stack_b, &b_down, b_starts, temp_b_starts);
+        else if(l_hold->b_start == NULL && list_len(l_hold->b) != 0)
+            b_start_empty(l_hold);
+        else if(l_hold->b->val != last_node_content(l_hold->b_start) && !(l_hold->b_start != NULL && after(l_hold->b, l_hold->b_start) != NULL && (l_hold->b)->val < last_node_content(l_hold->b)))
+            some_above_b(l_hold);
+        else if((l_hold->b_start)->val != (lst_last(l_hold->b))->val)
+            some_under_b(l_hold);
         else 
-            del_last(b_starts);
+            del_last(&l_hold->b_start);
     }
 }
 
-void b_starts_empty(l_list** stack_a, l_list** stack_b, l_list**b_down, l_list**b_starts)
+void b_start_empty(t_holder *l_hold)
 {
     int pivot = 0;
-    l_list *temp_b = NULL;
-    if((*b_down == NULL && range(*stack_b, *stack_b, lst_last(*stack_b)) <= 4))
+    t_list *temp_b = NULL;
+    
+    if((l_hold->b_down == NULL && range(l_hold->b, l_hold->b, lst_last(l_hold->b)) <= 4))
     {
-        if(*b_down == NULL)
-            push_all_to_a("make_b_empty", *stack_b, NULL, stack_a, stack_b);
-        else if(*b_down != NULL)
-            push_all_to_a("under_b", place(*stack_b, lst_last(*b_down)), NULL, stack_a, stack_b);
-        del_last(b_down);
+        if(l_hold->b_down == NULL)
+            push_all_to_a("make_b_empty", l_hold->b, NULL, &l_hold->a, &l_hold->b);
+        else if(l_hold->b_down != NULL)
+            push_all_to_a("under_b", place(l_hold->b, lst_last(l_hold->b_down)), NULL, &l_hold->a, &l_hold->b);
+        del_last(&l_hold->b_down);
         return ;
     }
-    else if(*b_down != NULL && range(*stack_b, (place(*stack_b, lst_last(*b_down)))->next, lst_last(*stack_b)) <= 4)
+    else if(l_hold->b_down != NULL && range(l_hold->b, (place(l_hold->b, lst_last(l_hold->b_down)))->next, lst_last(l_hold->b)) <= 4)
     {
-        if(*b_down == NULL)
-            push_all_to_a("make_b_empty", *stack_b, NULL, stack_a, stack_b);
-        else if(*b_down != NULL)
-            push_all_to_a("under_b", place(*stack_b, lst_last(*b_down)), NULL, stack_a, stack_b);
-        del_last(b_down);
+        if(l_hold->b_down == NULL)
+            push_all_to_a("make_b_empty", l_hold->b, NULL, &l_hold->a, &l_hold->b);
+        else if(l_hold->b_down != NULL)
+            push_all_to_a("under_b", place(l_hold->b, lst_last(l_hold->b_down)), NULL, &l_hold->a, &l_hold->b);
+        del_last(&l_hold->b_down);
         return ;
         
     }
     int len = 0;
-    if(*b_down == NULL)
+    if(l_hold->b_down == NULL)
     {
-        pivot = perfect_pivot(*stack_b, NULL);
-        temp_b = *stack_b;
-        len = range(*stack_b, *stack_b, lst_last(*stack_b));
+        pivot = perfect_pivot(l_hold->b, NULL);
+        temp_b = l_hold->b;
+        len = range(l_hold->b, l_hold->b, lst_last(l_hold->b));
     }
-    else if(*b_down != NULL)
+    else if(l_hold->b_down != NULL)
     {
-        pivot = perfect_pivot(place(*stack_b, (lst_last(*b_down)))->next, NULL);
-        temp_b = (lst_last(*b_down))->next;
-        len = range(*stack_b, lst_last(*b_down), lst_last(*stack_b)) - 1;
+        pivot = perfect_pivot(place(l_hold->b, (lst_last(l_hold->b_down)))->next, NULL);
+        temp_b = (lst_last(l_hold->b_down))->next;
+        len = range(l_hold->b, lst_last(l_hold->b_down), lst_last(l_hold->b)) - 1;
     }
     
     while(len > 0)
     {
-        rrb(stack_b, true);
-        if((*stack_b)->val > pivot)
-            pa(stack_a, stack_b);
-        else if(*b_starts == NULL)
-            *b_starts = new_node((*stack_b)->val);
+        rrb(&l_hold->b, true);
+        if((l_hold->b)->val > pivot)
+            pa(&l_hold->a, &l_hold->b);
+        else if(l_hold->b_start == NULL)
+            l_hold->b_start = new_node((l_hold->b)->val);
         len--;
     }
-    del_last(b_down);
+    del_last(&l_hold->b_down);
 }
 
 
-void some_above_a(l_list** stack_a, l_list** stack_b, l_list** b_starts, l_list**temp_b_starts, l_list**a_starts)
+void some_above_a(t_holder *l_hold)
 {    
     int pivot = 0;
-    // 6 cause we want max 4 but not the last digit including
-    if(range(*stack_a, *stack_a, lst_last(*a_starts)) < 6)
+    if(range(l_hold->a, l_hold->a, lst_last(l_hold->a_start)) < 6)
     {
-        hardcode_func(stack_a, stack_b, lst_last(*a_starts));
-        // there is always something in a_starts
-        (lst_last(*a_starts))->next = new_node((*stack_a)->val); 
+        hardcode_func(&l_hold->a, &l_hold->b, lst_last(l_hold->a_start));
+        (lst_last(l_hold->a_start))->next = new_node((l_hold->a)->val); 
         return ;
     }
-    l_list *temp_a = *stack_a;
-    
-    // there is something above b
-    // current number is not already in b_starts or temp_b_start
-    if(*b_starts != NULL && *stack_b != place(*stack_b, lst_last(*b_starts)) && *stack_b != place(*stack_b, lst_last(*temp_b_starts)))
+    t_list *temp_a = l_hold->a;
+
+    if(l_hold->b_start != NULL && l_hold->b != place(l_hold->b, lst_last(l_hold->b_start)) && l_hold->b != place(l_hold->b, lst_last(l_hold->tmp_b_start)))
     {
-        if(*temp_b_starts == NULL)
-            *temp_b_starts = new_node((*stack_b)->val);
+        if(l_hold->tmp_b_start == NULL)
+            l_hold->tmp_b_start = new_node((l_hold->b)->val);
         else
-            (lst_last(*temp_b_starts))->next = new_node((*stack_b)->val);
+            (lst_last(l_hold->tmp_b_start))->next = new_node((l_hold->b)->val);
     }
-    pivot = perfect_pivot(*stack_a, lst_last(*a_starts));
-    while(temp_a->val != (lst_last(*a_starts))->val)
+    pivot = perfect_pivot(l_hold->a, lst_last(l_hold->a_start));
+    while(temp_a->val != (lst_last(l_hold->a_start))->val)
     {
         if(temp_a->val >= pivot)
         {
             temp_a = temp_a->next;
-            ra(stack_a, true);
+            ra(&l_hold->a, true);
         }
         else if(temp_a->val < pivot)
         {
             temp_a = temp_a->next;
-            pb(stack_a, stack_b);
-            if (*b_starts == NULL)
-                *b_starts = new_node((*stack_b)->val);
+            pb(&l_hold->a, &l_hold->b);
+            if (l_hold->b_start == NULL)
+                l_hold->b_start = new_node((l_hold->b)->val);
         }
     }
 }
 
 
-void some_under_a(l_list** stack_a, l_list** stack_b, l_list** b_starts, l_list**temp_b_starts, l_list **a_starts)
+void some_under_a(t_holder *l_hold)
 {
     int pivot = 0;
-    l_list *temp_a = place(*stack_a, *a_starts);
+    t_list *temp_a = place(l_hold->a, l_hold->a_start);
 
-    if(*stack_b != lst_last(*b_starts) || *stack_b != lst_last(*temp_b_starts))
+    if(l_hold->b != lst_last(l_hold->b_start) || l_hold->b != lst_last(l_hold->tmp_b_start))
     {
-        if(*temp_b_starts == NULL)
-            *temp_b_starts = new_node((*stack_b)->val);
+        if(l_hold->tmp_b_start == NULL)
+            l_hold->tmp_b_start = new_node((l_hold->b)->val);
         else
-            (lst_last(*temp_b_starts))->next = new_node((*stack_b)->val);
+            (lst_last(l_hold->tmp_b_start))->next = new_node((l_hold->b)->val);
     }
-    pivot = perfect_pivot((place(*stack_a, *a_starts))->next, NULL);
+    pivot = perfect_pivot((place(l_hold->a, l_hold->a_start))->next, NULL);
     while(temp_a->next != NULL)
     {
-        rra(stack_a, stack_b);
-        if((*stack_a)->val < pivot)
-            pb(stack_a, stack_b);
+        rra(&l_hold->a, true);
+        if((l_hold->a)->val < pivot)
+            pb(&l_hold->a, &l_hold->b);
     }
 }
 
 
-void some_above_b(l_list*** stack_a, l_list*** stack_b, l_list*** b_starts, l_list***temp_b_starts, l_list **b_down)
+void some_above_b(t_holder *l_hold)
 {
-    int pivot = 0;
+	int pivot = 0;
 
-    // the stuff between top of b to [excluding] last node of temp b_starts is max 4
-    // 5 cause last node gets not pushed in if statement
-    if((**temp_b_starts != NULL) && (range(**stack_b, **stack_b, prev(**stack_b, lst_last(**temp_b_starts))) <= 4))
-    {
-        // push everything from top of b till [excluding] last node of temp_b_starts to a
-        push_all_to_a("above_b", **stack_b, place(**stack_b, lst_last(**temp_b_starts)), *stack_a, *stack_b);
-        del_last(*temp_b_starts);
-        return ;
-    }
-    
-    // first: we dont push very first b_starts so number can be 5 but we actually just push 4
-    // second: if there is the very last b_starts we want to push it as well
-    //         -> number has to be 4
-    else if((list_len(**b_starts) > 1 && range(**stack_b, **stack_b, lst_last(**b_starts)) <= 5) || (list_len(**b_starts) == 1 && range(**stack_b, **stack_b, lst_last(**b_starts)) <= 4))
-    {
-        // push all to a -> from stack_b till [excluding] last node of b_starts
-        push_all_to_a("above_b", **stack_b, place(**stack_b, lst_last(**b_starts)), *stack_a, *stack_b);
-        
-        // if we reach very last digit of above b
-        //  -> special case and we push it as well
-        if((**stack_b)->val == (**b_starts)->val)
-        {
-            pa(*stack_a, *stack_b);
-            del_last(*b_starts);
-        }
-        return ;
-    }
+	if((l_hold->tmp_b_start != NULL) && (range(l_hold->b, l_hold->b, prev(l_hold->b, lst_last(l_hold->tmp_b_start))) <= 4))
+	{
+		push_all_to_a("above_b", l_hold->b, place(l_hold->b, lst_last(l_hold->tmp_b_start)), &l_hold->a, &l_hold->b);
+		del_last(&l_hold->tmp_b_start);
+		return ;
+	}
+	else if((list_len(l_hold->b_start) > 1 && range(l_hold->b, l_hold->b, lst_last(l_hold->b_start)) <= 5) || (list_len(l_hold->b_start) == 1 && range(l_hold->b, l_hold->b, lst_last(l_hold->b_start)) <= 4))
+	{
+		push_all_to_a("above_b", l_hold->b, place(l_hold->b, lst_last(l_hold->b_start)), &l_hold->a, &l_hold->b);
+		if((l_hold->b)->val == (l_hold->b_start)->val)
+		{
+			pa(&l_hold->a, &l_hold->b);
+			del_last(&l_hold->b_start);
+		}
+		return ;
+	}
+	if((l_hold->b_start)->val != (lst_last(l_hold->b))->val)
+	{
+		if(l_hold->b_down == NULL)
+			l_hold->b_down = new_node(last_node_content(l_hold->b));
+		else
+			(lst_last(l_hold->b_down))->next = new_node(last_node_content(l_hold->b));
+	}
+	t_list *temp_b = l_hold->b;
 
-    // if there is already something under b -> updating b_down list
-    if((**b_starts)->val != (lst_last(**stack_b))->val)
-    {
-        if(*b_down == NULL)
-            *b_down = new_node(last_node_content(**stack_b));
-        else
-            (lst_last(*b_down))->next = new_node(last_node_content(**stack_b));
-    }
-    l_list *temp_b = **stack_b;
-    
-    // either pivot for chunk in temp starts, or pivot in actual b_starts chunk 
-    if(**temp_b_starts != NULL)
-        pivot = perfect_pivot(**stack_b, lst_last(**temp_b_starts));
-    else if (list_len(**b_starts) == 1)
-        pivot = perfect_pivot(**stack_b, (place(**stack_b, lst_last(**b_starts)))->next);
-    else
-        pivot = perfect_pivot(**stack_b, lst_last(**b_starts));
+	if(l_hold->tmp_b_start != NULL)
+		pivot = perfect_pivot(l_hold->b, lst_last(l_hold->tmp_b_start));
+	else if (list_len(l_hold->b_start) == 1)
+		pivot = perfect_pivot(l_hold->b, (place(l_hold->b, lst_last(l_hold->b_start)))->next);
+	else
+		pivot = perfect_pivot(l_hold->b, lst_last(l_hold->b_start));
 
-    // while next start of b_starts occurs, or if there is something in temp_b_starts next starts there
-    while(temp_b != NULL && temp_b->val != lst_last(**b_starts)->val)
-    {
-        if(**temp_b_starts != NULL && temp_b->val == lst_last(**temp_b_starts)->val)
-            break ;
-        if(temp_b->val >= pivot)
-        {
-            temp_b = temp_b->next;
-            pa(*stack_a, *stack_b);
-        }
-        else if (temp_b->val < pivot)
-        {
-            temp_b = temp_b->next;
-            rb(*stack_b, true);
-        }
-    }
-    // hitting the beginning of b_starts
-    if(temp_b->val == (**b_starts)->val)
-    {
-        del_last(*b_starts);
-        if(temp_b->val > pivot)
-            pa(*stack_a, *stack_b);
-        else
-            rb(*stack_b, true);
-    }
-    // if there was something in temp chunk, remove last content
-    del_last(*temp_b_starts);
+	while(temp_b != NULL && temp_b->val != lst_last(l_hold->b_start)->val)
+	{
+		if(l_hold->tmp_b_start != NULL && temp_b->val == lst_last(l_hold->tmp_b_start)->val)
+			break ;
+		if(temp_b->val >= pivot)
+		{
+			temp_b = temp_b->next;
+			pa(&l_hold->a, &l_hold->b);
+		}
+		else if (temp_b->val < pivot)
+		{
+			temp_b = temp_b->next;
+			rb(&l_hold->b, true);
+		}
+	}
+	if(temp_b->val == (l_hold->b_start)->val)
+	{
+		del_last(&l_hold->b_start);
+		if(temp_b->val > pivot)
+			pa(&l_hold->a, &l_hold->b);
+		else
+			rb(&l_hold->b, true);
+	}
+	del_last(&l_hold->tmp_b_start);
 }
 
-
-void some_under_b(l_list **stack_a, l_list **stack_b, l_list** b_down, l_list** b_starts, l_list **temp_b_starts)
+void some_under_b(t_holder *l_hold)
 {
-    l_list *temp_b = NULL;
-    int pivot = 0;
+	t_list *temp_b = NULL;
+	int pivot = 0;
 
-    // 5 cause we dont want to push the very first digit (lst_last(b_down))
-    if(*b_down != NULL && range(*stack_b, lst_last(*b_down), lst_last(*stack_b)) <= 5)
-    {
-        push_all_to_a("under_b", place(*stack_b, lst_last(*b_down)), NULL, stack_a, stack_b);
-        del_last(b_down);
-        return ;
-    }
-    else if(*b_down == NULL && *b_starts!= NULL && range(*stack_b, place(*stack_b, *b_starts)->next, lst_last(*stack_b)) < 5)
-    {
-        push_all_to_a("under_b", place(*stack_b, *b_starts), NULL, stack_a, stack_b);
-        return ;
-    }
-    if(*b_down == NULL)
-    {
-        pivot = perfect_pivot((place(*stack_b, *b_starts))->next, NULL);
-        temp_b = (place(*stack_b, *b_starts))->next;
-    }
-    else if(*b_down != NULL)
-    {
-        pivot = perfect_pivot((place(*stack_b, lst_last(*b_down)))->next, NULL);
-        temp_b = (place(*stack_b, lst_last(*b_down)))->next;
-    }
-    if(*temp_b_starts == NULL)
-        *temp_b_starts = new_node((*stack_b)->val);
-    else 
-        (lst_last(*temp_b_starts))->next = new_node((*stack_b)->val);
-    while(temp_b->next != NULL)
-        rrb(stack_b, true);
-    rrb(stack_b, true);
-    del_last(b_down);
+	if(l_hold->b_down != NULL && range(l_hold->b, lst_last(l_hold->b_down), lst_last(l_hold->b)) <= 5)
+	{
+		push_all_to_a("under_b", place(l_hold->b, lst_last(l_hold->b_down)), NULL, &l_hold->a, &l_hold->b);
+		del_last(&l_hold->b_down);
+		return ;
+	}
+	else if(l_hold->b_down == NULL && l_hold->b_start!= NULL && range(l_hold->b, place(l_hold->b, l_hold->b_start)->next, lst_last(l_hold->b)) < 5)
+	{
+		push_all_to_a("under_b", place(l_hold->b, l_hold->b_start), NULL, &l_hold->a, &l_hold->b);
+		return ;
+	}
+	if(l_hold->b_down == NULL)
+	{
+		pivot = perfect_pivot((place(l_hold->b, l_hold->b_start))->next, NULL);
+		temp_b = (place(l_hold->b, l_hold->b_start))->next;
+	}
+	else if(l_hold->b_down != NULL)
+	{
+		pivot = perfect_pivot((place(l_hold->b, lst_last(l_hold->b_down)))->next, NULL);
+		temp_b = (place(l_hold->b, lst_last(l_hold->b_down)))->next;
+	}
+	if(l_hold->tmp_b_start == NULL)
+		l_hold->tmp_b_start = new_node((l_hold->b)->val);
+	else 
+		(lst_last(l_hold->tmp_b_start))->next = new_node((l_hold->b)->val);
+	while(temp_b->next != NULL)
+		rrb(&l_hold->b, true);
+	rrb(&l_hold->b, true);
+	del_last(&l_hold->b_down);
 }
 
-
-
-
-// very first step
-void quick_to_b(l_list **stack_a, l_list **stack_b, l_list **a_starts, l_list **b_starts)
+void quick_to_b(t_holder *l_hold)
 {
-    int pivot = 0;
-    l_list *temp_a = *stack_a;
-    
-	// for guarding that the same number will not hit twice
-    int64_t guard = 999999999999; //12 times 9, so no int val will ever be this
+	t_list	l;
+	t_list	*temp_a;
 
-    // i the first iteration it will stop when everything besides max numbers is in stack b
-    // in second an continue iteration will stop when current a_chunk is sorted
-    while (list_len(*stack_a) > 4)
-    {
-        pivot = perfect_pivot(*stack_a, NULL);
-
-        //first iter last of a starts will be NULL
-        // otherwise the last of a starts
-        while (temp_a->next != NULL)
-        {
-            if (pivot >= temp_a->val)
-            {
-                temp_a = temp_a->next;
-                pb(stack_a, stack_b);
-            }
-            else if (pivot < temp_a->val)
-            {
-				if(guard == temp_a->val)
+	l.guard = 999999999999;
+	temp_a = l_hold->a;
+	while (list_len(l_hold->a) > 4)
+	{
+		l.pivot = perfect_pivot(l_hold->a, NULL);
+		while (temp_a->next != NULL)
+		{
+			if (l.pivot >= temp_a->val)
+			{
+				temp_a = temp_a->next;
+				pb(&l_hold->a, &l_hold->b);
+			}
+			else if (l.pivot < temp_a->val)
+			{
+				if (l.guard == temp_a->val)
 					break ;
-                if (guard == 999999999999)
-					guard = temp_a->val;
-                temp_a = temp_a->next;
-                ra(stack_a, true);     
-            }
-        }
-		guard = 999999999999;
-        if (*b_starts == NULL)
-            *b_starts = new_node((lst_last(*stack_b))->val);
-        (lst_last(*b_starts))->next = new_node((*stack_b)->val);
-    }
-	// hardcode cases
-	if (list_len(*stack_a) == 3)
-		hardcode_case_3(stack_a);
-	else if (list_len(*stack_a) == 4)
-		hardcode_case_4(stack_a);
-	else if (list_len(*stack_a) == 2 && ((*stack_a)->val > (*stack_a)->next->val))
-		ra(stack_a, true);
-            
-    // first and second a starts ->> needs to be there
-    *a_starts = new_node((lst_last(*stack_a))->val);
-    (*a_starts)->next = new_node((*stack_a)->val);
-    del_last(b_starts);
+				if (l.guard == 999999999999)
+					l.guard = temp_a->val;
+				temp_a = temp_a->next;
+				ra(&l_hold->a, true);
+			}
+		}
+		l.guard = 999999999999;
+		if (l_hold->b_start == NULL)
+			l_hold->b_start = new_node((lst_last(l_hold->b))->val);
+		(lst_last(l_hold->b_start))->next = new_node((l_hold->b)->val);
+	}
+	hc_quick(l_hold);
+	l_hold->a_start = new_node((lst_last(l_hold->a))->val);
+	(l_hold->a_start)->next = new_node((l_hold->a)->val);
+	del_last(&l_hold->b_start);
 }

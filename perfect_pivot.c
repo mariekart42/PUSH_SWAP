@@ -6,7 +6,7 @@
 /*   By: mmensing <mmensing@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 20:35:43 by mmensing          #+#    #+#             */
-/*   Updated: 2022/10/07 13:00:01 by mmensing         ###   ########.fr       */
+/*   Updated: 2022/10/14 15:00:50 by mmensing         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 // sort array
 // find half
 // pivot every time the bigger one!
-int32_t perfect_pivot(l_list *start, l_list *end)
+int32_t perfect_pivot(t_list *start, t_list *end)
 {
     int i = 0;
     int len_list;
@@ -53,9 +53,9 @@ int32_t perfect_pivot(l_list *start, l_list *end)
 
 
 // count len from start to end
-int32_t lst_len_end(l_list **start, l_list **end)
+int32_t lst_len_end(t_list **start, t_list **end)
 {
-    l_list *temp = *start;
+    t_list *temp = *start;
     int count = 0;
     if(temp == NULL)
         return(0);
