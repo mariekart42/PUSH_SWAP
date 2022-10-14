@@ -6,7 +6,7 @@
 /*   By: mmensing <mmensing@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 18:42:45 by mmensing          #+#    #+#             */
-/*   Updated: 2022/10/14 15:57:33 by mmensing         ###   ########.fr       */
+/*   Updated: 2022/10/14 18:11:12 by mmensing         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 int32_t	main(int32_t argc, char **argv)
 {
 	t_holder	l_hold;
+	t_list		list;
 
 	if (argc == 1)
 		return (0);
@@ -30,7 +31,7 @@ int32_t	main(int32_t argc, char **argv)
 		return (0);
 	}
 	quick_to_b(&l_hold);
-	marie_sort(&l_hold);
+	marie_sort(&l_hold, &list);
 	free_list(l_hold.b_start);
 	free_list(l_hold.b);
 	free_list(l_hold.a);

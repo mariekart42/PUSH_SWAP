@@ -6,7 +6,7 @@
 /*   By: mmensing <mmensing@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 17:18:05 by mmensing          #+#    #+#             */
-/*   Updated: 2022/10/14 15:59:34 by mmensing         ###   ########.fr       */
+/*   Updated: 2022/10/14 17:40:44 by mmensing         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ int32_t last_node_content(t_list *head)
 }
 
 //returns last node in list
-t_list *lst_last(t_list *head)
+t_list *l_last(t_list *head)
 {
 	if (head == NULL)
 		return(NULL);
@@ -228,7 +228,7 @@ t_list *place(t_list*stack, t_list*node)
 //
 // make b empty:
 //   -> everything gets pushed
-void push_all_to_a(char *from, t_list*start, t_list* end, t_list **a, t_list** b)
+void push_to_a(char *from, t_list*start, t_list* end, t_list **a, t_list** b)
 {
     t_list *temp = start;
 	
@@ -264,7 +264,7 @@ void push_all_to_a(char *from, t_list*start, t_list* end, t_list **a, t_list** b
 	return ;
 }
 
-void push_all_to_b(t_list** stack, t_list*start, t_list*end)
+void push_to_b(t_list** stack, t_list*start, t_list*end)
 {
 	
 	while ((*stack)->val != start->val)
@@ -497,12 +497,12 @@ void hc_four(t_list **a, t_list **b)
 void special_case(t_list **a, t_list** b, t_list *last_a, t_list**tmp_b_start, t_list**b_start)
 {
 	t_list* temp = last_a->next;
-	if (*b != lst_last(*tmp_b_start) || *b != lst_last(*b_start))
+	if (*b != l_last(*tmp_b_start) || *b != l_last(*b_start))
 	{
 		if (tmp_b_start == NULL)
 			*tmp_b_start = new_node((*b)->val);
 		else if (*tmp_b_start != NULL)
-			(lst_last(*tmp_b_start))->next = new_node((*b)->val);
+			(l_last(*tmp_b_start))->next = new_node((*b)->val);
 	}
 	while (temp != NULL)
 	{
