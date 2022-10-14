@@ -6,13 +6,13 @@
 /*   By: mmensing <mmensing@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 18:42:45 by mmensing          #+#    #+#             */
-/*   Updated: 2022/10/14 14:59:48 by mmensing         ###   ########.fr       */
+/*   Updated: 2022/10/14 15:57:33 by mmensing         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int32_t main(int32_t argc, char **argv) 
+int32_t	main(int32_t argc, char **argv)
 {
 	t_holder	l_hold;
 

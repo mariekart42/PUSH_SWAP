@@ -6,7 +6,7 @@
 /*   By: mmensing <mmensing@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 20:35:43 by mmensing          #+#    #+#             */
-/*   Updated: 2022/10/14 15:00:50 by mmensing         ###   ########.fr       */
+/*   Updated: 2022/10/14 15:59:33 by mmensing         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int32_t perfect_pivot(t_list *start, t_list *end)
     len_list = lst_len_end(&start, &end);
     int temp;
     int array[len_list +1];
-    while(len_list > 0)
+    while (len_list > 0)
     {
         array[i] = start->val;
         len_list--;
@@ -33,9 +33,9 @@ int32_t perfect_pivot(t_list *start, t_list *end)
     array[i] = '\0';
     len_list = i;
     i = 0;
-    while(is_sorted(array, len_list) == false)
+    while (is_sorted(array, len_list) == false)
     {
-        while(len_list - 1 > i)
+        while (len_list - 1 > i)
         {
             if (array[i] > array[i+1])
             {
@@ -57,11 +57,11 @@ int32_t lst_len_end(t_list **start, t_list **end)
 {
     t_list *temp = *start;
     int count = 0;
-    if(temp == NULL)
+    if (temp == NULL)
         return(0);
     if (temp == *end)
         return(1);
-    if(*end == NULL)
+    if (*end == NULL)
     {
         while (temp != NULL)
         {
@@ -70,7 +70,7 @@ int32_t lst_len_end(t_list **start, t_list **end)
         }
         return (count);
     }
-    while(temp->val != (*end)->val)
+    while (temp->val != (*end)->val)
     {
         count++;
         temp = temp->next;
@@ -83,7 +83,7 @@ int32_t half_list_val(int *array, int len_list)
 {
     int32_t half_len = 0;
     
-    if(len_list == 1)
+    if (len_list == 1)
         return(array[0]);
         
     if ((len_list % 2) == 0)
@@ -99,7 +99,7 @@ bool is_sorted(int *array, int len_list)
     int i = 0;
     if (len_list == 1)
         return(true);
-    while(len_list - 1 > 0)
+    while (len_list - 1 > 0)
     {
         if (array[i] > array[i+1])
             return(false);

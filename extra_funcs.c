@@ -6,7 +6,7 @@
 /*   By: mmensing <mmensing@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 17:18:05 by mmensing          #+#    #+#             */
-/*   Updated: 2022/10/14 15:48:15 by mmensing         ###   ########.fr       */
+/*   Updated: 2022/10/14 15:59:34 by mmensing         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ t_list *create_list(int32_t len, char **content)
 			head = temp;
 		else
 		{
-			if(p == NULL)
+			if (p == NULL)
 				p = head;//p at the beginning just head
 			else
 				p = p->next;//p is the previouse position
@@ -78,9 +78,9 @@ int32_t last_node_content(t_list *head)
 //returns last node in list
 t_list *lst_last(t_list *head)
 {
-	if(head == NULL)
+	if (head == NULL)
 		return(NULL);
-	while(head->next != NULL)
+	while (head->next != NULL)
 		head = head->next;
 	return(head);	
 }
@@ -89,14 +89,14 @@ t_list *lst_last(t_list *head)
 // t_list *second_last(t_list *head)
 // {
 // 	t_list *temp;
-// 	if(head == NULL || head->next == NULL)
+// 	if (head == NULL || head->next == NULL)
 // 		return(NULL);
-// 	if(head->next->next == NULL)
+// 	if (head->next->next == NULL)
 // 	{
 // 		return(head);
 		
 // 	}
-// 	while(head->next->next != NULL)
+// 	while (head->next->next != NULL)
 // 	{
 // 		temp = head;
 // 		head = head->next;
@@ -141,10 +141,10 @@ int	ft_isdigit(int val)
 
 void free_list(t_list *head)
 {
-	if(!head)
+	if (!head)
 		return ;
 	t_list *temp;
-	while(head != NULL)
+	while (head != NULL)
 	{
 		temp = head;
 		head = head->next;
@@ -157,7 +157,7 @@ bool stack_sorted(t_list **stack)
 {
 	t_list *temp;
 	temp = *stack;
-	while(temp->next != NULL)
+	while (temp->next != NULL)
 	{
 		if (temp->val > temp->next->val)
 			return(false);
@@ -193,9 +193,9 @@ int	ft_strncmp(const char *s1, const char *s2, size_t n)
 int32_t range(t_list* stack, t_list* begin, t_list *end)
 {
 	int count = 1;
-	while(stack->val != begin->val)
+	while (stack->val != begin->val)
 		stack = stack->next;
-	while(stack->val != end->val)
+	while (stack->val != end->val)
 	{
 		stack = stack->next;
 		count++;
@@ -206,14 +206,14 @@ int32_t range(t_list* stack, t_list* begin, t_list *end)
 // function returns pointer to place in given stack of content node
 t_list *place(t_list*stack, t_list*node)
 {
-	if(stack == NULL)
+	if (stack == NULL)
 	{
 		printf("error in function PLACE\n\n");
 		return(NULL);
 	}
-	if(node == NULL)
+	if (node == NULL)
 		return(NULL);
-	while(stack->val != node->val)
+	while (stack->val != node->val)
 		stack = stack->next; 
 	return(stack);
 }
@@ -232,33 +232,33 @@ void push_all_to_a(char *from, t_list*start, t_list* end, t_list **a, t_list** b
 {
     t_list *temp = start;
 	
-	if(ft_strncmp(from, "above_b", 7) == 0)
+	if (ft_strncmp(from, "above_b", 7) == 0)
 	{
-		while(temp != end)
+		while (temp != end)
 		{
-			if(ft_strncmp(from, "above_b", 7) == 0)
+			if (ft_strncmp(from, "above_b", 7) == 0)
 			{
 				temp = temp->next;
 				pa(a, b);
 			}
 		}
 	}
-	else if(ft_strncmp(from, "under_b", 7) == 0 || ft_strncmp(from, "under_a", 7) == 0)
+	else if (ft_strncmp(from, "under_b", 7) == 0 || ft_strncmp(from, "under_a", 7) == 0)
 	{
-		while(temp->next != NULL)
+		while (temp->next != NULL)
 		{
-			if(ft_strncmp(from, "under_b", 7) == 0)
+			if (ft_strncmp(from, "under_b", 7) == 0)
 			{
 				rrb(b, true);
 				pa(a, b);
 			}
-			else if(ft_strncmp(from, "under_a", 7) == 0)
+			else if (ft_strncmp(from, "under_a", 7) == 0)
 				rra(a, true);			
 		}
 	}
-	else if(ft_strncmp(from, "make_b_empty", 12) == 0)
+	else if (ft_strncmp(from, "make_b_empty", 12) == 0)
 	{
-		while(list_len(*b) > 0)
+		while (list_len(*b) > 0)
 			pa(a, b);
 	}
 	return ;
@@ -267,9 +267,9 @@ void push_all_to_a(char *from, t_list*start, t_list* end, t_list **a, t_list** b
 void push_all_to_b(t_list** stack, t_list*start, t_list*end)
 {
 	
-	while((*stack)->val != start->val)
+	while ((*stack)->val != start->val)
 		*stack = (*stack)->next;
-	while(*stack != end)
+	while (*stack != end)
 		rrb(stack, true);
 }
 
@@ -277,15 +277,15 @@ void push_all_to_b(t_list** stack, t_list*start, t_list*end)
 void del_last(t_list **node)
 {
 	t_list *temp = *node;
-	if(*node == NULL)
+	if (*node == NULL)
 		return ;
 		
-	if((*node)->next == NULL)
+	if ((*node)->next == NULL)
 	{
 		*node = NULL;
 		return ;
 	}
-	while(temp->next->next != NULL)
+	while (temp->next->next != NULL)
 		temp = temp->next;
 	free(temp->next);
 	(temp)->next = NULL;
@@ -324,11 +324,11 @@ void	ft_putstr_fd(char *s, int fd)
 // // algo for only 3 digits -> max 2 rules! works
 // void hardcode_case_3(t_list **node)
 // {
-// 	while((*node)->val > ((*node)->next->next)->val)
+// 	while ((*node)->val > ((*node)->next->next)->val)
 // 		ra(node, true);
-// 	if(((*node)->next->next)->val < ((*node)->next)->val)
+// 	if (((*node)->next->next)->val < ((*node)->next)->val)
 // 		rra(node, true);
-// 	if((*node)->val > ((*node)->next)->val)
+// 	if ((*node)->val > ((*node)->next)->val)
 // 		sa(node, true);
 // }
 
@@ -340,19 +340,19 @@ void	ft_putstr_fd(char *s, int fd)
 // 	temp = temp->next;
 // 	while (temp != NULL)
 // 	{
-// 		if(temp->val < smallest_val)
+// 		if (temp->val < smallest_val)
 // 			smallest_val = temp->val;
 // 		temp = temp->next;
 // 	}
 // 	free(temp); // dunno lol
-// 	if(((*node)->next)->val == smallest_val)
+// 	if (((*node)->next)->val == smallest_val)
 // 		sa(node, true);
-// 	else if(((*node)->next->next)->val == smallest_val)
+// 	else if (((*node)->next->next)->val == smallest_val)
 // 	{
 // 		rra(node, true);
 // 		rra(node, true);
 // 	}
-// 	else if(((*node)->next->next->next)->val == smallest_val)
+// 	else if (((*node)->next->next->next)->val == smallest_val)
 // 		rra(node, true);
 // 	hardcode_case_3(&((*node)->next));
 // }
@@ -368,9 +368,9 @@ bool lst_is_sorted(t_list **head, int32_t end, int32_t start)
 		
 	// temp should know have the same val as int start
 	temp = *head;
-	while(temp->val != end)
+	while (temp->val != end)
 	{
-		if(temp->val > temp->next->val)
+		if (temp->val > temp->next->val)
 			return(false);
 		temp = temp->next;
 	}
@@ -384,9 +384,9 @@ bool lst_is_sorted(t_list **head, int32_t end, int32_t start)
 //  or node or stack are NULL!
 t_list *prev(t_list *stack, t_list*node)
 {
-	if(stack == node)
+	if (stack == node)
 		return(NULL);
-	while(stack->next != NULL && stack->next->val != node->val)
+	while (stack->next != NULL && stack->next->val != node->val)
 		stack = stack->next;
 	return(stack);
 }
@@ -395,14 +395,14 @@ t_list *prev(t_list *stack, t_list*node)
 
 t_list *after(t_list *stack, t_list* node)
 {
-	if(stack == node)
+	if (stack == node)
 	{
 		printf(RED"\n!! in after function case appeared\n\n"RESET);
 		return(NULL);
 	}
-	while(stack != NULL && stack->val != node->val)
+	while (stack != NULL && stack->val != node->val)
 		stack = stack->next;
-	if(stack != NULL)
+	if (stack != NULL)
 		stack = stack->next;
 	return(stack);
 }
@@ -414,37 +414,37 @@ void hardcode_func(t_list**a, t_list **b, t_list *end)
 {
 	int len = 0;
 	t_list *temp = *a;
-	while(temp->val != end->val)
+	while (temp->val != end->val)
 	{
 		temp = temp->next;
 		len++;
 	}
-	if(len == 2)
+	if (len == 2)
 	{
-		if((*a)->val > (*a)->next->val)
+		if ((*a)->val > (*a)->next->val)
 			sa(a, true);
 	}
-	else if(len == 3)
+	else if (len == 3)
 		hc_three(a);
-	else if(len == 4)
+	else if (len == 4)
 		hc_four(a, b);
 }
 
 
 void hc_three(t_list **a)
 {
-	if((*a)->next->next->val < (*a)->val || (*a)->next->next->val < (*a)->next->val)
+	if ((*a)->next->next->val < (*a)->val || (*a)->next->next->val < (*a)->next->val)
 	{
-		if((*a)->val > (*a)->next->val)
+		if ((*a)->val > (*a)->next->val)
 			sa(a, true);
 		ra(a, true);
-		if((*a)->val > (*a)->next->val)
+		if ((*a)->val > (*a)->next->val)
 			sa(a, true);
 		rra(a, true);
-		if((*a)->val > (*a)->next->val)
+		if ((*a)->val > (*a)->next->val)
 			sa(a, true);
 	}
-	else if((*a)->val > (*a)->next->val)
+	else if ((*a)->val > (*a)->next->val)
 		sa(a, true);
 }
 
@@ -455,11 +455,11 @@ int smol(t_list *a)
 	t_list *temp = a;
 	
 	// first smaller then sec & third OR sec & four OR third & four
-	if((temp->val < a->next->next->next->val && temp->val < a->next->next->val)
+	if ((temp->val < a->next->next->next->val && temp->val < a->next->next->val)
 		|| (temp->val < a->next->next->next->val && temp->val < a->next->val)
 		|| (temp->val < a->next->next->val && temp->val < a->next->val))
 		return (temp->val);
-	else if((temp->next->val < a->next->next->val && temp->next->val < a->val)
+	else if ((temp->next->val < a->next->next->val && temp->next->val < a->val)
 		|| (temp->next->val < a->next->next->next->val && temp->next->val < a->val))
 		return(temp->next->val);
 	else
@@ -472,7 +472,7 @@ void hc_four(t_list **a, t_list **b)
 	int smolst_int;
 	
 	smolst_int = smol(*a);
-	if((*a)->next->next->val == smolst_int)
+	if ((*a)->next->next->val == smolst_int)
 	{
 		ra(a, true);
 		sa(a, true);
@@ -480,16 +480,16 @@ void hc_four(t_list **a, t_list **b)
 		sa(a, true);
 		ra(a, true);
 	}
-	else if((*a)->next->val == smolst_int)
+	else if ((*a)->next->val == smolst_int)
 	{
 		sa(a, true);
 		ra(a, true);
 	}
-	else if((*a)->val == smolst_int)
+	else if ((*a)->val == smolst_int)
 		ra(a, true);
 	hc_three(a);
 	rra(a, b);
-	if((*a)->val > (*a)->next->val)
+	if ((*a)->val > (*a)->next->val)
 		sa(a, true);
 }
 
@@ -497,14 +497,14 @@ void hc_four(t_list **a, t_list **b)
 void special_case(t_list **a, t_list** b, t_list *last_a, t_list**tmp_b_start, t_list**b_start)
 {
 	t_list* temp = last_a->next;
-	if(*b != lst_last(*tmp_b_start) || *b != lst_last(*b_start))
+	if (*b != lst_last(*tmp_b_start) || *b != lst_last(*b_start))
 	{
-		if(tmp_b_start == NULL)
+		if (tmp_b_start == NULL)
 			*tmp_b_start = new_node((*b)->val);
-		else if(*tmp_b_start != NULL)
+		else if (*tmp_b_start != NULL)
 			(lst_last(*tmp_b_start))->next = new_node((*b)->val);
 	}
-	while(temp != NULL)
+	while (temp != NULL)
 	{
 		temp = temp->next;
 		rra(a, true);

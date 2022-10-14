@@ -6,7 +6,7 @@
 /*   By: mmensing <mmensing@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 15:43:26 by mmensing          #+#    #+#             */
-/*   Updated: 2022/10/14 15:00:52 by mmensing         ###   ########.fr       */
+/*   Updated: 2022/10/14 15:59:31 by mmensing         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int counti()
 void sa(t_list **a, bool output)
 {
 	count++;
-	if(*a == NULL || (*a)->next == NULL)
+	if (*a == NULL || (*a)->next == NULL)
 	{
 		// printf("[sa rule] nothing or just one elemtent\n"); // deleter later
 		//"In case of error, it must display "Error" followed by a ’\n’ on the standard error"
@@ -55,7 +55,7 @@ void sa(t_list **a, bool output)
 void sb(t_list **b, bool output)
 {
 	count++;
-	if(*b == NULL || (*b)->next == NULL)
+	if (*b == NULL || (*b)->next == NULL)
 	{
 		// printf("[sb rule] nothing or just one elemtent\n"); // delete later
 		return ;
@@ -143,7 +143,7 @@ void ra(t_list **a, bool output)
 	first_node = *a;
 	
 	*a = (*a)->next; 
-	while(temp->next != NULL)
+	while (temp->next != NULL)
 		temp = temp->next;
 	temp->next = first_node;
 	first_node->next = NULL;
