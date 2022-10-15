@@ -6,7 +6,7 @@
 #    By: mmensing <mmensing@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/08 12:21:27 by mmensing          #+#    #+#              #
-#    Updated: 2022/10/15 14:42:16 by mmensing         ###   ########.fr        #
+#    Updated: 2022/10/15 16:33:36 by mmensing         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ RM= rm -rf
 NAME = push_swap
 #DEBUG = -fsanitize=address
 
-FILES= marie_sort.c checking.c perfect_pivot.c extra_funcs.c rules.c main.c some_above_a.c some_under_a.c some_above_b.c some_under_b.c quick_to_b.c b_starts_empty.c hardcode.c
+FILES= marie_sort.c checking.c perfect_pivot.c extra_funcs.c a_and_b_rules.c a_rules.c b_rules.c main.c some_above_a.c some_under_a.c some_above_b.c some_under_b.c quick_to_b.c b_starts_empty.c hardcode.c edit_list.c list_positions.c list_infos.c
 
 O_FILES= $(FILES:%.c=%.o)
 

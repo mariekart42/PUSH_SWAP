@@ -6,21 +6,21 @@
 /*   By: mmensing <mmensing@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 14:19:20 by mmensing          #+#    #+#             */
-/*   Updated: 2022/10/15 14:46:20 by mmensing         ###   ########.fr       */
+/*   Updated: 2022/10/15 16:39:03 by mmensing         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <stdbool.h>
-#include <unistd.h>
-#include <stdint.h>
-#include <limits.h>
-#include <string.h>
-
+# include <stdio.h>
+# include <stdlib.h>
+# include <stdbool.h>
+# include <unistd.h>
+# include <stdint.h>
+# include <limits.h>
+ # include<string.h>
+ 
 typedef struct s_list
 {
 	int64_t			*all;
@@ -46,9 +46,6 @@ typedef struct s_holder
 	t_list			*tmp_b_start;
 	t_list			*b_down;
 }	t_holder;
-
-int counti();
-
 
 //colour shit
 # define RED   "\x1B[31m"
@@ -122,27 +119,33 @@ int32_t	half_list_val(int *array, int len_list);
 bool	is_sorted(int *array, int len_list);
 
 
+// --- edit_list.c ------
+t_list	*create_list(int32_t len, char **content);
+t_list	*new_node(int32_t content);
+void	free_list(t_list *head);
+void	del_last(t_list **node);
+
+
+// ----- list_positions.c -----
+t_list	*l_last(t_list *head);
+t_list	*place(t_list*stack, t_list*node);
+t_list	*prev(t_list *stack, t_list*node);
+t_list*	after(t_list *stack, t_list* node);
+
+
+// ----- list_infos.c ------
+int32_t	list_len(t_list *head);
+int32_t	last_node_content(t_list *head);
+int32_t	range(t_list *stack, t_list *begin, t_list *end);
+bool	stack_sorted(t_list **stack);
+
 
 // -----  extra_funcs.c  -----
-t_list *create_list(int32_t len, char **content);
-int32_t list_len(t_list *head);
-t_list *new_node(int32_t content);
-int32_t last_node_content(t_list *head);
-t_list *l_last(t_list *head);
-long int ft_atol(const char *str);
-int	ft_isdigit(int val);
-void free_list(t_list *head);
-bool stack_sorted(t_list **stack);
-int	ft_strncmp(const char *s1, const char *s2, size_t n);
-int32_t range(t_list* stack, t_list* begin, t_list *end);
-t_list *place(t_list*stack, t_list*node);
+int64_t ft_atol(const char *str);
+int32_t	ft_isdigit(int32_t val);
+int32_t	ft_strncmp(const char *s1, const char *s2, size_t n);
 void push_to_a(char *from, t_list*start, t_list* end, t_list **a, t_list** b);
-void push_to_b(t_list** stack, t_list*start, t_list*end);
-void del_last(t_list **node);
 void	ft_putstr_fd(char *s, int fd);
-bool lst_is_sorted(t_list **head, int32_t end, int32_t start);
-t_list *prev(t_list *stack, t_list*node);
-t_list* after(t_list *stack, t_list* node);
 
 
 
@@ -154,20 +157,21 @@ void	hc_four(t_list **a, t_list **b);
 void	hardcode_func(t_list**a, t_list **b, t_list *end);
 
 
-/* - - - RULES - - - */
+// --- a_rules.c ----
 void	sa(t_list **a, bool output);
-void	sb(t_list **b, bool output);
-void	ss(t_list **a, t_list **b);
-
 void	pa(t_list **a, t_list **b);
-void	pb(t_list **a, t_list **b);
-
 void	ra(t_list **a, bool output);
-void	rb(t_list **b, bool output);
-void	rr(t_list **a, t_list **b);
-
 void	rra(t_list **a, bool output);
+
+// --- b_rules.c ----
+void	sb(t_list **b, bool output);
+void	pb(t_list **a, t_list **b);
+void	rb(t_list **b, bool output);
 void	rrb(t_list **b, bool output);
+
+// --- a_and_b_rules.c ----
+void	ss(t_list **a, t_list **b);
+void	rr(t_list **a, t_list **b);
 void	rrr(t_list **a, t_list **b);
 
 #endif
