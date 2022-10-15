@@ -6,7 +6,7 @@
 /*   By: mmensing <mmensing@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 17:18:05 by mmensing          #+#    #+#             */
-/*   Updated: 2022/10/14 17:40:44 by mmensing         ###   ########.fr       */
+/*   Updated: 2022/10/15 14:45:38 by mmensing         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,26 +85,6 @@ t_list *l_last(t_list *head)
 	return(head);	
 }
 
-// // returns NULL if head is NULL or the next is also NULL
-// t_list *second_last(t_list *head)
-// {
-// 	t_list *temp;
-// 	if (head == NULL || head->next == NULL)
-// 		return(NULL);
-// 	if (head->next->next == NULL)
-// 	{
-// 		return(head);
-		
-// 	}
-// 	while (head->next->next != NULL)
-// 	{
-// 		temp = head;
-// 		head = head->next;
-// 	}
-// 	return(temp);
-// }
-
-
 long int ft_atol(const char *str)
 {
 	int64_t		val; 	//int64_t == long int
@@ -130,7 +110,6 @@ long int ft_atol(const char *str)
 	}
 	return (val * minus);
 }
-
 
 int	ft_isdigit(int val)
 {
@@ -273,13 +252,11 @@ void push_to_b(t_list** stack, t_list*start, t_list*end)
 		rrb(stack, true);
 }
 
-
 void del_last(t_list **node)
 {
 	t_list *temp = *node;
 	if (*node == NULL)
 		return ;
-		
 	if ((*node)->next == NULL)
 	{
 		*node = NULL;
@@ -311,62 +288,11 @@ void	ft_putstr_fd(char *s, int fd)
 	}
 }
 
-
-
-
-
-
-
-
-
-
-
-// // algo for only 3 digits -> max 2 rules! works
-// void hardcode_case_3(t_list **node)
-// {
-// 	while ((*node)->val > ((*node)->next->next)->val)
-// 		ra(node, true);
-// 	if (((*node)->next->next)->val < ((*node)->next)->val)
-// 		rra(node, true);
-// 	if ((*node)->val > ((*node)->next)->val)
-// 		sa(node, true);
-// }
-
-
-// void hardcode_case_4(t_list **node)
-// {
-// 	t_list *temp = *node;
-// 	int smallest_val = temp->val;
-// 	temp = temp->next;
-// 	while (temp != NULL)
-// 	{
-// 		if (temp->val < smallest_val)
-// 			smallest_val = temp->val;
-// 		temp = temp->next;
-// 	}
-// 	free(temp); // dunno lol
-// 	if (((*node)->next)->val == smallest_val)
-// 		sa(node, true);
-// 	else if (((*node)->next->next)->val == smallest_val)
-// 	{
-// 		rra(node, true);
-// 		rra(node, true);
-// 	}
-// 	else if (((*node)->next->next->next)->val == smallest_val)
-// 		rra(node, true);
-// 	hardcode_case_3(&((*node)->next));
-// }
-
-
-
-
 bool lst_is_sorted(t_list **head, int32_t end, int32_t start)
 {
 	t_list *temp;
 	while ((*head)->val != start)
 		*head = (*head)->next;
-		
-	// temp should know have the same val as int start
 	temp = *head;
 	while (temp->val != end)
 	{
@@ -391,8 +317,6 @@ t_list *prev(t_list *stack, t_list*node)
 	return(stack);
 }
 
-
-
 t_list *after(t_list *stack, t_list* node)
 {
 	if (stack == node)
@@ -409,163 +333,3 @@ t_list *after(t_list *stack, t_list* node)
 
 
 
-// void hardcode_func(t_list **a)
-void hardcode_func(t_list**a, t_list **b, t_list *end)
-{
-	int len = 0;
-	t_list *temp = *a;
-	while (temp->val != end->val)
-	{
-		temp = temp->next;
-		len++;
-	}
-	if (len == 2)
-	{
-		if ((*a)->val > (*a)->next->val)
-			sa(a, true);
-	}
-	else if (len == 3)
-		hc_three(a);
-	else if (len == 4)
-		hc_four(a, b);
-}
-
-
-void hc_three(t_list **a)
-{
-	if ((*a)->next->next->val < (*a)->val || (*a)->next->next->val < (*a)->next->val)
-	{
-		if ((*a)->val > (*a)->next->val)
-			sa(a, true);
-		ra(a, true);
-		if ((*a)->val > (*a)->next->val)
-			sa(a, true);
-		rra(a, true);
-		if ((*a)->val > (*a)->next->val)
-			sa(a, true);
-	}
-	else if ((*a)->val > (*a)->next->val)
-		sa(a, true);
-}
-
-
-// function returns the fist found number that is smollest or second smollest
-int smol(t_list *a)
-{
-	t_list *temp = a;
-	
-	// first smaller then sec & third OR sec & four OR third & four
-	if ((temp->val < a->next->next->next->val && temp->val < a->next->next->val)
-		|| (temp->val < a->next->next->next->val && temp->val < a->next->val)
-		|| (temp->val < a->next->next->val && temp->val < a->next->val))
-		return (temp->val);
-	else if ((temp->next->val < a->next->next->val && temp->next->val < a->val)
-		|| (temp->next->val < a->next->next->next->val && temp->next->val < a->val))
-		return(temp->next->val);
-	else
-		return(temp->next->next->val);
-
-}
-
-void hc_four(t_list **a, t_list **b)
-{
-	int smolst_int;
-	
-	smolst_int = smol(*a);
-	if ((*a)->next->next->val == smolst_int)
-	{
-		ra(a, true);
-		sa(a, true);
-		rra(a, true);
-		sa(a, true);
-		ra(a, true);
-	}
-	else if ((*a)->next->val == smolst_int)
-	{
-		sa(a, true);
-		ra(a, true);
-	}
-	else if ((*a)->val == smolst_int)
-		ra(a, true);
-	hc_three(a);
-	rra(a, b);
-	if ((*a)->val > (*a)->next->val)
-		sa(a, true);
-}
-
-
-void special_case(t_list **a, t_list** b, t_list *last_a, t_list**tmp_b_start, t_list**b_start)
-{
-	t_list* temp = last_a->next;
-	if (*b != l_last(*tmp_b_start) || *b != l_last(*b_start))
-	{
-		if (tmp_b_start == NULL)
-			*tmp_b_start = new_node((*b)->val);
-		else if (*tmp_b_start != NULL)
-			(l_last(*tmp_b_start))->next = new_node((*b)->val);
-	}
-	while (temp != NULL)
-	{
-		temp = temp->next;
-		rra(a, true);
-		pb(a, b);
-	}
-}
-
-
-
-
-
-
-
-
-
-
-
-
-void hc_quick(t_holder* l_hold)
-{
-    if (list_len(l_hold->a) == 3)
-		hardcode_case_3(&l_hold->a);
-	else if (list_len(l_hold->a) == 4)
-		hardcode_case_4(&l_hold->a, l_hold);
-	else if (list_len(l_hold->a) == 2 && ((l_hold->a)->val > (l_hold->a)->next->val))
-		ra(&l_hold->a, true);
-}
-
-// algo for only 3 digits -> max 2 rules! works
-void hardcode_case_3(t_list **node)
-{
-	while ((*node)->val > ((*node)->next->next)->val)
-		ra(node, true);
-	if (((*node)->next->next)->val < ((*node)->next)->val)
-		rra(node, true);
-	if ((*node)->val > ((*node)->next)->val)
-		sa(node, true);
-}
-
-void hardcode_case_4(t_list **node, t_holder*l_hold) // add list holder here, 
-{
-	t_list *temp = *node;
-	int smallest_val = temp->val;
-	temp = temp->next;
-	while (temp != NULL)
-	{
-		if (temp->val < smallest_val)
-			smallest_val = temp->val;
-		temp = temp->next;
-	}
-	free(temp); // dunno lol
-	if ((*node)->next->val == smallest_val)
-		sa(node, true);
-	else if ((*node)->next->next->val == smallest_val)
-	{
-		rra(node, true);
-		rra(node, true);
-	}
-	else if ((*node)->next->next->next->val == smallest_val)
-		rra(node, true);
-	pb(node, &l_hold->b);
-	hardcode_case_3(node);
-	pa(node, &l_hold->b);
-}
