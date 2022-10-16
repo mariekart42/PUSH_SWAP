@@ -6,7 +6,7 @@
 /*   By: mmensing <mmensing@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 14:19:20 by mmensing          #+#    #+#             */
-/*   Updated: 2022/10/16 13:11:06 by mmensing         ###   ########.fr       */
+/*   Updated: 2022/10/16 16:39:29 by mmensing         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,9 @@ typedef struct s_holder
 	t_list			*a_start;
 	t_list			*tmp_b_start;
 	t_list			*b_down;
-}	t_holder;
+}				t_holder;	
 
+t_list	*att_new_node(t_list **node, int32_t content);
 //  · _ · 	SOME_ABOVE_A.C		· _ ·  · _ ·  · _ ·  · _ ·  
 void		some_above_a(t_holder *l_hold);
 void		update_tmp_b_start(t_holder *l_hold);
@@ -102,7 +103,7 @@ bool		is_sorted(int *array, int len_list);
 //  · _ · 	EDIT_LIST.C			· _ ·  · _ ·  · _ ·  · _ ·  
 t_list		*create_list(int32_t len, char **content);
 t_list		*new_node(int32_t content);
-void		free_list(t_list *head);
+void		free_list(t_list **head);
 void		del_last(t_list **node);
 
 //  · _ · 	LIST_POSITIONS.C	· _ ·  · _ ·   · _ ·   · _ ·  

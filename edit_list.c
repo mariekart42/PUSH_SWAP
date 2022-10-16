@@ -6,7 +6,7 @@
 /*   By: mmensing <mmensing@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 15:11:42 by mmensing          #+#    #+#             */
-/*   Updated: 2022/10/15 16:17:34 by mmensing         ###   ########.fr       */
+/*   Updated: 2022/10/16 16:38:43 by mmensing         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,19 +54,21 @@ t_list	*new_node(int32_t content)
 	return (new);
 }
 
-void	free_list(t_list *head)
+void	free_list(t_list **head)
 {
 	t_list	*temp;
 
-	if (!head)
+	if (!*head)
 		return ;
-	while (head != NULL)
+	while (*head != NULL)
 	{
-		temp = head;
-		head = head->next;
+		temp = *head;
+		*head = (*head)->next;
 		free(temp);
 	}
 }
+
+// void	free_struct(t_holder *l_hold)
 
 void	del_last(t_list **node)
 {
@@ -85,3 +87,24 @@ void	del_last(t_list **node)
 	free(temp->next);
 	(temp)->next = NULL;
 }
+
+// t_list	*att_new_node(t_list **node, int32_t content)
+// {
+// 	t_list	*head;
+
+// 	head = *node;
+// 	if (head == NULL)
+// 	{
+// 		head = malloc(sizeof(t_list));
+// 		head->val = content;
+// 		head->next = NULL;
+// 		return (head);
+// 	}
+// 	while (head->next != NULL)
+// 		head = head->next;
+// 	head->next = malloc(sizeof(t_list));
+// 	head = head->next;
+// 	head->val = content;
+// 	head->next = NULL;
+// 	return (head);
+// }

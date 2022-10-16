@@ -6,7 +6,7 @@
 /*   By: mmensing <mmensing@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 20:35:43 by mmensing          #+#    #+#             */
-/*   Updated: 2022/10/15 12:41:06 by mmensing         ###   ########.fr       */
+/*   Updated: 2022/10/16 16:01:51 by mmensing         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,7 @@ int32_t	lst_len_end(t_list **start, t_list **end)
 int32_t	half_list_val(int *array, int len_list)
 {
 	int32_t	half_len;
+	int32_t	return_val;
 
 	half_len = 0;
 	if (len_list == 1)
@@ -101,7 +102,9 @@ int32_t	half_list_val(int *array, int len_list)
 		half_len = len_list / 2;
 	else if ((len_list % 2) != 0)
 		half_len = (len_list - 1) / 2;
-	return (array[half_len]);
+	return_val = array[half_len];
+	free(array);
+	return (return_val);
 }
 
 bool	is_sorted(int *array, int len_list)

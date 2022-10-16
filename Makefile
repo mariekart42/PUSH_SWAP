@@ -6,7 +6,7 @@
 #    By: mmensing <mmensing@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/08 12:21:27 by mmensing          #+#    #+#              #
-#    Updated: 2022/10/16 11:32:32 by mmensing         ###   ########.fr        #
+#    Updated: 2022/10/16 15:47:03 by mmensing         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,7 +44,7 @@ O_FILES= $(FILES:%.c=%.o)
 all: $(NAME)
 
 $(NAME): $(O_FILES) $(HEADER)
-	$(CC) $(CFLAGS) $(O_FILES) -o $(NAME) $(DEBUG)
+	$(CC) $(CFLAGS) $(DEBUG) $(O_FILES) -o $(NAME)
 
 clean:
 	$(RM) $(O_FILES)
