@@ -6,7 +6,7 @@
 /*   By: mmensing <mmensing@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 17:32:11 by mmensing          #+#    #+#             */
-/*   Updated: 2022/10/14 18:47:55 by mmensing         ###   ########.fr       */
+/*   Updated: 2022/10/16 10:15:47 by mmensing         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	some_under_a(t_holder *l_hold, t_list *l)
 	if (range(l_hold->a, l->last_a->next, l_last(l_hold->a)) <= 4)
 	{
 		push_to_a("under_a", place(l_hold->a, l_hold->a_start), NULL, \
-			&l_hold->a, &l_hold->b);
+			l_hold);
 		return ;
 	}
 	if (l_hold->b != l_last(l_hold->b_start) \

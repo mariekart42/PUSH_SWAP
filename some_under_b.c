@@ -6,7 +6,7 @@
 /*   By: mmensing <mmensing@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 18:23:50 by mmensing          #+#    #+#             */
-/*   Updated: 2022/10/14 18:41:11 by mmensing         ###   ########.fr       */
+/*   Updated: 2022/10/16 10:16:00 by mmensing         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ bool	decider_push_to_a_under_b(t_holder *l_hold)
 		l_last(l_hold->b)) <= 5)
 	{
 		push_to_a("under_b", place(l_hold->b, l_last(l_hold->b_down)), \
-			NULL, &l_hold->a, &l_hold->b);
+			NULL, l_hold);
 		del_last(&l_hold->b_down);
 		return (true);
 	}
@@ -43,7 +43,7 @@ bool	decider_push_to_a_under_b(t_holder *l_hold)
 	l_last(l_hold->b)) < 5 && l_hold->b_down == NULL && l_hold->b_start != NULL)
 	{
 		push_to_a("under_b", place(l_hold->b, l_hold->b_start), \
-		NULL, &l_hold->a, &l_hold->b);
+		NULL, l_hold);
 		return (true);
 	}
 	else

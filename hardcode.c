@@ -6,13 +6,12 @@
 /*   By: mmensing <mmensing@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 12:48:48 by mmensing          #+#    #+#             */
-/*   Updated: 2022/10/15 14:42:49 by mmensing         ###   ########.fr       */
+/*   Updated: 2022/10/16 11:34:21 by mmensing         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-// void hardcode_func(t_list **a)
 void	hardcode_func(t_list**a, t_list **b, t_list *end)
 {
 	int		len;

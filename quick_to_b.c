@@ -6,68 +6,20 @@
 /*   By: mmensing <mmensing@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 13:17:52 by mmensing          #+#    #+#             */
-/*   Updated: 2022/10/15 14:18:17 by mmensing         ###   ########.fr       */
+/*   Updated: 2022/10/16 13:09:14 by mmensing         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	hc_quick(t_holder *l_hold)
-{
-	if (list_len(l_hold->a) == 3)
-		hc_quick_3(&l_hold->a);
-	else if (list_len(l_hold->a) == 4)
-		hc_quick_4(&l_hold->a, l_hold);
-	else if (list_len(l_hold->a) == 2 \
-	&& ((l_hold->a)->val > (l_hold->a)->next->val))
-		ra(&l_hold->a, true);
-}
-
-// algo for only 3 digits -> max 2 rules! works
-void	hc_quick_3(t_list **node)
-{
-	while ((*node)->val > ((*node)->next->next)->val)
-		ra(node, true);
-	if (((*node)->next->next)->val < ((*node)->next)->val)
-		rra(node, true);
-	if ((*node)->val > ((*node)->next)->val)
-		sa(node, true);
-}
-
-void	hc_quick_4(t_list **node, t_holder*l_hold)
-{
-	t_list	*temp;
-	int		smallest_val;
-
-	temp = *node;
-	smallest_val = temp->val;
-	temp = temp->next;
-	while (temp != NULL)
-	{
-		if (temp->val < smallest_val)
-			smallest_val = temp->val;
-		temp = temp->next;
-	}
-	free(temp);
-	if ((*node)->next->val == smallest_val)
-		sa(node, true);
-	else if ((*node)->next->next->val == smallest_val)
-	{
-		rra(node, true);
-		rra(node, true);
-	}
-	else if ((*node)->next->next->next->val == smallest_val)
-		rra(node, true);
-	pb(node, &l_hold->b);
-	hc_quick_3(node);
-	pa(node, &l_hold->b);
-}
 
 void	quick_to_b(t_holder *l_hold)
 {
 	t_list	l;
 
 	l.guard = 999999999999;
+	if (list_len(l_hold->a) == 5)
+		return (hc_quick_5(&l_hold->a, &l_hold->b));
 	while (list_len(l_hold->a) > 4)
 	{
 		l.pivot = perfect_pivot(l_hold->a, NULL);

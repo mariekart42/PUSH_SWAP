@@ -6,11 +6,37 @@
 /*   By: mmensing <mmensing@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 18:42:45 by mmensing          #+#    #+#             */
-/*   Updated: 2022/10/15 16:14:08 by mmensing         ###   ########.fr       */
+/*   Updated: 2022/10/16 12:30:38 by mmensing         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+// void print_list(t_list **list, char *name)
+// {
+// 	printf("----------\n[%s]:\n", name);
+// 	if(*list == NULL)
+// 	{
+// 		printf("list_pos_1: (NULL)\n");
+// 		return ;
+// 	}
+// 	int32_t i = 1;
+// 	t_list *node = NULL;
+// 	node = (*list);
+// 	while (node->next != NULL)
+// 	{
+// 		printf("list_pos_%d: %d\n", i, node->val);
+// 		i++;
+// 		node = node->next;
+// 	}
+// 	printf("list_pos_%d: %d\n", i, node->val);
+// 	i++;
+// 	if(node->next == NULL)
+// 		printf("list_pos_%d: (NULL)\n", i);
+// 	else	
+// 		printf("something wrong! (print_list function)\n");
+// 	printf("-- done --\n\n");
+// }
 
 int32_t	main(int32_t argc, char **argv)
 {
@@ -31,6 +57,8 @@ int32_t	main(int32_t argc, char **argv)
 		return (0);
 	}
 	quick_to_b(&l_hold);
+	// print_list(&l_hold.a, "a main");
+	// print_list(&l_hold.b, "b main");
 	marie_sort(&l_hold, &list);
 	free_list(l_hold.b_start);
 	free_list(l_hold.b);

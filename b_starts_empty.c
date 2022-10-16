@@ -6,7 +6,7 @@
 /*   By: mmensing <mmensing@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 13:53:59 by mmensing          #+#    #+#             */
-/*   Updated: 2022/10/15 14:10:37 by mmensing         ###   ########.fr       */
+/*   Updated: 2022/10/16 10:12:58 by mmensing         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,10 @@ bool	decider_push_to_a_b_starts_empty(t_holder *l_hold)
 	&& range(l_hold->b, l_hold->b, l_last(l_hold->b)) <= 4))
 	{
 		if (l_hold->b_down == NULL)
-			push_to_a("make_b_empty", l_hold->b, NULL, &l_hold->a, &l_hold->b);
+			push_to_a("make_b_empty", l_hold->b, NULL, l_hold);
 		else if (l_hold->b_down != NULL)
 			push_to_a("under_b", place(l_hold->b, l_last(l_hold->b_down)), \
-			NULL, &l_hold->a, &l_hold->b);
+			NULL, l_hold);
 		del_last(&l_hold->b_down);
 		return (true);
 	}
@@ -29,10 +29,10 @@ bool	decider_push_to_a_b_starts_empty(t_holder *l_hold)
 	(place(l_hold->b, l_last(l_hold->b_down)))->next, l_last(l_hold->b)) <= 4)
 	{
 		if (l_hold->b_down == NULL)
-			push_to_a("make_b_empty", l_hold->b, NULL, &l_hold->a, &l_hold->b);
+			push_to_a("make_b_empty", l_hold->b, NULL, l_hold);
 		else if (l_hold->b_down != NULL)
 			push_to_a("under_b", place(l_hold->b, l_last(l_hold->b_down)), \
-			NULL, &l_hold->a, &l_hold->b);
+			NULL, l_hold);
 		del_last(&l_hold->b_down);
 		return (true);
 	}

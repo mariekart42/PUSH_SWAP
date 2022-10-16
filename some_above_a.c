@@ -6,7 +6,7 @@
 /*   By: mmensing <mmensing@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 17:11:01 by mmensing          #+#    #+#             */
-/*   Updated: 2022/10/15 11:03:51 by mmensing         ###   ########.fr       */
+/*   Updated: 2022/10/16 10:15:29 by mmensing         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ bool	decider_hc_above_a(t_holder *l_hold)
 	if (range(l_hold->a, l_hold->a, l_last(l_hold->a_start)) < 6)
 	{
 		hardcode_func(&l_hold->a, &l_hold->b, l_last(l_hold->a_start));
-		(l_last(l_hold->a_start))->next = new_node((l_hold->a)->val); 
+		(l_last(l_hold->a_start))->next = new_node((l_hold->a)->val);
 		return (true);
 	}
 	else

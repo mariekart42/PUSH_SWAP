@@ -6,17 +6,17 @@
 /*   By: mmensing <mmensing@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 17:18:05 by mmensing          #+#    #+#             */
-/*   Updated: 2022/10/15 16:40:04 by mmensing         ###   ########.fr       */
+/*   Updated: 2022/10/16 10:10:44 by mmensing         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int64_t ft_atol(const char *str)
+int64_t	ft_atol(const char *str)
 {
-	int64_t		val; 	//int64_t == long int
-	int8_t		minus; 	//int8_t == short int
-	int32_t		i; 		// int32_t == int
+	int64_t		val;
+	int8_t		minus;
+	int32_t		i;
 
 	val = 0;
 	minus = 1;
@@ -78,38 +78,31 @@ int32_t	ft_strncmp(const char *s1, const char *s2, size_t n)
 //
 // make b empty:
 //   -> everything gets pushed
-void	push_to_a(char *from, t_list*start, t_list* end, t_list **a, t_list** b)
+void	push_to_a(char *from, t_list *start, t_list *end, t_holder *l_hold)
 {
-    t_list *temp = start;
-	
-	if (ft_strncmp(from, "above_b", 7) == 0)
+	t_list	*temp;
+
+	temp = start;
+	while (ft_strncmp(from, "above_b", 7) == 0 && temp != end)
 	{
-		while (temp != end)
-		{
-			if (ft_strncmp(from, "above_b", 7) == 0)
-			{
-				temp = temp->next;
-				pa(a, b);
-			}
-		}
+		temp = temp->next;
+		pa(&l_hold->a, &l_hold->b);
 	}
-	else if (ft_strncmp(from, "under_b", 7) == 0 || ft_strncmp(from, "under_a", 7) == 0)
+	while (ft_strncmp(from, "make_b_empty", 12) == 0 && list_len(l_hold->b) > 0)
+		pa(&l_hold->a, &l_hold->b);
+	if (ft_strncmp(from, "under_b", 7) == 0 \
+	|| ft_strncmp(from, "under_a", 7) == 0)
 	{
 		while (temp->next != NULL)
 		{
 			if (ft_strncmp(from, "under_b", 7) == 0)
 			{
-				rrb(b, true);
-				pa(a, b);
+				rrb(&l_hold->b, true);
+				pa(&l_hold->a, &l_hold->b);
 			}
 			else if (ft_strncmp(from, "under_a", 7) == 0)
-				rra(a, true);
+				rra(&l_hold->a, true);
 		}
-	}
-	else if (ft_strncmp(from, "make_b_empty", 12) == 0)
-	{
-		while (list_len(*b) > 0)
-			pa(a, b);
 	}
 	return ;
 }

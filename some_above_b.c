@@ -6,7 +6,7 @@
 /*   By: mmensing <mmensing@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 17:33:48 by mmensing          #+#    #+#             */
-/*   Updated: 2022/10/14 18:21:57 by mmensing         ###   ########.fr       */
+/*   Updated: 2022/10/16 10:11:45 by mmensing         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ bool	decider_push_to_a(t_holder *l_hold)
 		prev(l_hold->b, l_last(l_hold->tmp_b_start))) <= 4))
 	{
 		push_to_a("above_b", l_hold->b, place(l_hold->b, \
-			l_last(l_hold->tmp_b_start)), &l_hold->a, &l_hold->b);
+			l_last(l_hold->tmp_b_start)), l_hold);
 		del_last(&l_hold->tmp_b_start);
 		return (true);
 	}
@@ -28,7 +28,7 @@ bool	decider_push_to_a(t_holder *l_hold)
 		&& range(l_hold->b, l_hold->b, l_last(l_hold->b_start)) <= 4))
 	{
 		push_to_a("above_b", l_hold->b, \
-			place(l_hold->b, l_last(l_hold->b_start)), &l_hold->a, &l_hold->b);
+			place(l_hold->b, l_last(l_hold->b_start)), l_hold);
 		if ((l_hold->b)->val == (l_hold->b_start)->val)
 		{
 			pa(&l_hold->a, &l_hold->b);
