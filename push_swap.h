@@ -6,7 +6,7 @@
 /*   By: mmensing <mmensing@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 14:19:20 by mmensing          #+#    #+#             */
-/*   Updated: 2022/10/19 13:31:07 by mmensing         ###   ########.fr       */
+/*   Updated: 2022/10/19 14:17:34 by mmensing         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ bool	is_sorted(int *array, int len_list);
 void	free_(void **toFree);
 void	ft_lstclear(t_list **lst, void (*del)(void **));
 void	ft_lstdelone(t_list **lst, void (*del)(void **));
-void	free_list(t_list **head);
+// void	free_list(t_list **head);
 
 //  · _ · 	edit_list.c			· _ ·  · _ ·  · _ ·  · _ ·  
 t_list	*create_list(int32_t len, char **content);
@@ -123,12 +123,16 @@ int32_t	last_node_content(t_list *head);
 int32_t	range(t_list *stack, t_list *begin, t_list *end);
 bool	stack_sorted(t_list **stack);
 
-//  · _ · 	extra_funcs.c		· _ ·  · _ ·  · _ ·  · _ ·  
+//  · _ · 	extra_funcs_one.c	· _ ·  · _ ·  · _ ·  · _ ·  
 int64_t	ft_atol(const char *str);
 int32_t	ft_isdigit(int32_t val);
 int32_t	ft_strncmp(const char *s1, const char *s2, size_t n);
 void	push_to_a(char *from, t_list *start, t_list *end, t_holder *l_hold);
 void	ft_putstr_fd(char *s, int fd);
+
+//  · _ · 	extra_funcs_two.c	· _ ·  · _ ·  · _ ·  · _ ·  
+int		ft_atoi(const char *str);
+size_t	ft_strlen(const char *str);
 
 //  · _ · 	hardcode.c			· _ ·  · _ ·  · _ ·  · _ ·  
 void	hc_three(t_list **a);

@@ -6,7 +6,7 @@
 /*   By: mmensing <mmensing@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 19:27:44 by mmensing          #+#    #+#             */
-/*   Updated: 2022/10/19 13:28:36 by mmensing         ###   ########.fr       */
+/*   Updated: 2022/10/19 14:17:55 by mmensing         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,18 +57,4 @@ void	ft_lstdelone(t_list **lst, void (*del)(void **))
 		return ;
 	del((void **)&(*lst)->all);
 	free_((void **)lst);
-}
-
-void	free_list(t_list **head)
-{
-	t_list	*temp;
-
-	if (!*head)
-		return ;
-	while (*head != NULL)
-	{
-		temp = *head;
-		*head = (*head)->next;
-		free_((void **)&temp);
-	}
 }

@@ -6,7 +6,7 @@
 /*   By: mmensing <mmensing@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 15:11:42 by mmensing          #+#    #+#             */
-/*   Updated: 2022/10/19 13:28:30 by mmensing         ###   ########.fr       */
+/*   Updated: 2022/10/19 13:49:44 by mmensing         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ t_list	*create_list(int32_t len, char **content)
 	i = 1;
 	while (i < len)
 	{
-		temp = new_node(atoi(content[i]));
+		temp = new_node(ft_atoi(content[i]));
 		if (head == NULL)
 			head = temp;
 		else

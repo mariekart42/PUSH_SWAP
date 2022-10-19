@@ -6,7 +6,7 @@
 #    By: mmensing <mmensing@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/08 12:21:27 by mmensing          #+#    #+#              #
-#    Updated: 2022/10/19 13:27:12 by mmensing         ###   ########.fr        #
+#    Updated: 2022/10/19 13:51:40 by mmensing         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,8 @@ NAME = push_swap
 FILES=	marie_sort.c \
 		checking.c \
 		perfect_pivot.c \
-		extra_funcs.c \
+		extra_funcs_one.c \
+		extra_funcs_two.c \
 		a_and_b_rules.c \
 		a_rules.c \
 		b_rules.c \

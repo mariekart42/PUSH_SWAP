@@ -6,7 +6,7 @@
 /*   By: mmensing <mmensing@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 17:37:08 by mmensing          #+#    #+#             */
-/*   Updated: 2022/10/19 11:41:15 by mmensing         ###   ########.fr       */
+/*   Updated: 2022/10/19 13:46:38 by mmensing         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ bool	only_nums(char **argv, int32_t argc, t_list l)
 	l.minus = 0;
 	while (argc - 1 > 0)
 	{
-		l.len_num = strlen(argv[l.base]);
+		l.len_num = ft_strlen(argv[l.base]);
 		if (argv[l.base][0] == '-' || argv[l.base][0] == '+')
 		{
 			l.i++;
