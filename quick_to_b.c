@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   quick_to_b.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ljahn <ljahn@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mmensing <mmensing@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 13:17:52 by mmensing          #+#    #+#             */
-/*   Updated: 2022/10/19 12:12:18 by ljahn            ###   ########.fr       */
+/*   Updated: 2022/10/19 13:05:15 by mmensing         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,13 @@ void	quick_to_b(t_holder *l_hold)
 		return (hc_quick_5(&l_hold->a, &l_hold->b));
 	while (list_len(l_hold->a) > 4)
 	{
-		l.pivot = perfect_pivot(l_hold->a, NULL);//Leaking
+		l.pivot = perfect_pivot(l_hold->a, NULL);
 		quick_to_b_algo(l_hold, l.guard, l.pivot);
 		l.guard = 999999999999;
 		if (l_hold->b_start == NULL)
-			ft_lstadd_back(&l_hold->b_start, new_node((l_last(l_hold->b))->val));
+			ft_lstadd_back(&l_hold->b_start, \
+			new_node((l_last(l_hold->b))->val));
 		ft_lstadd_back(&l_hold->b_start, new_node(l_hold->b->val));
-		
-			// l_hold->b_start = new_node((l_last(l_hold->b))->val);
-		// (l_last(l_hold->b_start))->next = new_node(l_hold->b->val);
 	}
 	hc_quick(l_hold);
 	l_hold->a_start = new_node((l_last(l_hold->a))->val);

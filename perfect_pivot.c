@@ -3,16 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   perfect_pivot.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ljahn <ljahn@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mmensing <mmensing@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 20:35:43 by mmensing          #+#    #+#             */
-/*   Updated: 2022/10/19 12:11:19 by ljahn            ###   ########.fr       */
+/*   Updated: 2022/10/19 13:23:29 by mmensing         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-
 
 // create array with content of list
 // sort array
@@ -25,7 +23,7 @@ int32_t	perfect_pivot(t_list *start, t_list *end)
 	t_list	l;
 
 	len_list = lst_len_end(&start, &end);
-	array = (int32_t *)malloc(sizeof(int32_t) * len_list);//Leaking
+	array = (int32_t *)malloc(sizeof(int32_t) * len_list);
 	if (!array)
 		exit (0);
 	len_list = init_array(start, array, len_list);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   edit_list.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ljahn <ljahn@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mmensing <mmensing@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 15:11:42 by mmensing          #+#    #+#             */
-/*   Updated: 2022/10/19 12:35:36 by ljahn            ###   ########.fr       */
+/*   Updated: 2022/10/19 13:28:30 by mmensing         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,27 +55,6 @@ t_list	*new_node(int32_t content)
 	return (new);
 }
 
-void	free_list(t_list **head)
-{
-	t_list	*temp;
-
-	if (!*head)
-		return ;
-	while (*head != NULL)
-	{
-		temp = *head;
-		*head = (*head)->next;
-		free_((void **)&temp);
-	}
-	// free(*temp);
-	temp=NULL;
-	*head=NULL;
-	head= NULL;
-}
-
-
-// void	free_struct(t_holder *l_hold)
-
 void	del_last(t_list **node)
 {
 	t_list	*temp;
@@ -95,23 +74,21 @@ void	del_last(t_list **node)
 	(temp)->next = NULL;
 }
 
-// t_list	*att_new_node(t_list **node, int32_t content)
-// {
-// 	t_list	*head;
+/**
+ * @brief Adds the node ’new’ at the end of the list
+ * 
+ * @param lst  The address of a pointer to the first link of a list
+ * @param new  The address of a pointer to the node to be added to the list
+ */
+void	ft_lstadd_back(t_list **lst, t_list *new)
+{
+	t_list	*last;
 
-// 	head = *node;
-// 	if (head == NULL)
-// 	{
-// 		head = malloc(sizeof(t_list));
-// 		head->val = content;
-// 		head->next = NULL;
-// 		return (head);
-// 	}
-// 	while (head->next != NULL)
-// 		head = head->next;
-// 	head->next = malloc(sizeof(t_list));
-// 	head = head->next;
-// 	head->val = content;
-// 	head->next = NULL;
-// 	return (head);
-// }
+	if (!(*lst))
+	{
+		*lst = new;
+		return ;
+	}	
+	last = l_last(*lst);
+	last->next = new;
+}

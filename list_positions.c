@@ -1,18 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   infos_of_list.c                                    :+:      :+:    :+:   */
+/*   list_positions.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmensing <mmensing@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 16:19:45 by mmensing          #+#    #+#             */
-/*   Updated: 2022/10/15 16:31:35 by mmensing         ###   ########.fr       */
+/*   Updated: 2022/10/19 13:24:43 by mmensing         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-//returns last node in list
+/**
+ * @brief Returns the last node of the list.
+ * 
+ * @param head The beginning of the list.
+ * @return t_list* Last node of the list
+ */
 t_list	*l_last(t_list *head)
 {
 	if (head == NULL)

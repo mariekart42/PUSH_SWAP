@@ -6,7 +6,7 @@
 #    By: mmensing <mmensing@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/08 12:21:27 by mmensing          #+#    #+#              #
-#    Updated: 2022/10/18 19:50:29 by mmensing         ###   ########.fr        #
+#    Updated: 2022/10/19 13:27:12 by mmensing         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,7 +38,7 @@ FILES=	marie_sort.c \
 		edit_list.c \
 		list_positions.c \
 		list_infos.c \
-		leak_shit.c 
+		clean_up_list.c 
 
 O_FILES= $(FILES:%.c=%.o)
 

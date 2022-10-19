@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   leak_shit.c                                        :+:      :+:    :+:   */
+/*   clean_up_list.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ljahn <ljahn@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mmensing <mmensing@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 19:27:44 by mmensing          #+#    #+#             */
-/*   Updated: 2022/10/19 11:59:07 by ljahn            ###   ########.fr       */
+/*   Updated: 2022/10/19 13:28:36 by mmensing         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,36 +59,16 @@ void	ft_lstdelone(t_list **lst, void (*del)(void **))
 	free_((void **)lst);
 }
 
-/**
- * @brief Adds the node ’new’ at the end of the list
- * 
- * @param lst  The address of a pointer to the first link of a list
- * @param new  The address of a pointer to the node to be added to the list
- */
-void	ft_lstadd_back(t_list **lst, t_list *new)
+void	free_list(t_list **head)
 {
-	t_list	*last;
+	t_list	*temp;
 
-	if (!(*lst))
-	{
-		*lst = new;
+	if (!*head)
 		return ;
-	}	
-	last = ft_lstlast(*lst);
-	last->next = new;
-}
-
-/**
- * @brief Returns the last node of the list.
- * 
- * @param lst The beginning of the list.
- * @return t_list* Last node of the list
- */
-t_list	*ft_lstlast(t_list *lst)
-{
-	if (!lst)
-		return (NULL);
-	while (lst->next)
-		lst = lst->next;
-	return (lst);
+	while (*head != NULL)
+	{
+		temp = *head;
+		*head = (*head)->next;
+		free_((void **)&temp);
+	}
 }
