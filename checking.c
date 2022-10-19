@@ -6,7 +6,7 @@
 /*   By: mmensing <mmensing@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 17:37:08 by mmensing          #+#    #+#             */
-/*   Updated: 2022/10/15 12:42:16 by mmensing         ###   ########.fr       */
+/*   Updated: 2022/10/19 11:41:15 by mmensing         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ bool	dupli_and_min_max(char **argv, int32_t argc, t_list l)
 		l.n = 1;
 		l.i++;
 	}
-	free(l.all);
+	free_((void **)&l.all);
 	return (true);
 }
 

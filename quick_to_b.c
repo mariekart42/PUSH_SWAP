@@ -6,7 +6,7 @@
 /*   By: mmensing <mmensing@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 13:17:52 by mmensing          #+#    #+#             */
-/*   Updated: 2022/10/16 16:42:25 by mmensing         ###   ########.fr       */
+/*   Updated: 2022/10/18 20:06:39 by mmensing         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,11 @@ void	quick_to_b(t_holder *l_hold)
 		quick_to_b_algo(l_hold, l.guard, l.pivot);
 		l.guard = 999999999999;
 		if (l_hold->b_start == NULL)
-			l_hold->b_start = new_node((l_last(l_hold->b))->val);
-		(l_last(l_hold->b_start))->next = new_node(l_hold->b->val);
+			ft_lstadd_back(&l_hold->b_start, new_node((l_last(l_hold->b))->val));
+		ft_lstadd_back(&l_hold->b_start, new_node(l_hold->b->val));
+		
+			// l_hold->b_start = new_node((l_last(l_hold->b))->val);
+		// (l_last(l_hold->b_start))->next = new_node(l_hold->b->val);
 	}
 	hc_quick(l_hold);
 	l_hold->a_start = new_node((l_last(l_hold->a))->val);

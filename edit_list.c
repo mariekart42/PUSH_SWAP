@@ -6,7 +6,7 @@
 /*   By: mmensing <mmensing@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 15:11:42 by mmensing          #+#    #+#             */
-/*   Updated: 2022/10/16 16:38:43 by mmensing         ###   ########.fr       */
+/*   Updated: 2022/10/19 11:42:07 by mmensing         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ t_list	*new_node(int32_t content)
 	t_list	*new;
 
 	new = NULL;
-	new = (t_list *)malloc(sizeof(t_list));
+	new = malloc(sizeof(t_list));
 	if (!new)
 		return (NULL);
 	new->val = content;
@@ -64,9 +64,14 @@ void	free_list(t_list **head)
 	{
 		temp = *head;
 		*head = (*head)->next;
-		free(temp);
+		free_((void **)&temp);
 	}
+	// free(*temp);
+	temp=NULL;
+	*head=NULL;
+	head= NULL;
 }
+
 
 // void	free_struct(t_holder *l_hold)
 
@@ -84,7 +89,7 @@ void	del_last(t_list **node)
 	}
 	while (temp->next->next != NULL)
 		temp = temp->next;
-	free(temp->next);
+	free_((void **)&temp->next);
 	(temp)->next = NULL;
 }
 

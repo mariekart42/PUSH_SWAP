@@ -6,7 +6,7 @@
 /*   By: mmensing <mmensing@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/16 11:32:47 by mmensing          #+#    #+#             */
-/*   Updated: 2022/10/16 13:10:01 by mmensing         ###   ########.fr       */
+/*   Updated: 2022/10/19 11:42:27 by mmensing         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	hc_quick_4(t_list **node, t_holder*l_hold)
 			smallest_val = temp->val;
 		temp = temp->next;
 	}
-	free(temp);
+	free_((void **)&temp);
 	if ((*node)->next->val == smallest_val)
 		sa(node, true);
 	else if ((*node)->next->next->val == smallest_val)

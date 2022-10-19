@@ -6,7 +6,7 @@
 /*   By: mmensing <mmensing@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 18:42:45 by mmensing          #+#    #+#             */
-/*   Updated: 2022/10/16 16:39:47 by mmensing         ###   ########.fr       */
+/*   Updated: 2022/10/19 11:41:54 by mmensing         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,10 +59,14 @@ int32_t	main(int32_t argc, char **argv)
 	quick_to_b(&l_hold);
 	// print_list(&l_hold.a, "a main");
 	// print_list(&l_hold.b, "b main");
+	
+	
 	marie_sort(&l_hold, &list);
-	free_list(&l_hold.b_start);
-	free_list(&l_hold.b);
-	free_list(&l_hold.a);
-	free_list(&l_hold.a_start);
-	free_list(&l_hold.tmp_b_start);
+	ft_lstclear(&l_hold.a, del_);
+	ft_lstclear(&l_hold.b, del_);
+	ft_lstclear(&l_hold.b_start, del_);
+	ft_lstclear(&l_hold.a_start, del_);
+	ft_lstclear(&l_hold.tmp_b_start, del_);
+	ft_lstclear(&l_hold.b_down, del_);
+
 }

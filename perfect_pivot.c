@@ -6,11 +6,13 @@
 /*   By: mmensing <mmensing@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 20:35:43 by mmensing          #+#    #+#             */
-/*   Updated: 2022/10/16 16:01:51 by mmensing         ###   ########.fr       */
+/*   Updated: 2022/10/19 11:39:08 by mmensing         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+
 
 // create array with content of list
 // sort array
@@ -103,7 +105,7 @@ int32_t	half_list_val(int *array, int len_list)
 	else if ((len_list % 2) != 0)
 		half_len = (len_list - 1) / 2;
 	return_val = array[half_len];
-	free(array);
+	// free(array); 
 	return (return_val);
 }
 

@@ -6,7 +6,7 @@
 #    By: mmensing <mmensing@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/08 12:21:27 by mmensing          #+#    #+#              #
-#    Updated: 2022/10/16 15:47:03 by mmensing         ###   ########.fr        #
+#    Updated: 2022/10/18 19:50:29 by mmensing         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,7 +37,8 @@ FILES=	marie_sort.c \
 		hardcode.c \
 		edit_list.c \
 		list_positions.c \
-		list_infos.c
+		list_infos.c \
+		leak_shit.c 
 
 O_FILES= $(FILES:%.c=%.o)
 
@@ -55,6 +56,6 @@ fclean: clean
 re: fclean all
 
 g:
-	@gcc -g $(FILES) $(CFLAGS)
+	@gcc -g -fsanitize=address $(FILES) $(CFLAGS)
 # -fsanitize=address
 .PHONY: all clean fclean re
