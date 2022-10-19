@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmensing <mmensing@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ljahn <ljahn@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 14:19:20 by mmensing          #+#    #+#             */
-/*   Updated: 2022/10/19 11:37:18 by mmensing         ###   ########.fr       */
+/*   Updated: 2022/10/19 12:07:22 by ljahn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,11 +48,11 @@ typedef struct s_holder
 }				t_holder;	
 
 void	free_(void **toFree);
-void	ft_lstclear(t_list **lst, void (*del)(void *));
+void	ft_lstclear(t_list **lst, void (*del)(void **));
 t_list	*ft_lstlast(t_list *lst);
 void	ft_lstadd_back(t_list **lst, t_list *new);
 void	del_(void *int_ptr);
-void	ft_lstdelone(t_list *lst, void (*del)(void *));
+void	ft_lstdelone(t_list **lst, void (*del)(void **));
 // void super_free(t_holder *l_hold);
 
 t_list	*att_new_node(t_list **node, int32_t content);
@@ -155,5 +155,7 @@ void		rrb(t_list **b, bool output);
 void		ss(t_list **a, t_list **b);
 void		rr(t_list **a, t_list **b);
 void		rrr(t_list **a, t_list **b);
+
+void	block(t_holder l_hold);
 
 #endif

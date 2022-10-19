@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   some_above_b.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmensing <mmensing@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ljahn <ljahn@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 17:33:48 by mmensing          #+#    #+#             */
-/*   Updated: 2022/10/16 10:11:45 by mmensing         ###   ########.fr       */
+/*   Updated: 2022/10/19 12:30:45 by ljahn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,11 +63,11 @@ void	update_b_down(t_holder *l_hold)
 	}
 }
 
-void	end_of_b_start(t_holder *l_hold, int temp_b_val, int pivot)
+void	end_of_b_start(t_holder *l_hold, int temp_b_val, int pivot) // Leaking
 {
 	if (temp_b_val == (l_hold->b_start)->val)
 	{
-		del_last(&l_hold->b_start);
+		del_last(&l_hold->b_start);//Leaking
 		if (temp_b_val > pivot)
 			pa(&l_hold->a, &l_hold->b);
 		else
@@ -77,13 +77,15 @@ void	end_of_b_start(t_holder *l_hold, int temp_b_val, int pivot)
 
 void	some_above_b(t_holder *l_hold, t_list *l)
 {
+	(void)l_hold;
+	(void)l;
 	t_list	*temp_b;
 
 	temp_b = l_hold->b;
 	if (decider_push_to_a(l_hold) == true)
 		return ;
-	update_b_down(l_hold);
-	l->pivot = decider_pivot_above_b(l_hold);
+	update_b_down(l_hold); // something malloced
+	l->pivot = decider_pivot_above_b(l_hold); // something malloced
 	while (temp_b != NULL && temp_b->val != l_last(l_hold->b_start)->val)
 	{
 		if (l_hold->tmp_b_start != NULL \

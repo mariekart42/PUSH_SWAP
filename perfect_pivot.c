@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   perfect_pivot.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmensing <mmensing@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ljahn <ljahn@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 20:35:43 by mmensing          #+#    #+#             */
-/*   Updated: 2022/10/19 11:39:08 by mmensing         ###   ########.fr       */
+/*   Updated: 2022/10/19 12:11:19 by ljahn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int32_t	perfect_pivot(t_list *start, t_list *end)
 	t_list	l;
 
 	len_list = lst_len_end(&start, &end);
-	array = (int32_t *)malloc(sizeof(int32_t) * len_list);
+	array = (int32_t *)malloc(sizeof(int32_t) * len_list);//Leaking
 	if (!array)
 		exit (0);
 	len_list = init_array(start, array, len_list);
@@ -105,7 +105,7 @@ int32_t	half_list_val(int *array, int len_list)
 	else if ((len_list % 2) != 0)
 		half_len = (len_list - 1) / 2;
 	return_val = array[half_len];
-	// free(array); 
+	free_((void **)&array);
 	return (return_val);
 }
 

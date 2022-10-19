@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   edit_list.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmensing <mmensing@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ljahn <ljahn@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 15:11:42 by mmensing          #+#    #+#             */
-/*   Updated: 2022/10/19 11:42:07 by mmensing         ###   ########.fr       */
+/*   Updated: 2022/10/19 12:35:36 by ljahn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ t_list	*new_node(int32_t content)
 		return (NULL);
 	new->val = content;
 	new->next = NULL;
+	new->all = NULL;
 	return (new);
 }
 
@@ -84,12 +85,13 @@ void	del_last(t_list **node)
 		return ;
 	if ((*node)->next == NULL)
 	{
+		ft_lstdelone(node, free_);
 		*node = NULL;
 		return ;
 	}
 	while (temp->next->next != NULL)
 		temp = temp->next;
-	free_((void **)&temp->next);
+	ft_lstdelone(&temp->next, free_);
 	(temp)->next = NULL;
 }
 

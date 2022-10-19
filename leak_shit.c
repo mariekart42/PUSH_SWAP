@@ -3,20 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   leak_shit.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmensing <mmensing@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ljahn <ljahn@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/18 19:27:44 by mmensing          #+#    #+#             */
-/*   Updated: 2022/10/19 11:39:15 by mmensing         ###   ########.fr       */
+/*   Updated: 2022/10/19 11:59:07 by ljahn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-void	del_(void *int_ptr)
-{
-	if (int_ptr)
-		free_(&int_ptr);
-}
 
 void	free_(void **toFree)
 {
@@ -35,7 +29,7 @@ void	free_(void **toFree)
  * @param lst The address of a pointer to a node.
  * @param del The address of the function used to delete the content of the node.
  */
-void	ft_lstclear(t_list **lst, void (*del)(void *))
+void	ft_lstclear(t_list **lst, void (*del)(void **))
 {
 	t_list	*temp;
 
@@ -44,7 +38,7 @@ void	ft_lstclear(t_list **lst, void (*del)(void *))
 	while (*lst)
 	{
 		temp = (*lst)->next;
-		ft_lstdelone(*lst, del);
+		ft_lstdelone(lst, del);
 		(*lst) = temp;
 	}
 }
@@ -57,12 +51,12 @@ void	ft_lstclear(t_list **lst, void (*del)(void *))
  * @param lst The node to free.
  * @param del The address of the function used to delete the content.
  */
-void	ft_lstdelone(t_list *lst, void (*del)(void *))
+void	ft_lstdelone(t_list **lst, void (*del)(void **))
 {
 	if (!lst || !del)
 		return ;
-	del(lst->all);
-	free(lst);
+	del((void **)&(*lst)->all);
+	free_((void **)lst);
 }
 
 /**

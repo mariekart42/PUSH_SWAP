@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmensing <mmensing@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ljahn <ljahn@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 18:42:45 by mmensing          #+#    #+#             */
-/*   Updated: 2022/10/19 11:41:54 by mmensing         ###   ########.fr       */
+/*   Updated: 2022/10/19 12:37:48 by ljahn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,16 @@
 // 	printf("-- done --\n\n");
 // }
 
+void	block(t_holder l_hold)
+{
+	ft_lstclear(&l_hold.a, free_);
+	ft_lstclear(&l_hold.b, free_);
+	ft_lstclear(&l_hold.b_start, free_);
+	ft_lstclear(&l_hold.a_start, free_);
+	ft_lstclear(&l_hold.tmp_b_start, free_);
+	ft_lstclear(&l_hold.b_down, free_);
+};
+
 int32_t	main(int32_t argc, char **argv)
 {
 	t_holder	l_hold;
@@ -56,17 +66,10 @@ int32_t	main(int32_t argc, char **argv)
 		free_list(&l_hold.a);
 		return (0);
 	}
-	quick_to_b(&l_hold);
+	quick_to_b(&l_hold);// Is leaking one leak
 	// print_list(&l_hold.a, "a main");
 	// print_list(&l_hold.b, "b main");
 	
-	
 	marie_sort(&l_hold, &list);
-	ft_lstclear(&l_hold.a, del_);
-	ft_lstclear(&l_hold.b, del_);
-	ft_lstclear(&l_hold.b_start, del_);
-	ft_lstclear(&l_hold.a_start, del_);
-	ft_lstclear(&l_hold.tmp_b_start, del_);
-	ft_lstclear(&l_hold.b_down, del_);
-
+	block(l_hold);
 }
