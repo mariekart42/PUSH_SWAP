@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   extra_funcs_two.c                                  :+:      :+:    :+:   */
+/*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmensing <mmensing@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/19 13:52:03 by mmensing          #+#    #+#             */
-/*   Updated: 2022/10/19 13:53:03 by mmensing         ###   ########.fr       */
+/*   Created: 2022/05/04 21:07:06 by mmensing          #+#    #+#             */
+/*   Updated: 2022/06/06 22:26:34 by mmensing         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "libft.h"
 
 /**
  * @brief function converts string argument to integer type(returns int)
@@ -48,18 +48,13 @@ int	ft_atoi(const char *str)
 	return (val * minus);
 }
 
-/**
- * @brief returns lengh of str
- * 
- * @param str 
- * @return size_t lengh of str
- */
-size_t	ft_strlen(const char *str)
-{
-	int	i;
-
-	i = 0;
-	while (str[i] != '\0')
-		i++;
-	return (i);
-}
+// int main()
+// {
+// 		char array[20] = "-587";
+// 		int ori;
+// 		ori = atoi(array);
+// 		printf("ori: %d\n", ori);
+// 		int mine;
+// 		mine = ft_atoi(array);
+// 		printf("mine: %d\n", mine);
+// }
